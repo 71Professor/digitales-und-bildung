@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Was Watzlawick, Grice und Searle über KI-Kommunikation sagen – und wie die RAKFET-Formel daraus folgt. Wissenschaftliche Grundlagen für besseres Prompting.">
+  <link rel="icon" href="../images/favicon.ico">
+  <title>Watzlawick, Grice, Searle – und die RAKFET-Formel | Kommunikation &amp; KI, Teil 2 | Digitales &amp; Bildung</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container nav-inner">
+      <a href="../index.html" class="logo">
+        <img src="../images/logo.jpeg" alt="Digitales & Bildung Logo" onerror="this.style.display='none'">
+        <div class="logo-text">
+          <span class="logo-title">Digitales &amp; Bildung</span>
+          <span class="logo-subtitle">Die Bildungsingenieure</span>
+        </div>
+      </a>
+      <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav>
+        <ul>
+          <li><a href="../index.html">Startseite</a></li>
+          <li><a href="../blog.html">Blog</a></li>
+          <li><a href="../leistungen.html">Leistungen</a></li>
+          <li><a href="../werkzeuge.html">Werkzeuge</a></li>
+          <li><a href="../der-bildungsingenieur.html">Die Bildungsingenieure</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb">
+    <div class="container">
+      <a href="../index.html">Startseite</a>
+      <span>›</span>
+      <a href="../blog.html">Blog</a>
+      <span>›</span>
+      Kommunikation &amp; KI – Teil 2
+    </div>
+  </div>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="container">
+      <h1>Watzlawick, Grice, Searle – und die RAKFET-Formel</h1>
+      <p>Drei Kommunikationstheorien beleuchten dieselbe Frage: Warum scheitert die Kommunikation mit KI – und was lässt sich dagegen tun?</p>
+    </div>
+  </div>
+
+  <!-- BEITRAGSINHALT -->
+  <section class="section">
+    <div class="container">
+
+      <div class="post-header-meta">
+        <span class="blog-meta">KI &amp; Bildung</span>
+        <span>10. April 2026</span>
+        <span>Teil 2 von 2</span>
+      </div>
+
+      <div class="post-content">
+
+        <a href="kommunikation-ki-teil-1.html" class="post-part-link">
+          <span>← Zurück zu Teil 1: Das Kommunikationsquadrat und die KI</span>
+        </a>
+
+        <p>
+          Im ersten Teil haben wir gesehen, wie das Kommunikationsquadrat von Schulz von Thun erklärt, warum beim Prompting so viel verloren geht: Von sechs Kommunikationskanälen kommt nur einer zuverlässig bei der KI an. In diesem zweiten Teil schauen wir auf drei weitere Kommunikationstheorien – und zeigen, dass sie alle zu demselben Befund kommen. Und dann übersetzen wir diesen Befund in ein konkretes Werkzeug: die RAKFET-Formel.
+        </p>
+
+        <h2>1. Watzlawick: Man kann nicht nicht kommunizieren – oder doch?</h2>
+
+        <p>
+          Paul Watzlawick formulierte 1967 mit Beavin und Jackson fünf Axiome menschlicher Kommunikation. Das erste lautet: <em>Man kann nicht nicht kommunizieren.</em> Jedes Verhalten zwischen Menschen, die sich wahrnehmen – auch Schweigen, Wegschauen, Zögern – ist Kommunikation. Es gibt kein kommunikationsfreies Verhalten.
+        </p>
+
+        <p>
+          Dieses Axiom gilt für Menschen. Bei der KI ist es außer Kraft gesetzt: Wenn ein Mensch schweigt, signalisiert er Nachdenken, Unbehagen oder Ablehnung. Wenn die KI keine Antwort gibt, weil der Prompt unklar ist, kommuniziert sie – im Watzlawick'schen Sinne – gar nichts. Das Schweigen hat keinen Sender.
+        </p>
+
+        <p>
+          Das zweite Axiom ist für das Prompting noch aufschlussreicher: <em>Jede Kommunikation hat einen Inhalts- und einen Beziehungsaspekt.</em> Der Beziehungsaspekt rahmt den Inhaltsaspekt – er sagt, wie das Gesagte zu verstehen ist. Ein Satz wie „Das Essen ist scharf" klingt je nach Beziehung der Beteiligten völlig anders.
+        </p>
+
+        <blockquote>
+          „Der Beziehungsaspekt rahmt den Inhaltsaspekt — er sagt, wie das Gesagte zu verstehen ist." — Paul Watzlawick
+        </blockquote>
+
+        <p>
+          Bei der KI fehlt dieser Beziehungsaspekt vollständig. Es gibt keine gemeinsame Geschichte, kein Vertrauen, keine echte Haltung zur Person. Deshalb entsteht beim Lesen von KI-Antworten oft eine Leerstelle, die Menschen intuitiv selbst füllen – und dabei projizieren: Neutralität wird als Kälte gelesen, sachliche Kritik als Arroganz.
+        </p>
+
+        <div class="post-tip">
+          <strong>Watzlawick und das Prompting</strong>
+          <ul>
+            <li>Weil der Beziehungsrahmen fehlt, muss er explizit erzeugt werden: durch die Beschreibung der Situation, der Personen und des Kontexts.</li>
+            <li>KI-Antworten sollte man bewusst auf dem Sachohr lesen. Neutralität ist keine Kälte – es gibt schlicht keinen Absender für eine Haltung.</li>
+          </ul>
+        </div>
+
+        <h2>2. Grice: Was macht eine gute Aussage aus?</h2>
+
+        <p>
+          H. Paul Grice beschrieb 1975, wie Menschen in Gesprächen stillschweigend kooperieren. Sein <em>Kooperationsprinzip</em> besagt: Beiträge in Gesprächen folgen einem übergeordneten Ziel – man ist so informativ, klar und relevant wie nötig. Vier Maximen konkretisieren das:
+        </p>
+
+        <div class="post-mechanism">
+          <h3>Die vier Maximen von Grice – und was sie für Prompts bedeuten</h3>
+
+          <p><strong>Quantität:</strong> Sei so informativ wie nötig – nicht mehr und nicht weniger. Beim Prompting wird diese Maxime ständig verletzt: Wer zu wenig Kontext gibt, bekommt zu generische Antworten. Wer zu viel schreibt, verleitet die KI zum Abschweifen.</p>
+
+          <p><strong>Qualität:</strong> Behaupte nichts, wofür du keine hinreichenden Belege hast. Hier liegt eine der großen Schwächen auf der KI-Seite: Wenn die KI halluziniert – also Fakten erfindet, die plausibel klingen, aber falsch sind – verletzt sie die Qualitätsmaxime. Das Sachohr kann täuschen.</p>
+
+          <p><strong>Relevanz:</strong> Bleib beim Thema. Ohne klaren Auftrag und situativen Kontext antwortet die KI oft thematisch richtig, aber situativ irrelevant. Sie weiß nicht, für wen, wofür und in welchem Rahmen die Antwort gebraucht wird.</p>
+
+          <p><strong>Modalität:</strong> Sei klar, geordnet, kurz – vermeide Mehrdeutigkeit. Vage oder mehrdeutige Prompts erzeugen vage Antworten. Wer kein Format angibt, bekommt das Format, das die KI für wahrscheinlich hält – oft nicht das, das gebraucht wird.</p>
+        </div>
+
+        <p>
+          Die vier Maximen lassen sich direkt als Checkliste vor dem Absenden eines Prompts nutzen: Habe ich genug Kontext gegeben (Quantität)? Ist meine Frage präzise (Modalität)? Habe ich klar gemacht, was ich brauche (Relevanz)? Die RAKFET-Formel, die wir am Ende dieses Beitrags vorstellen, ist im Kern eine Operationalisierung dieser vier Maximen für die Praxis.
+        </p>
+
+        <h2>3. Searle: Was wir sagen – und was wir meinen</h2>
+
+        <p>
+          John Searles Sprechakttheorie unterscheidet drei Ebenen jedes Sprachakts – und erklärt damit, warum indirekte Kommunikation mit der KI so oft scheitert:
+        </p>
+
+        <ul>
+          <li><strong>Lokutionärer Akt:</strong> Was wörtlich gesagt wird. Der Satz „Könntest du das Fenster schließen?" ist wörtlich eine Frage nach einer Fähigkeit.</li>
+          <li><strong>Illokutionärer Akt:</strong> Was gemeint ist. Die eigentliche Funktion des Satzes ist eine Bitte – kein Mensch antwortet darauf mit „Ja, ich könnte."</li>
+          <li><strong>Perlokutionärer Akt:</strong> Was bewirkt wird. Im Idealfall schließt der Angesprochene das Fenster.</li>
+        </ul>
+
+        <p>
+          Im menschlichen Gespräch kommunizieren wir ständig indirekt: Wir fragen, wenn wir bitten wollen. Wir stellen fest, wenn wir kritisieren. Wir beschreiben eine Situation, wenn wir einen Wunsch äußern. Die KI versteht diese Mehrstufigkeit nicht – sie interpretiert den lokutionären Akt wörtlich und antwortet auf das, was dasteht, nicht auf das, was gemeint ist.
+        </p>
+
+        <p>
+          Ein Prompt wie „Es wäre schön, wenn der Text kürzer wäre" klingt für einen Menschen wie ein klarer Wunsch. Die KI antwortet darauf unter Umständen mit einer Bestätigung – und ändert nichts. Weil der Wunsch nicht explizit als Auftrag formuliert wurde.
+        </p>
+
+        <div class="post-tip">
+          <strong>Searles Konsequenz für Prompts: Direktheit schlägt Höflichkeit</strong>
+          <ul>
+            <li>Statt: „Es wäre schön, wenn…" → Besser: „Fasse die Antwort auf maximal 5 Sätze zusammen."</li>
+            <li>Statt: „Ich bin kein Fan von Fachbegriffen." → Besser: „Verwende keine Fachbegriffe. Erkläre alles in einfacher Alltagssprache."</li>
+            <li>Statt: „Das klingt ein bisschen formell." → Besser: „Schreibe in einem warmen, persönlichen Ton – wie ein Brief an Eltern, nicht wie ein Amtsschreiben."</li>
+          </ul>
+        </div>
+
+        <h2>Vier Theorien – eine Aussage</h2>
+
+        <p>
+          Es ist kein Zufall, dass Schulz von Thun, Watzlawick, Grice und Searle alle zu demselben Befund kommen. Menschliche Kommunikation ist mehrschichtig, kontextgebunden und beziehungsabhängig. KI-Kommunikation ist – strukturell, nicht technisch – flach: Sie empfängt und sendet auf der Sachebene, und alles andere muss der Mensch explizit in Worte fassen.
+        </p>
+
+        <!-- DIAGRAMM 1: Vier Theorien – eine Lücke -->
+        <figure style="margin: 2rem 0;">
+          <svg viewBox="0 0 560 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:560px;display:block;margin:0 auto;" aria-label="Vier Kommunikationstheorien – eine strukturelle Lücke">
+
+            <!-- Hintergrund -->
+            <rect width="560" height="320" rx="14" fill="#FAFAF7" stroke="#e0ddd6" stroke-width="1"/>
+
+            <!-- Zentrum: Die Lücke -->
+            <ellipse cx="280" cy="160" rx="72" ry="42" fill="#F1EFE8" stroke="#9A9389" stroke-width="1.5"/>
+            <text x="280" y="155" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#5A5549">Strukturelle</text>
+            <text x="280" y="171" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#5A5549">Lücke KI</text>
+
+            <!-- Pfeile zum Zentrum -->
+            <line x1="148" y1="90" x2="218" y2="138" stroke="#9A9389" stroke-width="1.5" stroke-dasharray="4,3"/>
+            <line x1="420" y1="90" x2="345" y2="138" stroke="#9A9389" stroke-width="1.5" stroke-dasharray="4,3"/>
+            <line x1="148" y1="230" x2="218" y2="182" stroke="#9A9389" stroke-width="1.5" stroke-dasharray="4,3"/>
+            <line x1="420" y1="230" x2="345" y2="182" stroke="#9A9389" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+            <!-- Karte oben links: Schulz von Thun -->
+            <rect x="20" y="30" width="168" height="90" rx="10" fill="#E6EEF9" stroke="rgba(43,95,166,0.3)" stroke-width="1.5"/>
+            <text x="104" y="56" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#2B5FA6" letter-spacing="0.05em">SCHULZ VON THUN</text>
+            <text x="104" y="76" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#1C1A16">Nur Sachinhalt</text>
+            <text x="104" y="93" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#5A5549">kommt zuverlässig</text>
+            <text x="104" y="110" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#5A5549">bei KI an</text>
+
+            <!-- Karte oben rechts: Watzlawick -->
+            <rect x="372" y="30" width="168" height="90" rx="10" fill="#E6EEF9" stroke="rgba(43,95,166,0.3)" stroke-width="1.5"/>
+            <text x="456" y="56" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#2B5FA6" letter-spacing="0.05em">WATZLAWICK</text>
+            <text x="456" y="76" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#1C1A16">Beziehungsaspekt</text>
+            <text x="456" y="93" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#5A5549">fehlt vollständig,</text>
+            <text x="456" y="110" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#5A5549">Projektion entsteht</text>
+
+            <!-- Karte unten links: Grice -->
+            <rect x="20" y="200" width="168" height="90" rx="10" fill="#E1F0EC" stroke="rgba(42,122,106,0.3)" stroke-width="1.5"/>
+            <text x="104" y="226" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#2A7A6A" letter-spacing="0.05em">GRICE</text>
+            <text x="104" y="246" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#1C1A16">Quantität, Qualität,</text>
+            <text x="104" y="263" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#5A5549">Relevanz, Modalität</text>
+            <text x="104" y="280" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#5A5549">im Prompt machen</text>
+
+            <!-- Karte unten rechts: Searle -->
+            <rect x="372" y="200" width="168" height="90" rx="10" fill="#EEE8F7" stroke="rgba(91,61,138,0.3)" stroke-width="1.5"/>
+            <text x="456" y="226" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#5B3D8A" letter-spacing="0.05em">SEARLE</text>
+            <text x="456" y="246" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#1C1A16">KI versteht nur</text>
+            <text x="456" y="263" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#5A5549">wörtlich Gesagtes –</text>
+            <text x="456" y="280" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#5A5549">direkte Sprechakte</text>
+
+            <!-- Fazit unten -->
+            <text x="280" y="307" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#9A9389" font-style="italic">Alle vier Modelle kommen zum selben Befund: explizit kommunizieren.</text>
+
+          </svg>
+          <figcaption class="post-img-caption">Vier Kommunikationstheorien – ein gemeinsamer Befund: Was im menschlichen Gespräch implizit mitschwingt, muss im Prompt explizit formuliert werden.</figcaption>
+        </figure>
+
+        <h2>Die RAKFET-Formel: Kommunikationstheorie in die Praxis übersetzt</h2>
+
+        <p>
+          Die RAKFET-Formel ist kein Trick und keine Abkürzung. Sie ist die praktische Antwort auf eine theoretisch präzise beschriebene Lücke: Was im Gespräch automatisch mitschwingt – Kontext, Beziehung, Tonfall, Appell – muss im Prompt explizit in Worte gefasst werden. RAKFET benennt sechs Bausteine, die dabei helfen.
+        </p>
+
+        <!-- DIAGRAMM 2: RAKFET-Formel -->
+        <figure style="margin: 2rem 0;">
+          <svg viewBox="0 0 560 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:560px;display:block;margin:0 auto;" aria-label="Die RAKFET-Formel">
+
+            <!-- Hintergrund -->
+            <rect width="560" height="340" rx="14" fill="#FAFAF7" stroke="#e0ddd6" stroke-width="1"/>
+
+            <!-- Titel -->
+            <text x="280" y="28" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="#1C1A16" letter-spacing="0.1em">DIE RAKFET-FORMEL</text>
+
+            <!-- R – Rolle -->
+            <rect x="20" y="44" width="248" height="56" rx="8" fill="#E6EEF9" stroke="rgba(43,95,166,0.3)" stroke-width="1.5"/>
+            <text x="50" y="68" font-family="Georgia,serif" font-size="26" font-weight="300" fill="#2B5FA6">R</text>
+            <text x="80" y="64" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#2B5FA6" letter-spacing="0.06em">ROLLE</text>
+            <text x="80" y="80" font-family="system-ui,sans-serif" font-size="12" fill="#5A5549">Wer soll die KI sein?</text>
+            <text x="80" y="93" font-family="system-ui,sans-serif" font-size="11" fill="#2B5FA6" font-style="italic">→ Beziehungsebene setzen</text>
+
+            <!-- A – Aufgabe -->
+            <rect x="292" y="44" width="248" height="56" rx="8" fill="#EAF3E5" stroke="rgba(58,110,53,0.3)" stroke-width="1.5"/>
+            <text x="322" y="68" font-family="Georgia,serif" font-size="26" font-weight="300" fill="#3A6E35">A</text>
+            <text x="352" y="64" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#3A6E35" letter-spacing="0.06em">AUFGABE</text>
+            <text x="352" y="80" font-family="system-ui,sans-serif" font-size="12" fill="#5A5549">Was soll die KI tun?</text>
+            <text x="352" y="93" font-family="system-ui,sans-serif" font-size="11" fill="#3A6E35" font-style="italic">→ Appell explizit formulieren</text>
+
+            <!-- K – Kontext -->
+            <rect x="20" y="116" width="248" height="56" rx="8" fill="#FBF0DC" stroke="rgba(160,107,16,0.3)" stroke-width="1.5"/>
+            <text x="50" y="140" font-family="Georgia,serif" font-size="26" font-weight="300" fill="#A06B10">K</text>
+            <text x="80" y="136" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#A06B10" letter-spacing="0.06em">KONTEXT</text>
+            <text x="80" y="152" font-family="system-ui,sans-serif" font-size="12" fill="#5A5549">Was ist die Situation?</text>
+            <text x="80" y="165" font-family="system-ui,sans-serif" font-size="11" fill="#A06B10" font-style="italic">→ Gemeinsame Geschichte ersetzen</text>
+
+            <!-- F – Format -->
+            <rect x="292" y="116" width="248" height="56" rx="8" fill="#F9EAEd" stroke="rgba(155,58,74,0.3)" stroke-width="1.5"/>
+            <text x="322" y="140" font-family="Georgia,serif" font-size="26" font-weight="300" fill="#9B3A4A">F</text>
+            <text x="352" y="136" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#9B3A4A" letter-spacing="0.06em">FORMAT</text>
+            <text x="352" y="152" font-family="system-ui,sans-serif" font-size="12" fill="#5A5549">Wie soll das Ergebnis aussehen?</text>
+            <text x="352" y="165" font-family="system-ui,sans-serif" font-size="11" fill="#9B3A4A" font-style="italic">→ Modalität (Grice) sichern</text>
+
+            <!-- E – Einschränkungen -->
+            <rect x="20" y="188" width="248" height="56" rx="8" fill="#F1EFE8" stroke="rgba(90,85,73,0.3)" stroke-width="1.5"/>
+            <text x="50" y="212" font-family="Georgia,serif" font-size="26" font-weight="300" fill="#5A5549">E</text>
+            <text x="80" y="208" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#5A5549" letter-spacing="0.06em">EINSCHRÄNKUNGEN</text>
+            <text x="80" y="224" font-family="system-ui,sans-serif" font-size="12" fill="#5A5549">Was soll die KI vermeiden?</text>
+            <text x="80" y="237" font-family="system-ui,sans-serif" font-size="11" fill="#5A5549" font-style="italic">→ Indirektes direkt machen (Searle)</text>
+
+            <!-- T – Ton -->
+            <rect x="292" y="188" width="248" height="56" rx="8" fill="#E1F0EC" stroke="rgba(42,122,106,0.3)" stroke-width="1.5"/>
+            <text x="322" y="212" font-family="Georgia,serif" font-size="26" font-weight="300" fill="#2A7A6A">T</text>
+            <text x="352" y="208" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#2A7A6A" letter-spacing="0.06em">TON</text>
+            <text x="352" y="224" font-family="system-ui,sans-serif" font-size="12" fill="#5A5549">Wie soll der Text klingen?</text>
+            <text x="352" y="237" font-family="system-ui,sans-serif" font-size="11" fill="#2A7A6A" font-style="italic">→ Stimme &amp; Tonfall ersetzen</text>
+
+            <!-- Beispiel-Prompt -->
+            <rect x="20" y="262" width="520" height="66" rx="8" fill="#1C1A16"/>
+            <text x="36" y="281" font-family="system-ui,sans-serif" font-size="10" font-weight="500" fill="#9A9389" letter-spacing="0.08em">BEISPIEL-PROMPT (Kita-Leiterin)</text>
+            <text x="36" y="298" font-family="system-ui,sans-serif" font-size="12" fill="#EDE9E0">„Du bist eine erfahrene Kita-Leiterin (R). Schreibe eine Eltern-E-Mail zur Schließung (A).</text>
+            <text x="36" y="314" font-family="system-ui,sans-serif" font-size="12" fill="#EDE9E0">45 Kinder, familiäres Klima (K). Max. 8 Sätze, mit Betreff (F). Kein Juristendeutsch (E+T)."</text>
+
+          </svg>
+          <figcaption class="post-img-caption">Die RAKFET-Formel übersetzt Kommunikationstheorie in eine praktische Schritt-für-Schritt-Struktur für Prompts.</figcaption>
+        </figure>
+
+        <h2>Die sechs Bausteine im Detail</h2>
+
+        <div class="post-mechanism">
+          <h3>R – Rolle: Wer soll die KI sein?</h3>
+          <p>
+            Die Rolle gibt der KI eine Perspektive, ein Fachwissen und eine Haltung. Ohne Rolle antwortet die KI als generalistischer Assistent – mit Rolle als Expertin mit spezifischem Blickwinkel. Watzlawick würde sagen: Die Rolle setzt den Beziehungsrahmen. Schulz von Thun: Sie füllt den Selbstoffenbarungskanal, der strukturell fehlt.
+          </p>
+          <p><em>Beispiel: „Du bist eine erfahrene Kita-Leiterin mit 15 Jahren Praxis in der Elternkommunikation."</em></p>
+        </div>
+
+        <div class="post-mechanism">
+          <h3>A – Aufgabe: Was soll die KI tun?</h3>
+          <p>
+            Die Aufgabe ist der explizite Appell – der im menschlichen Gespräch oft nur durch Tonfall und Situation klar wird. Searle: Hier wird aus dem indirekten Sprechakt ein direkter. Grice: Die Relevanzmaxime wird erfüllt. Alles, was die KI tun soll, muss vollständig in Worte gefasst werden: Was genau, für wen, bis wann.
+          </p>
+          <p><em>Beispiel: „Schreibe eine kurze E-Mail an Eltern, in der wir ankündigen, dass die Kita nächste Woche wegen eines Teamtags geschlossen bleibt."</em></p>
+        </div>
+
+        <div class="post-mechanism">
+          <h3>K – Kontext: Was ist die Situation?</h3>
+          <p>
+            Der Kontext ersetzt das geteilte Vorwissen, das im Gespräch selbstverständlich ist. Watzlawick: Der Beziehungsaspekt wird zumindest teilweise durch Situationsbeschreibung ersetzt. Grice: Die Quantitätsmaxime wird erfüllt – genug Information, um relevant antworten zu können. Die KI kennt weder die Einrichtung noch die Eltern noch die Vorgeschichte.
+          </p>
+          <p><em>Beispiel: „Unsere Kita hat 45 Kinder, ein familiäres Klima und kommuniziert regelmäßig per E-Mail. Die Eltern schätzen transparente Kommunikation."</em></p>
+        </div>
+
+        <div class="post-mechanism">
+          <h3>F – Format: Wie soll das Ergebnis aussehen?</h3>
+          <p>
+            Das Format definiert die äußere Form der Antwort: Länge, Struktur, Gliederung. Grice: Die Modalitätsmaxime wird erfüllt. Ohne Formatangabe entscheidet die KI selbst – und trifft dabei oft nicht das, was gebraucht wird.
+          </p>
+          <p><em>Beispiel: „Die E-Mail soll maximal 8 Sätze lang sein, mit einer kurzen Betreffzeile beginnen und keinen Anhang erwähnen."</em></p>
+        </div>
+
+        <div class="post-mechanism">
+          <h3>E – Einschränkungen: Was soll die KI vermeiden?</h3>
+          <p>
+            Einschränkungen machen implizite Wünsche explizit – also das, was Searle als indirekten Sprechakt beschreibt. Statt „Ich mag keinen Fachjargon" (indirekt) steht hier: „Verwende keine Fachbegriffe. Erkläre alles in einfacher Alltagssprache." Der Appell wird zum direkten Sprechakt.
+          </p>
+          <p><em>Beispiel: „Verwende kein Amtsdeutsch und keine Bürokratiesprache. Schreibe so, wie du persönlich mit Eltern sprichst."</em></p>
+        </div>
+
+        <div class="post-mechanism">
+          <h3>T – Ton: Wie soll der Text klingen?</h3>
+          <p>
+            Der Ton ersetzt, was im menschlichen Gespräch durch Stimme, Tempo und emotionalen Zustand transportiert wird. Schulz von Thun: Er adressiert die Beziehungs- und Selbstoffenbarungsebene. Der Tonfall entscheidet, ob eine sachlich identische Aussage warm oder kalt, motivierend oder belehrend wirkt.
+          </p>
+          <p><em>Beispiel: „Warm und verbindlich – wie ein Brief von einer Kita-Leiterin, die ihre Eltern persönlich kennt und schätzt."</em></p>
+        </div>
+
+        <h2>Was gutes Prompting wirklich ist</h2>
+
+        <p>
+          Wer das Kommunikationsquadrat versteht, wer Watzlawicks Axiome kennt, wer Grices Maximen und Searles Sprechakttheorie verstanden hat, der hat im Grunde schon die theoretische Grundlage für gutes Prompting. Denn die Konsequenz aller vier Theorien ist dieselbe: Was im Gespräch implizit bleibt, muss im Prompt explizit gemacht werden.
+        </p>
+
+        <p>
+          Ein guter Prompt ist eine vollständige Selbstoffenbarung in Textform. Wer gelernt hat, über die vier Seiten einer Nachricht nachzudenken, kann dieses Wissen direkt auf das Prompting übertragen – und bekommt von der KI Antworten, die sich menschlich anfühlen. Nicht weil die KI menschlich ist. Sondern weil der Prompt es ihr möglich macht, so zu antworten.
+        </p>
+
+        <blockquote>
+          Gutes Prompting ist keine technische Fähigkeit – es ist Kommunikationskompetenz.
+        </blockquote>
+
+        <p>
+          Und das ist vielleicht die wichtigste Erkenntnis aus diesem zweiteiligen Beitrag: KI-Kompetenz fängt nicht mit Technologie an. Sie fängt damit an, Kommunikation zu verstehen – die eigene, die menschliche, und dann die Lücke dazwischen.
+        </p>
+
+        <a href="kommunikation-ki-teil-1.html" class="post-part-link">
+          <span>← Zurück zu Teil 1: Das Kommunikationsquadrat und die KI</span>
+        </a>
+
+        <p style="margin-top: 3rem;">
+          <a href="../blog.html" style="color: var(--color-accent); font-weight: 600;">← Zurück zum Blog</a>
+        </p>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-logo">Digitales &amp; Bildung</div>
+          <div class="footer-sub">Die Bildungsingenieure</div>
+        </div>
+        <div class="footer-links">
+          <a href="../index.html">Startseite</a>
+          <a href="../blog.html">Blog</a>
+          <a href="../leistungen.html">Leistungen</a>
+          <a href="../werkzeuge.html">Werkzeuge</a>
+          <a href="../der-bildungsingenieur.html">Die Bildungsingenieure</a>
+          <a href="../impressum.html">Impressum</a>
+          <a href="../datenschutz.html">Datenschutz</a>
+        </div>
+      </div>
+      <p class="footer-copy">© 2024 Digitales &amp; Bildung – Die Bildungsingenieure</p>
+    </div>
+  </footer>
+
+  <script src="../js/nav.js"></script>
+</body>
+</html>

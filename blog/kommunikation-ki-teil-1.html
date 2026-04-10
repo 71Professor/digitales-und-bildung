@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Wie das Kommunikationsquadrat von Schulz von Thun erklärt, warum KI-Kommunikation so oft scheitert – und was das für das Prompting bedeutet.">
+  <link rel="icon" href="../images/favicon.ico">
+  <title>Wenn einer der beiden keine Ohren hat – Kommunikation & KI, Teil 1 | Digitales &amp; Bildung</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container nav-inner">
+      <a href="../index.html" class="logo">
+        <img src="../images/logo.jpeg" alt="Digitales & Bildung Logo" onerror="this.style.display='none'">
+        <div class="logo-text">
+          <span class="logo-title">Digitales &amp; Bildung</span>
+          <span class="logo-subtitle">Die Bildungsingenieure</span>
+        </div>
+      </a>
+      <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav>
+        <ul>
+          <li><a href="../index.html">Startseite</a></li>
+          <li><a href="../blog.html">Blog</a></li>
+          <li><a href="../leistungen.html">Leistungen</a></li>
+          <li><a href="../werkzeuge.html">Werkzeuge</a></li>
+          <li><a href="../der-bildungsingenieur.html">Die Bildungsingenieure</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb">
+    <div class="container">
+      <a href="../index.html">Startseite</a>
+      <span>›</span>
+      <a href="../blog.html">Blog</a>
+      <span>›</span>
+      Kommunikation &amp; KI – Teil 1
+    </div>
+  </div>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="container">
+      <h1>Wenn einer der beiden keine Ohren hat</h1>
+      <p>Was das Kommunikationsquadrat von Schulz von Thun über KI verrät – und warum Prompting eigentlich Kommunikationskompetenz ist.</p>
+    </div>
+  </div>
+
+  <!-- BEITRAGSINHALT -->
+  <section class="section">
+    <div class="container">
+
+      <div class="post-header-meta">
+        <span class="blog-meta">KI &amp; Bildung</span>
+        <span>10. April 2026</span>
+        <span>Teil 1 von 2</span>
+      </div>
+
+      <div class="post-content">
+
+        <p>
+          Wer schon einmal eine KI um Hilfe gebeten und eine generische, am Thema vorbeizielende Antwort bekommen hat, kennt das Gefühl: „Die versteht mich nicht." Das ist keine Frage schlechter Technik – es ist ein Kommunikationsproblem. Und ein sehr altes dazu. Friedemann Schulz von Thun hat es in den 1980er Jahren beschrieben. Nur dass er damals noch nicht an ChatGPT gedacht hat.
+        </p>
+
+        <h2>Eine Nachricht – vier Botschaften</h2>
+
+        <p>
+          Das Kommunikationsquadrat von Schulz von Thun beschreibt, dass jede Nachricht gleichzeitig auf vier Ebenen kommuniziert wird – ob der Sender das will oder nicht:
+        </p>
+
+        <ul>
+          <li><strong>Sachinhalt:</strong> Was ist die objektive Information? Die Fakten, Daten, der eigentliche Inhalt.</li>
+          <li><strong>Selbstoffenbarung:</strong> Was sage ich dadurch über mich selbst? Meine Gefühle, meinen Zustand, meine Haltung.</li>
+          <li><strong>Beziehung:</strong> Was sage ich damit über unser Verhältnis? Wie stehe ich zu dir, wie schätze ich dich ein?</li>
+          <li><strong>Appell:</strong> Was will ich mit dieser Nachricht bewirken? Was soll der andere jetzt tun, denken oder fühlen?</li>
+        </ul>
+
+        <p>
+          Ein klassisches Beispiel: „Das Essen ist scharf." Sachlich eine schlichte Feststellung. Aber je nach Tonfall, Mimik und Kontext kann dieselbe Aussage bedeuten: <em>„Ich leide gerade"</em> (Selbstoffenbarung), <em>„Du hättest besser aufpassen sollen"</em> (Beziehung) oder <em>„Bring mir bitte etwas anderes"</em> (Appell). Vier Ebenen, ein Satz.
+        </p>
+
+        <!-- DIAGRAMM 1: Das Kommunikationsquadrat -->
+        <figure style="margin: 2rem 0;">
+          <svg viewBox="0 0 520 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:520px;display:block;margin:0 auto;" aria-label="Das Kommunikationsquadrat von Schulz von Thun">
+            <defs>
+              <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+                <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="rgba(0,0,0,0.08)"/>
+              </filter>
+            </defs>
+
+            <!-- Hintergrund -->
+            <rect width="520" height="380" rx="14" fill="#FAFAF7" stroke="#e0ddd6" stroke-width="1"/>
+
+            <!-- Quadrant: Sachinhalt (oben links) -->
+            <rect x="20" y="20" width="220" height="155" rx="10" fill="#E6EEF9" stroke="rgba(43,95,166,0.25)" stroke-width="1.5"/>
+            <text x="130" y="48" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="600" letter-spacing="0.08em" text-transform="uppercase" fill="#2B5FA6">SACHINHALT</text>
+            <text x="130" y="68" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#5A5549">Was ist der Inhalt?</text>
+            <text x="130" y="95" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#1C1A16">Fakten · Daten · Information</text>
+            <text x="130" y="115" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#1C1A16">Das „Was" der Nachricht</text>
+            <text x="130" y="148" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#5A5549" font-style="italic">Kanäle: Worte, Inhalt</text>
+
+            <!-- Quadrant: Selbstoffenbarung (oben rechts) -->
+            <rect x="280" y="20" width="220" height="155" rx="10" fill="#EAF3E5" stroke="rgba(58,110,53,0.25)" stroke-width="1.5"/>
+            <text x="390" y="48" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="600" letter-spacing="0.08em" fill="#3A6E35">SELBSTOFFENBARUNG</text>
+            <text x="390" y="68" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#5A5549">Was sage ich über mich?</text>
+            <text x="390" y="95" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#1C1A16">Gefühle · Stimmung · Werte</text>
+            <text x="390" y="115" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#1C1A16">Das „Ich" der Nachricht</text>
+            <text x="390" y="148" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#5A5549" font-style="italic">Kanäle: Mimik, Stimme, Emotion</text>
+
+            <!-- Quadrant: Beziehung (unten links) -->
+            <rect x="20" y="205" width="220" height="155" rx="10" fill="#FBF0DC" stroke="rgba(160,107,16,0.25)" stroke-width="1.5"/>
+            <text x="130" y="233" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="600" letter-spacing="0.08em" fill="#A06B10">BEZIEHUNG</text>
+            <text x="130" y="253" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#5A5549">Wie stehe ich zu dir?</text>
+            <text x="130" y="280" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#1C1A16">Haltung · Vertrauen · Hierarchie</text>
+            <text x="130" y="300" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#1C1A16">Das „Wir" der Nachricht</text>
+            <text x="130" y="342" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#5A5549" font-style="italic">Kanäle: Tonfall, gemeinsame Geschichte</text>
+
+            <!-- Quadrant: Appell (unten rechts) -->
+            <rect x="280" y="205" width="220" height="155" rx="10" fill="#F9EAEd" stroke="rgba(155,58,74,0.25)" stroke-width="1.5"/>
+            <text x="390" y="233" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="600" letter-spacing="0.08em" fill="#9B3A4A">APPELL</text>
+            <text x="390" y="253" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#5A5549">Was soll der andere tun?</text>
+            <text x="390" y="280" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#1C1A16">Bitte · Wunsch · Aufforderung</text>
+            <text x="390" y="300" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#1C1A16">Das „Du sollst" der Nachricht</text>
+            <text x="390" y="342" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#5A5549" font-style="italic">Kanäle: Worte, Gestik, Tonfall</text>
+
+            <!-- Mittelkreis -->
+            <ellipse cx="260" cy="192" rx="54" ry="28" fill="#FAFAF7" stroke="#9A9389" stroke-width="1.5" filter="url(#shadow)"/>
+            <text x="260" y="189" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="500" fill="#1C1A16">Nachricht</text>
+            <text x="260" y="204" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#5A5549">4 Seiten</text>
+
+            <!-- Pfeile -->
+            <line x1="240" y1="180" x2="200" y2="155" stroke="#9A9389" stroke-width="1" marker-end="url(#arr)"/>
+            <line x1="280" y1="180" x2="320" y2="155" stroke="#9A9389" stroke-width="1" marker-end="url(#arr)"/>
+            <line x1="240" y1="205" x2="200" y2="230" stroke="#9A9389" stroke-width="1" marker-end="url(#arr)"/>
+            <line x1="280" y1="205" x2="320" y2="230" stroke="#9A9389" stroke-width="1" marker-end="url(#arr)"/>
+            <defs>
+              <marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+                <path d="M0,0 L6,3 L0,6 Z" fill="#9A9389"/>
+              </marker>
+            </defs>
+          </svg>
+          <figcaption class="post-img-caption">Das Kommunikationsquadrat nach Schulz von Thun: Jede Nachricht trägt gleichzeitig vier Botschaften.</figcaption>
+        </figure>
+
+        <h2>Mit vier Ohren hören</h2>
+
+        <p>
+          Was für den Sender gilt, gilt spiegelbildlich für den Empfänger: Auch er hört auf vier Ebenen – und hat oft ein bevorzugtes „Lieblingsohr". Wer hauptsächlich mit dem <strong>Sachohr</strong> hört, nimmt vor allem Fakten auf. Wer mit dem <strong>Selbstoffenbarungsohr</strong> hört, fragt sich: Was sagt mir das über den anderen? Das <strong>Beziehungsohr</strong> hört vor allem Bewertungen – „Was meint er damit über mich?" – und neigt zu Überempfindlichkeit. Das <strong>Appellohr</strong> schließlich ist ständig auf der Suche nach Erwartungen und Pflichten.
+        </p>
+
+        <p>
+          Missverständnisse entstehen, wenn Sender und Empfänger auf verschiedenen Ebenen kommunizieren, ohne es zu merken. Der Satz „Das Essen ist scharf" wird als sachliche Feststellung ausgesprochen – und auf dem Beziehungsohr als Kritik empfangen. Klassisch.
+        </p>
+
+        <blockquote>
+          Kommunikation gelingt nicht dadurch, dass wir dasselbe sagen – sondern dadurch, dass wir auf derselben Ebene ankommen.
+        </blockquote>
+
+        <h2>Das Alltagsbeispiel: Zwei Szenarien, ein Satz</h2>
+
+        <div class="post-mechanism">
+          <h3>Szenario 1: Sachliche Beratung unter Freunden</h3>
+
+          <p>
+            A hat sich Essen bestellt, das viel zu scharf ist. A ruft B an: <em>„Hey, ich hab mir gerade was bestellt – das Essen ist krass scharf, ich kann das kaum essen."</em> (lacht dabei). B hört auf dem Sachohr, fragt nach dem Schärfegrad, gibt konkrete Tipps: Milch, Joghurt, Brot. A bedankt sich erleichtert. Das Gespräch funktioniert – weil der Tonfall, das Lachen und die Situation alle vier Ebenen gleichzeitig transportieren. A muss nicht erklären, dass er leidet oder Hilfe braucht – B versteht es.
+          </p>
+        </div>
+
+        <div class="post-mechanism">
+          <h3>Szenario 2: Feedback in der Beziehung</h3>
+
+          <p>
+            Derselbe Satz, andere Situation: B hat für A gekocht. A legt die Gabel vorsichtig ab und sagt leise: <em>„Mmh… das Essen ist scharf."</em> B hört sofort auf dem Beziehungsohr: Kritik. Verteidigt sich: „Ich hab doch extra weniger Chili genommen…" Ein Missverständnis. Dabei wollte A nur ehrlich sein, ohne zu verletzen. Erst als A explizit macht, was nonverbal nicht ankam – „Ich vertrage keine Schärfe" (Ich-Botschaft) – löst sich die Spannung.
+          </p>
+          <p>
+            Was im Gespräch noch durch Tonfall und Körpersprache gerettet werden kann, geht bei der KI vollständig verloren.
+          </p>
+        </div>
+
+        <h2>Wenn einer der beiden keine Ohren hat</h2>
+
+        <p>
+          Generative Sprachmodelle wie ChatGPT oder Claude empfangen ausschließlich Text. Die Konsequenz ist drastisch: Von sieben typischen Kommunikationskanälen kommt nur einer zuverlässig an. Mimik, Gestik, Stimme, emotionaler Zustand und gemeinsame Geschichte existieren für die KI schlicht nicht. Ironie und Humor werden nicht erkannt – sie werden wörtlich genommen.
+        </p>
+
+        <!-- DIAGRAMM 2: Kanalvergleich Mensch vs KI -->
+        <figure style="margin: 2rem 0;">
+          <svg viewBox="0 0 560 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:560px;display:block;margin:0 auto;" aria-label="Kanalvergleich: Mensch-Mensch vs Mensch-KI">
+
+            <!-- Hintergrund -->
+            <rect width="560" height="260" rx="14" fill="#FAFAF7" stroke="#e0ddd6" stroke-width="1"/>
+
+            <!-- Titel links -->
+            <text x="150" y="30" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#3A6E35" letter-spacing="0.05em">MENSCH – MENSCH</text>
+
+            <!-- Titel rechts -->
+            <text x="420" y="30" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#5A5549" letter-spacing="0.05em">MENSCH – KI</text>
+
+            <!-- Trennlinie -->
+            <line x1="280" y1="16" x2="280" y2="248" stroke="#e0ddd6" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+            <!-- Kanäle (7 Zeilen) -->
+            <!-- Worte & Inhalt -->
+            <rect x="20" y="46" width="235" height="26" rx="6" fill="#E6EEF9" stroke="rgba(43,95,166,0.3)" stroke-width="1"/>
+            <text x="137" y="63" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#2B5FA6" font-weight="500">Worte &amp; Inhalt</text>
+            <rect x="300" y="46" width="235" height="26" rx="6" fill="#E6EEF9" stroke="rgba(43,95,166,0.3)" stroke-width="1"/>
+            <text x="417" y="63" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#2B5FA6" font-weight="500">Worte &amp; Inhalt ✓</text>
+
+            <!-- Mimik -->
+            <rect x="20" y="80" width="235" height="26" rx="6" fill="#E6EEF9" stroke="rgba(43,95,166,0.3)" stroke-width="1"/>
+            <text x="137" y="97" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#2B5FA6" font-weight="500">Mimik</text>
+            <rect x="300" y="80" width="235" height="26" rx="6" fill="#F1EFE8" stroke="#e0ddd6" stroke-width="1"/>
+            <text x="417" y="97" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#9A9389" text-decoration="line-through">Mimik</text>
+
+            <!-- Gestik -->
+            <rect x="20" y="114" width="235" height="26" rx="6" fill="#E6EEF9" stroke="rgba(43,95,166,0.3)" stroke-width="1"/>
+            <text x="137" y="131" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#2B5FA6" font-weight="500">Gestik &amp; Körpersprache</text>
+            <rect x="300" y="114" width="235" height="26" rx="6" fill="#F1EFE8" stroke="#e0ddd6" stroke-width="1"/>
+            <text x="417" y="131" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#9A9389" text-decoration="line-through">Gestik &amp; Körpersprache</text>
+
+            <!-- Stimme -->
+            <rect x="20" y="148" width="235" height="26" rx="6" fill="#E6EEF9" stroke="rgba(43,95,166,0.3)" stroke-width="1"/>
+            <text x="137" y="165" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#2B5FA6" font-weight="500">Stimme &amp; Tonfall</text>
+            <rect x="300" y="148" width="235" height="26" rx="6" fill="#F1EFE8" stroke="#e0ddd6" stroke-width="1"/>
+            <text x="417" y="165" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#9A9389" text-decoration="line-through">Stimme &amp; Tonfall</text>
+
+            <!-- Emotionaler Zustand -->
+            <rect x="20" y="182" width="235" height="26" rx="6" fill="#E6EEF9" stroke="rgba(43,95,166,0.3)" stroke-width="1"/>
+            <text x="137" y="199" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#2B5FA6" font-weight="500">Emotionaler Zustand</text>
+            <rect x="300" y="182" width="235" height="26" rx="6" fill="#F1EFE8" stroke="#e0ddd6" stroke-width="1"/>
+            <text x="417" y="199" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#9A9389" text-decoration="line-through">Emotionaler Zustand</text>
+
+            <!-- Gemeinsame Geschichte -->
+            <rect x="20" y="216" width="235" height="26" rx="6" fill="#E6EEF9" stroke="rgba(43,95,166,0.3)" stroke-width="1"/>
+            <text x="137" y="233" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#2B5FA6" font-weight="500">Gemeinsame Geschichte</text>
+            <rect x="300" y="216" width="235" height="26" rx="6" fill="#F1EFE8" stroke="#e0ddd6" stroke-width="1"/>
+            <text x="417" y="233" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#9A9389" text-decoration="line-through">Gemeinsame Geschichte</text>
+
+            <!-- Zähler -->
+            <text x="137" y="258" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#3A6E35" font-weight="600">6 von 6 Kanälen aktiv</text>
+            <text x="417" y="258" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#9B3A4A" font-weight="600">1 von 6 Kanälen aktiv</text>
+
+          </svg>
+          <figcaption class="post-img-caption">Von sechs Kommunikationskanälen kommt beim Prompting nur einer zuverlässig bei der KI an – der Inhalt der Worte.</figcaption>
+        </figure>
+
+        <h2>Die KI hört immer mit dem Sachohr</h2>
+
+        <p>
+          Das hat eine wichtige Konsequenz: Die KI hat kein Beziehungsohr, kein Selbstoffenbarungsohr, kein Appellohr – jedenfalls nicht in dem Sinne, wie Menschen diese Ohren benutzen. Sie analysiert den Wortlaut, sucht nach Mustern und antwortet auf das, was explizit dasteht. Verdeckte Appelle, implizite Bitten, Ironie – all das geht verloren oder wird falsch interpretiert.
+        </p>
+
+        <p>
+          Was bedeutet das umgekehrt, wenn die KI selbst spricht? Wenn die KI eine Antwort formuliert, sendet sie ausschließlich auf der Sachebene. Ihre Formulierungen klingen vielleicht warm und empathisch – aber das ist Design, kein Innenleben. Wer auf dem Beziehungsohr hört und glaubt, die KI meine es kritisch oder arrogant, interpretiert etwas hinein, das strukturell nicht vorhanden ist.
+        </p>
+
+        <div class="post-tip">
+          <strong>Was das für die Praxis bedeutet</strong>
+          <ul>
+            <li>Was im Gespräch automatisch durch Tonfall und Körpersprache mitschwingt, muss im Prompt explizit in Worte gefasst werden.</li>
+            <li>KI-Antworten auf dem Sachohr lesen – nicht auf dem Beziehungsohr. Neutralität ist keine Kälte.</li>
+            <li>Ironie und Sarkasmus im Prompt vermeiden: Die KI nimmt alles wörtlich.</li>
+            <li>KI-Empfehlungen sind Vorschläge, keine Anweisungen – das eigene Urteil bleibt unverzichtbar.</li>
+          </ul>
+        </div>
+
+        <h2>Kommunikation verstehen heißt besser promten</h2>
+
+        <p>
+          Die gute Nachricht: Wer das Kommunikationsquadrat verstanden hat, hat bereits das wichtigste Werkzeug für besseres Prompting in der Hand. Gutes Prompting ist keine technische Fähigkeit – es ist Kommunikationskompetenz. Wer weiß, welche Informationen die KI strukturell nicht empfangen kann, weiß auch, was er explizit schreiben muss.
+        </p>
+
+        <p>
+          Ein guter Prompt beschreibt den Sachinhalt präzise, macht die eigene Situation und den emotionalen Kontext sichtbar (Selbstoffenbarung), erklärt die Beziehungskonstellation und formuliert den Appell – also den konkreten Wunsch – klar und direkt.
+        </p>
+
+        <p>
+          Im zweiten Teil dieses Beitrags schauen wir, was drei weitere Kommunikationstheorien – Paul Watzlawick, H. Paul Grice und John Searle – noch zu dieser Frage beitragen. Und wir zeigen, wie sich das alles in einer konkreten Formel für die berufliche Praxis bündeln lässt: RAKFET.
+        </p>
+
+        <a href="kommunikation-ki-teil-2.html" class="post-part-link">
+          <span>Weiter zu Teil 2: Watzlawick, Grice, Searle – und die RAKFET-Formel →</span>
+        </a>
+
+        <p style="margin-top: 3rem;">
+          <a href="../blog.html" style="color: var(--color-accent); font-weight: 600;">← Zurück zum Blog</a>
+        </p>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-logo">Digitales &amp; Bildung</div>
+          <div class="footer-sub">Die Bildungsingenieure</div>
+        </div>
+        <div class="footer-links">
+          <a href="../index.html">Startseite</a>
+          <a href="../blog.html">Blog</a>
+          <a href="../leistungen.html">Leistungen</a>
+          <a href="../werkzeuge.html">Werkzeuge</a>
+          <a href="../der-bildungsingenieur.html">Die Bildungsingenieure</a>
+          <a href="../impressum.html">Impressum</a>
+          <a href="../datenschutz.html">Datenschutz</a>
+        </div>
+      </div>
+      <p class="footer-copy">© 2024 Digitales &amp; Bildung – Die Bildungsingenieure</p>
+    </div>
+  </footer>
+
+  <script src="../js/nav.js"></script>
+</body>
+</html>
