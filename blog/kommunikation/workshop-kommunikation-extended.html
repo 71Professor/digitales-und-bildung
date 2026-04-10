@@ -1,0 +1,2834 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kommunikation & KI — Workshop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F5F2EC;
+    --bg2: #EDE9E0;
+    --surface: #FAFAF7;
+    --ink: #1C1A16;
+    --ink2: #5A5549;
+    --ink3: #9A9389;
+    --teal: #2A7A6A;
+    --teal-light: #E1F0EC;
+    --blue: #2B5FA6;
+    --blue-light: #E6EEF9;
+    --amber: #A06B10;
+    --amber-light: #FBF0DC;
+    --rose: #9B3A4A;
+    --rose-light: #F9EAEd;
+    --green: #3A6E35;
+    --green-light: #EAF3E5;
+    --violet: #5B3D8A;
+    --violet-light: #EEE8F7;
+    --gray-light: #F1EFE8;
+    --blue-mid: #185FA5;
+    --border: rgba(28,26,22,0.12);
+    --border-strong: rgba(28,26,22,0.22);
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+    --radius: 10px;
+    --radius-lg: 16px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 18px;
+    line-height: 1.75;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(245,242,236,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 32px;
+    display: flex; align-items: center; gap: 0;
+    height: 56px;
+  }
+  .nav-logo {
+    font-family: var(--serif); font-size: 17px; font-weight: 500;
+    color: var(--ink); margin-right: auto; letter-spacing: -0.01em;
+  }
+  .nav-links { display: flex; gap: 0; }
+  .nav-links a {
+    font-size: 15px; font-weight: 400; color: var(--ink2);
+    text-decoration: none; padding: 0 14px; height: 56px;
+    display: flex; align-items: center;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a.active { color: var(--ink); border-bottom-color: var(--ink); }
+
+  /* ── LAYOUT ── */
+  .page { display: none; padding-top: 56px; min-height: 100vh; }
+  .page.active { display: block; }
+
+  .hero {
+    padding: 80px 56px 64px;
+    max-width: 1200px; margin: 0 auto;
+  }
+  .hero-eyebrow {
+    font-size: 13px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink3);
+    margin-bottom: 20px;
+  }
+  .hero-title {
+    font-family: var(--serif); font-size: clamp(38px, 5vw, 60px);
+    font-weight: 300; line-height: 1.12; letter-spacing: -0.02em;
+    color: var(--ink); margin-bottom: 24px;
+  }
+  .hero-title em { font-style: italic; }
+  .hero-sub {
+    font-size: 20px; color: var(--ink2); max-width: 780px; line-height: 1.7;
+    margin-bottom: 36px;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--sans); font-size: 16px; font-weight: 500;
+    padding: 11px 22px; border-radius: 99px;
+    border: 1.5px solid var(--ink); background: var(--ink);
+    color: var(--bg); text-decoration: none; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn:hover { background: transparent; color: var(--ink); }
+  .btn-outline {
+    background: transparent; color: var(--ink);
+  }
+  .btn-outline:hover { background: var(--ink); color: var(--bg); }
+
+  .content { max-width: 1200px; margin: 0 auto; padding: 0 56px 80px; }
+
+  /* ── SECTION ── */
+  .section { margin-bottom: 56px; }
+  .section-label {
+    font-size: 12px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink3); margin-bottom: 12px;
+  }
+  h2 {
+    font-family: var(--serif); font-size: 34px; font-weight: 300;
+    letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 16px;
+  }
+  h2 em { font-style: italic; }
+  h3 {
+    font-family: var(--serif); font-size: 24px; font-weight: 300;
+    letter-spacing: -0.01em; margin-bottom: 12px;
+  }
+  p { color: var(--ink2); margin-bottom: 14px; }
+  p:last-child { margin-bottom: 0; }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+  .card-title {
+    font-size: 13px; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 12px;
+  }
+
+  /* ── QUADRAT ── */
+  .quadrat {
+    display: grid; grid-template-columns: 1fr 1fr;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-lg); overflow: hidden;
+    margin: 24px 0; position: relative;
+  }
+  .q-cell {
+    padding: 20px 18px;
+    border: 0.5px solid var(--border);
+  }
+  .q-label {
+    font-size: 9px; font-weight: 500; text-transform: uppercase;
+    letter-spacing: 0.1em; margin-bottom: 3px;
+  }
+  .q-question {
+    font-size: 14px; color: var(--ink3); margin-bottom: 12px; font-style: italic;
+  }
+  .q-list {
+    font-size: 14px; color: var(--ink2); padding-left: 16px; margin-bottom: 10px;
+  }
+  .q-list li { margin-bottom: 4px; line-height: 1.45; }
+  .q-divider {
+    font-size: 9px; font-weight: 500; text-transform: uppercase;
+    letter-spacing: 0.07em; color: var(--ink3); margin: 8px 0 6px;
+  }
+  .chip-row { display: flex; flex-wrap: wrap; gap: 4px; }
+  .chip {
+    font-size: 12px; padding: 3px 9px; border-radius: 99px;
+    border: 0.5px solid; line-height: 1.6; font-weight: 400;
+  }
+  .chip-blue  { background: var(--blue-light);  color: var(--blue);  border-color: rgba(43,95,166,0.25); }
+  .chip-amber { background: var(--amber-light); color: var(--amber); border-color: rgba(160,107,16,0.25); }
+  .chip-ghost { background: var(--bg2); color: var(--ink3); border-color: var(--border); text-decoration: line-through; opacity: 0.6; }
+  .chip-rose  { background: var(--rose-light);  color: var(--rose);  border-color: rgba(155,58,74,0.25); }
+
+  .q-sach   .q-label { color: var(--blue); }
+  .q-selbst .q-label { color: var(--green); }
+  .q-bezie  .q-label { color: var(--amber); }
+  .q-appell .q-label { color: var(--rose); }
+
+  .q-center {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    background: var(--bg); border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    padding: 6px 14px; font-size: 13px; font-weight: 500;
+    color: var(--ink2); white-space: nowrap; z-index: 5; pointer-events: none;
+  }
+
+  /* ── OHREN ── */
+  .ohren-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; }
+  .ohr-card {
+    border-radius: var(--radius); padding: 18px;
+    border: 1px solid;
+  }
+  .ohr-sach   { background: var(--blue-light);  border-color: rgba(43,95,166,0.2);  }
+  .ohr-selbst { background: var(--green-light); border-color: rgba(58,110,53,0.2); }
+  .ohr-bezie  { background: var(--amber-light); border-color: rgba(160,107,16,0.2); }
+  .ohr-appell { background: var(--rose-light);  border-color: rgba(155,58,74,0.2);  }
+  .ohr-name {
+    font-size: 10px; font-weight: 500; text-transform: uppercase;
+    letter-spacing: 0.08em; margin-bottom: 4px;
+  }
+  .ohr-sach   .ohr-name { color: var(--blue); }
+  .ohr-selbst .ohr-name { color: var(--green); }
+  .ohr-bezie  .ohr-name { color: var(--amber); }
+  .ohr-appell .ohr-name { color: var(--rose); }
+  .ohr-q { font-size: 15px; font-style: italic; color: var(--ink2); margin-bottom: 8px; }
+  .ohr-reaction {
+    font-size: 15px; padding: 8px 12px;
+    background: rgba(255,255,255,0.6); border-radius: 8px;
+    color: var(--ink); line-height: 1.5; font-style: italic;
+  }
+
+  /* ── DIALOG ── */
+  .dialog-step { margin-bottom: 20px; }
+  .step-label {
+    font-size: 10px; font-weight: 500; text-transform: uppercase;
+    letter-spacing: 0.07em; color: var(--ink3); margin-bottom: 8px;
+  }
+  .bubbles { display: flex; flex-direction: column; gap: 6px; margin-bottom: 8px; }
+  .bubble {
+    max-width: 70%; padding: 10px 14px;
+    font-size: 16px; line-height: 1.55; border-radius: 16px;
+    border: 1px solid var(--border);
+  }
+  .bubble-a {
+    background: var(--bg2); border-radius: 16px 16px 16px 4px;
+    align-self: flex-start;
+  }
+  .bubble-b {
+    background: var(--surface); border-radius: 16px 16px 4px 16px;
+    align-self: flex-end;
+  }
+  .bubble-speaker {
+    font-size: 9px; font-weight: 500; text-transform: uppercase;
+    letter-spacing: 0.07em; color: var(--ink3); margin-bottom: 2px;
+  }
+  .bubble-nonverbal {
+    font-size: 13px; color: var(--ink3); font-style: italic; padding: 0 4px;
+  }
+  .bubble-right { align-self: flex-end; text-align: right; }
+  .comment-strip {
+    background: var(--bg2); border-radius: var(--radius);
+    padding: 10px 14px; display: flex; flex-wrap: wrap; gap: 6px; align-items: flex-start;
+  }
+  .comment-text { font-size: 15px; color: var(--ink2); flex: 1; min-width: 200px; line-height: 1.55; }
+
+  .badge {
+    font-size: 11px; padding: 3px 8px; border-radius: 99px; border: 0.5px solid;
+    font-weight: 500; white-space: nowrap; line-height: 1.6;
+  }
+  .b-sach   { background: var(--blue-light);  color: var(--blue);  border-color: rgba(43,95,166,0.3); }
+  .b-selbst { background: var(--green-light); color: var(--green); border-color: rgba(58,110,53,0.3); }
+  .b-bezie  { background: var(--amber-light); color: var(--amber); border-color: rgba(160,107,16,0.3); }
+  .b-appell { background: var(--rose-light);  color: var(--rose);  border-color: rgba(155,58,74,0.3); }
+
+  /* ── PROMPT COMPARE ── */
+  .prompt-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0; }
+  .prompt-card {
+    border-radius: var(--radius); overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .prompt-head {
+    padding: 10px 14px; font-size: 13px; font-weight: 500;
+    text-transform: uppercase; letter-spacing: 0.07em;
+    border-bottom: 1px solid var(--border);
+  }
+  .prompt-head.bad  { background: var(--bg2); color: var(--ink2); }
+  .prompt-head.good { background: var(--green-light); color: var(--green); }
+  .prompt-body {
+    padding: 16px; font-size: 15px; font-family: var(--sans);
+    line-height: 1.6; background: var(--surface); color: var(--ink);
+    min-height: 80px;
+  }
+  .prompt-body .hl  { color: var(--blue); }
+  .prompt-body .hlo { color: var(--green); }
+  .prompt-foot {
+    padding: 10px 14px; font-size: 14px; font-style: italic;
+    color: var(--ink2); border-top: 1px solid var(--border);
+    background: var(--bg2); line-height: 1.5;
+  }
+
+  /* ── KI QUADRAT ── */
+  .note-mini {
+    font-size: 13px; color: var(--ink2); border-left: 2px solid var(--border-strong);
+    padding: 4px 8px; margin-top: 8px; font-style: italic; line-height: 1.5;
+  }
+  .note-mini.warn { border-color: var(--rose); color: var(--rose); }
+
+  /* ── DIVIDER ── */
+  hr.fancy {
+    border: none; height: 1px; background: var(--border);
+    margin: 40px 0;
+  }
+
+  /* ── HIGHLIGHT BOX ── */
+  .highlight-box {
+    background: var(--ink); color: var(--bg);
+    border-radius: var(--radius-lg); padding: 28px 32px;
+    margin: 28px 0;
+  }
+  .highlight-box p { color: rgba(245,242,236,0.75); }
+  .highlight-box h3 { font-family: var(--serif); color: var(--bg); margin-bottom: 10px; }
+
+  /* ── MODULE NAV ── */
+  .module-nav {
+    display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 36px;
+  }
+  .module-btn {
+    font-size: 15px; padding: 9px 20px; border-radius: 99px;
+    border: 1px solid var(--border-strong); background: transparent;
+    color: var(--ink2); cursor: pointer; font-family: var(--sans);
+    transition: all 0.18s;
+  }
+  .module-btn:hover, .module-btn.active {
+    background: var(--ink); color: var(--bg); border-color: var(--ink);
+  }
+
+  /* ── INTRO PAGE ── */
+  .intro-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 28px 0;
+  }
+  .intro-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 22px;
+  }
+  .intro-card-num {
+    font-family: var(--serif); font-size: 36px; font-weight: 300;
+    color: var(--ink3); line-height: 1; margin-bottom: 10px;
+  }
+  .intro-card-title { font-weight: 500; margin-bottom: 6px; font-size: 17px; }
+  .intro-card p { font-size: 16px; }
+
+  /* ── LEGEND ── */
+  .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 14px; color: var(--ink2); margin-top: 8px; }
+  .leg-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; vertical-align: middle; margin-right: 4px; border: 0.5px solid; }
+
+  /* ── FOOTER NAV ── */
+  .page-footer {
+    padding: 40px 56px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    max-width: 1200px; margin: 0 auto;
+  }
+  .page-footer .btn { font-size: 15px; }
+  .footer-note { font-size: 15px; color: var(--ink3); }
+
+  /* ── MODEL HEADER (add1) ── */
+  .model-header {
+    display: flex; align-items: flex-start; gap: 24px;
+    margin-bottom: 28px;
+  }
+  .model-number {
+    font-family: var(--serif); font-size: 64px; font-weight: 300;
+    line-height: 1; color: var(--border-strong); flex-shrink: 0;
+    margin-top: -6px;
+  }
+  .model-meta { flex: 1; }
+  .model-eyebrow {
+    font-size: 12px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .model-title {
+    font-family: var(--serif); font-size: 32px; font-weight: 300;
+    letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 10px;
+  }
+  .model-title em { font-style: italic; }
+  .model-author {
+    font-size: 15px; color: var(--ink3);
+  }
+
+  /* ── AXIOM CARDS (add1) ── */
+  .axiom-grid {
+    display: flex; flex-direction: column; gap: 10px; margin: 24px 0;
+  }
+  .axiom {
+    border-radius: var(--radius); padding: 16px 20px;
+    border: 1px solid var(--border);
+    display: grid; grid-template-columns: 36px 1fr; gap: 16px; align-items: start;
+  }
+  .axiom-num {
+    font-family: var(--serif); font-size: 22px; font-weight: 300;
+    color: var(--ink3); line-height: 1.2;
+  }
+  .axiom-content {}
+  .axiom-title { font-weight: 500; font-size: 17px; color: var(--ink); margin-bottom: 4px; }
+  .axiom-body { font-size: 15px; color: var(--ink2); line-height: 1.6; }
+  .axiom.focus { background: var(--ink); border-color: var(--ink); }
+  .axiom.focus .axiom-num { color: rgba(245,242,236,0.35); }
+  .axiom.focus .axiom-title { color: var(--bg); }
+  .axiom.focus .axiom-body { color: rgba(245,242,236,0.72); }
+  .axiom.subtle { background: var(--bg2); }
+
+  /* ── MAXIM GRID (add1) ── */
+  .maxim-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 24px 0;
+  }
+  .maxim-card {
+    border-radius: var(--radius); padding: 18px 20px;
+    border: 1px solid var(--border); background: var(--surface);
+  }
+  .maxim-name {
+    font-size: 12px; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .maxim-rule { font-size: 16px; font-style: italic; color: var(--ink); margin-bottom: 8px; font-family: var(--serif); }
+  .maxim-ki { font-size: 14px; color: var(--ink2); line-height: 1.5; }
+  .maxim-ki strong { color: var(--ink); font-weight: 500; }
+  .maxim-card.warn { background: var(--rose-light); border-color: rgba(155,58,74,0.2); }
+  .maxim-card.warn .maxim-name { color: var(--rose); }
+  .maxim-card.ok { background: var(--green-light); border-color: rgba(58,110,53,0.2); }
+  .maxim-card.ok .maxim-name { color: var(--green); }
+  .maxim-card.mid { background: var(--amber-light); border-color: rgba(160,107,16,0.2); }
+  .maxim-card.mid .maxim-name { color: var(--amber); }
+
+  /* ── SPEECH ACT TABLE (add1) ── */
+  .sprechakt-wrap {
+    margin: 24px 0;
+    display: flex; flex-direction: column; gap: 0;
+  }
+  .sprechakt-row {
+    display: grid; grid-template-columns: 130px 1fr 1fr;
+    gap: 0; border: 1px solid var(--border); margin-top: -1px;
+  }
+  .sprechakt-row:first-child { border-radius: var(--radius) var(--radius) 0 0; }
+  .sprechakt-row:last-child { border-radius: 0 0 var(--radius) var(--radius); }
+  .sprechakt-row:first-child .sa-cell { padding-top: 18px; }
+  .sprechakt-row:last-child .sa-cell { padding-bottom: 18px; }
+  .sa-label {
+    padding: 12px 16px; background: var(--bg2);
+    font-size: 12px; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink3);
+    border-right: 1px solid var(--border);
+    display: flex; align-items: center;
+  }
+  .sa-cell {
+    padding: 12px 18px; font-size: 15px; line-height: 1.55;
+    border-right: 1px solid var(--border);
+  }
+  .sa-cell:last-child { border-right: none; }
+  .sa-cell .sa-head {
+    font-size: 11px; font-weight: 500; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--ink3); margin-bottom: 4px;
+  }
+  .sa-cell.highlight { background: var(--blue-light); }
+  .sa-cell.warn { background: var(--rose-light); }
+
+  /* ── BRIDGE BOXES (add1) ── */
+  .bridge-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 24px 0;
+  }
+  .bridge-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 18px;
+  }
+  .bridge-icon {
+    font-size: 22px; margin-bottom: 10px; line-height: 1;
+  }
+  .bridge-title { font-weight: 500; font-size: 16px; color: var(--ink); margin-bottom: 6px; }
+  .bridge-body { font-size: 14px; color: var(--ink2); line-height: 1.55; }
+
+  /* ── RAKFET CONNECTOR (add1) ── */
+  .connector-row {
+    display: grid; grid-template-columns: 1fr 40px 1fr; gap: 0;
+    align-items: center; margin-bottom: 10px;
+  }
+  .connector-left {
+    background: var(--bg2); border-radius: var(--radius) 0 0 var(--radius);
+    padding: 12px 16px; font-size: 15px; color: var(--ink2); line-height: 1.5;
+    border: 1px solid var(--border); border-right: none;
+  }
+  .connector-arrow {
+    background: var(--bg2); height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; color: var(--ink3);
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  }
+  .connector-right {
+    background: var(--surface); border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 12px 16px; font-size: 15px; color: var(--ink); line-height: 1.5;
+    border: 1px solid var(--border); border-left: none;
+    font-weight: 500;
+  }
+
+  /* ── CHIPS (add1 extras) ── */
+  .chip-green { background: var(--green-light); color: var(--green); border-color: rgba(58,110,53,0.25); }
+  .chip-violet { background: var(--violet-light); color: var(--violet); border-color: rgba(91,61,138,0.25); }
+  .chip-teal  { background: var(--teal-light);  color: var(--teal);  border-color: rgba(42,122,106,0.25); }
+
+  /* ── QUOTE (add1) ── */
+  .model-quote {
+    border-left: 3px solid var(--border-strong); padding: 10px 20px;
+    margin: 20px 0; font-family: var(--serif); font-size: 20px;
+    font-style: italic; font-weight: 300; color: var(--ink2); line-height: 1.5;
+  }
+
+  /* ── SENDER QUADRAT (add2) ── */
+  .q-cell-sender {
+    background: var(--surface);
+    padding: 22px 20px 18px;
+    position: relative;
+    transition: background 0.18s;
+  }
+  .q-cell-sender:hover { filter: brightness(0.97); }
+  .q-sach-s    { background: var(--blue-light); }
+  .q-selbst-s  { background: var(--gray-light); }
+  .q-bezie-s   { background: var(--gray-light); }
+  .q-appell-s  { background: var(--amber-light); }
+  .q-sach-e    { background: var(--blue-light); }
+  .q-selbst-e  { background: var(--gray-light); }
+  .q-bezie-e   { background: var(--rose-light); }
+  .q-appell-e  { background: var(--amber-light); }
+
+  .q-sender-label {
+    font-size: 11px; font-weight: 500; text-transform: uppercase;
+    letter-spacing: 0.09em; margin-bottom: 4px;
+  }
+  .q-sender-title {
+    font-family: var(--serif); font-size: 19px; font-weight: 300;
+    letter-spacing: -0.01em; margin-bottom: 12px; line-height: 1.2;
+  }
+  .q-sender-list {
+    list-style: none; font-size: 14px; color: var(--ink2);
+    margin-bottom: 14px; display: flex; flex-direction: column; gap: 4px;
+  }
+  .q-sender-list li {
+    padding-left: 14px; position: relative; line-height: 1.45;
+  }
+  .q-sender-list li::before {
+    content: '–'; position: absolute; left: 0; color: var(--ink3);
+  }
+  .badge-sender {
+    display: inline-block; font-size: 11px; font-weight: 500;
+    padding: 3px 10px; border-radius: 99px; border: 0.5px solid; line-height: 1.6;
+  }
+  .badge-strong  { background: rgba(43,95,166,0.12); color: var(--blue-mid); border-color: rgba(43,95,166,0.25); }
+  .badge-limited { background: rgba(90,85,73,0.08); color: var(--ink2); border-color: rgba(90,85,73,0.2); }
+  .badge-warn-s  { background: rgba(160,107,16,0.10); color: var(--amber); border-color: rgba(160,107,16,0.25); }
+  .badge-danger  { background: rgba(155,58,74,0.10); color: var(--rose); border-color: rgba(155,58,74,0.25); }
+  .badge-ok      { background: rgba(43,95,166,0.12); color: var(--blue-mid); border-color: rgba(43,95,166,0.25); }
+
+  .q-center-sender {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--bg); border: 1px solid var(--border-strong);
+    border-radius: var(--radius); padding: 6px 16px;
+    font-size: 13px; font-weight: 500; color: var(--ink2);
+    white-space: nowrap; z-index: 10; pointer-events: none;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+
+  .quadrat-sender {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+    background: var(--border-strong); border-radius: var(--radius-lg);
+    overflow: hidden; border: 1px solid var(--border-strong);
+  }
+
+  .legend-sender {
+    display: flex; flex-wrap: wrap; gap: 12px; margin-top: 14px;
+    font-size: 13px; color: var(--ink2);
+  }
+  .legend-sender-item { display: flex; align-items: center; gap: 6px; }
+  .legend-sender-dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    border: 0.5px solid; flex-shrink: 0;
+  }
+  .dot-blue  { background: var(--blue-light);  border-color: rgba(43,95,166,0.3); }
+  .dot-gray  { background: var(--gray-light);  border-color: rgba(90,85,73,0.2); }
+  .dot-amber { background: var(--amber-light); border-color: rgba(160,107,16,0.3); }
+  .dot-rose  { background: var(--rose-light);  border-color: rgba(155,58,74,0.3); }
+
+  .sender-divider {
+    margin: 36px 0; display: flex; align-items: center; gap: 16px;
+  }
+  .sender-divider-line { flex: 1; height: 1px; background: var(--border); }
+  .sender-divider-icon {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--ink); display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .section-title-sender {
+    font-size: 12px; font-weight: 500; letter-spacing: 0.09em;
+    text-transform: uppercase; color: var(--ink3); margin-bottom: 14px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-title-sender::after {
+    content: ''; flex: 1; height: 1px; background: var(--border);
+  }
+
+  @media (max-width: 680px) {
+    .quadrat, .ohren-grid, .prompt-compare, .intro-grid { grid-template-columns: 1fr; }
+    .quadrat-sender { grid-template-columns: 1fr; }
+    .maxim-grid, .bridge-grid, .sprechakt-row { grid-template-columns: 1fr; }
+    .hero { padding: 48px 24px 40px; }
+    .content { padding: 0 24px 60px; }
+    nav { padding: 0 16px; }
+    .nav-links a { padding: 0 8px; font-size: 11px; }
+    .page-footer { padding: 32px 24px; flex-direction: column; gap: 14px; }
+    .model-number { font-size: 44px; }
+    .model-title { font-size: 26px; }
+    .connector-row { grid-template-columns: 1fr; }
+    .connector-left, .connector-right, .connector-arrow { border-radius: var(--radius); border: 1px solid var(--border); }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Kommunikation & KI</div>
+  <div class="nav-links">
+    <a href="#" onclick="show('intro')" id="nav-intro" class="active">Einführung</a>
+    <a href="#" onclick="show('modell')" id="nav-modell">Das Modell</a>
+    <a href="#" onclick="show('mensch')" id="nav-mensch">Mensch–Mensch</a>
+    <a href="#" onclick="show('ki')" id="nav-ki">Mensch–KI</a>
+    <a href="#" onclick="show('kisender')" id="nav-kisender">KI als Sender</a>
+    <a href="#" onclick="show('beispiel')" id="nav-beispiel">Analyse</a>
+    <a href="#" onclick="show('watzlawick')" id="nav-watzlawick">Watzlawick</a>
+    <a href="#" onclick="show('grice')" id="nav-grice">Grice</a>
+    <a href="#" onclick="show('searle')" id="nav-searle">Searle</a>
+    <a href="#" onclick="show('synthese')" id="nav-synthese">Synthese</a>
+    <a href="#" onclick="show('prompts')" id="nav-prompts">Besser promten</a>
+    <a href="#" onclick="show('rakfet')" id="nav-rakfet">RAKFET</a>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════ -->
+<!-- PAGE 1: INTRO -->
+<!-- ════════════════════════════════ -->
+<div class="page active" id="page-intro">
+  <div class="hero">
+    <div class="hero-eyebrow">Workshop · Kommunikation & Künstliche Intelligenz</div>
+    <h1 class="hero-title">Wie wir reden —<br>und was <em>die KI</em><br>davon versteht.</h1>
+    <p class="hero-sub">Ein Blick durch das Kommunikationsquadrat von Schulz von Thun — auf menschliche Gespräche und auf die ganz andere Welt des Promptens.</p>
+    <a href="#" class="btn" onclick="show('modell')">Workshop starten →</a>
+  </div>
+  <div class="content">
+    <div class="section-label">Ablauf des Workshops</div>
+    <div class="intro-grid">
+      <div class="intro-card">
+        <div class="intro-card-num">01</div>
+        <div class="intro-card-title">Das Kommunikationsmodell</div>
+        <p>Das Kommunikationsquadrat und die vier Ohren von Friedemann Schulz von Thun — Grundlagen und Systematik.</p>
+      </div>
+      <div class="intro-card">
+        <div class="intro-card-num">02</div>
+        <div class="intro-card-title">Mensch–Mensch-Kommunikation</div>
+        <p>Zwei Alltagsszenarien: sachliche Beratung und emotionale Beziehungskommunikation — analysiert durch das Modell.</p>
+      </div>
+      <div class="intro-card">
+        <div class="intro-card-num">03</div>
+        <div class="intro-card-title">Kommunikation mit KI</div>
+        <p>Wie verändert sich das Modell, wenn einer der Gesprächspartner ein generatives Sprachmodell ist?</p>
+      </div>
+      <div class="intro-card">
+        <div class="intro-card-num">04</div>
+        <div class="intro-card-title">KI als Sender</div>
+        <p>Was sendet ein KI-Sprachmodell auf den vier Ebenen — und wie hört der Mensch als Empfänger?</p>
+      </div>
+      <div class="intro-card">
+        <div class="intro-card-num">05</div>
+        <div class="intro-card-title">Analyse & Praxis</div>
+        <p>„Das Essen ist scharf" — ein Satz, zwei Welten. Was kommt an, was geht verloren?</p>
+      </div>
+      <div class="intro-card">
+        <div class="intro-card-num">06–09</div>
+        <div class="intro-card-title">Weitere Modelle & Synthese</div>
+        <p>Watzlawick, Grice und Searle beleuchten dieselbe Frage aus anderen Winkeln — mit einer gemeinsamen Synthese.</p>
+      </div>
+      <div class="intro-card">
+        <div class="intro-card-num">10</div>
+        <div class="intro-card-title">Besser promten</div>
+        <p>Die fehlenden Kommunikationskanäle in Sprache übersetzen — mit konkreten Vorher-Nachher-Beispielen.</p>
+      </div>
+      <div class="intro-card">
+        <div class="intro-card-num">11</div>
+        <div class="intro-card-title">Die RAKFET-Formel</div>
+        <p>Sechs Bausteine für den beruflichen Alltag — vom Gespräch zum präzisen Arbeitsauftrag.</p>
+      </div>
+    </div>
+    <div class="highlight-box">
+      <h3>Lernziel</h3>
+      <p>Nach diesem Workshop verstehen Sie, warum KI-Kommunikation so oft scheitert — und wie Sie Prompts formulieren müssen, um die fehlenden Kommunikationskanäle in Sprache zu übersetzen.</p>
+    </div>
+    <div class="page-footer" style="padding-left:0;padding-right:0;">
+      <span class="footer-note">Modul 1 von 12</span>
+      <a href="#" class="btn" onclick="show('modell')">Weiter: Das Modell →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════ -->
+<!-- PAGE 2: DAS MODELL -->
+<!-- ════════════════════════════════ -->
+<div class="page" id="page-modell">
+  <div class="hero" style="padding-bottom:32px;">
+    <div class="hero-eyebrow">Modul 01 — Grundlagen</div>
+    <h1 class="hero-title">Das Kommunikations­<em>quadrat</em></h1>
+    <p class="hero-sub">Friedemann Schulz von Thun zeigt: Jede Nachricht enthält gleichzeitig vier Botschaften — und jeder Mensch hört mit vier verschiedenen Ohren.</p>
+  </div>
+  <div class="content">
+
+    <div class="section">
+      <div class="section-label">Das Modell</div>
+      <h2>Eine Nachricht — <em>vier Seiten</em></h2>
+      <p>Wenn jemand spricht, sendet er immer auf allen vier Ebenen gleichzeitig — bewusst oder unbewusst. Tonfall, Mimik, Wortwahl und Kontext entscheiden, welche Ebene dominiert.</p>
+
+      <div class="quadrat">
+        <div class="q-cell q-sach">
+          <div class="q-label">Sachinhalt</div>
+          <div class="q-question">Was ist der Inhalt?</div>
+          <ul class="q-list">
+            <li>Fakten, Daten, Sachverhalte</li>
+            <li>Objektive Information</li>
+            <li>Das „Was" der Nachricht</li>
+          </ul>
+          <div class="q-divider">Typische Kanäle</div>
+          <div class="chip-row">
+            <span class="chip chip-blue">Worte & Inhalt</span>
+            <span class="chip chip-amber">Gestik ~</span>
+          </div>
+        </div>
+        <div class="q-cell q-selbst">
+          <div class="q-label">Selbstoffenbarung</div>
+          <div class="q-question">Was sage ich über mich?</div>
+          <ul class="q-list">
+            <li>Gefühle, Stimmungen, Bedürfnisse</li>
+            <li>Persönlichkeit und Werte</li>
+            <li>Das „Ich" hinter der Nachricht</li>
+          </ul>
+          <div class="q-divider">Typische Kanäle</div>
+          <div class="chip-row">
+            <span class="chip chip-blue">Worte</span>
+            <span class="chip chip-blue">Mimik</span>
+            <span class="chip chip-blue">Stimme</span>
+            <span class="chip chip-blue">Emotionaler Zustand</span>
+          </div>
+        </div>
+        <div class="q-cell q-bezie">
+          <div class="q-label">Beziehung</div>
+          <div class="q-question">Wie stehe ich zu dir?</div>
+          <ul class="q-list">
+            <li>Haltung gegenüber dem Empfänger</li>
+            <li>Wertung, Vertrauen, Hierarchie</li>
+            <li>Das „Wir" der Nachricht</li>
+          </ul>
+          <div class="q-divider">Typische Kanäle</div>
+          <div class="chip-row">
+            <span class="chip chip-blue">Tonfall</span>
+            <span class="chip chip-blue">Mimik</span>
+            <span class="chip chip-blue">Gemeinsame Geschichte</span>
+          </div>
+        </div>
+        <div class="q-cell q-appell">
+          <div class="q-label">Appell</div>
+          <div class="q-question">Was soll der andere tun?</div>
+          <ul class="q-list">
+            <li>Wunsch, Bitte, Aufforderung</li>
+            <li>Explizit oder verdeckt</li>
+            <li>Das „Du sollst" der Nachricht</li>
+          </ul>
+          <div class="q-divider">Typische Kanäle</div>
+          <div class="chip-row">
+            <span class="chip chip-blue">Worte</span>
+            <span class="chip chip-blue">Gestik</span>
+            <span class="chip chip-amber">Stimme ~</span>
+          </div>
+        </div>
+        <div class="q-center">Nachricht</div>
+      </div>
+    </div>
+
+    <hr class="fancy">
+
+    <div class="section">
+      <div class="section-label">Die Empfängerseite</div>
+      <h2>Die <em>vier Ohren</em></h2>
+      <p>Empfänger wählen (oft unbewusst) ein „Lieblingsohr" — und hören dadurch die Nachricht ganz anders, als sie gemeint war. Hier entsteht das Missverständnis.</p>
+
+      <div class="ohren-grid">
+        <div class="ohr-card ohr-sach">
+          <div class="ohr-name">Sachohr</div>
+          <div class="ohr-q">Was ist die objektive Information?</div>
+          <ul class="q-list" style="margin-bottom:10px;">
+            <li>Hört nur den Sachinhalt</li>
+            <li>Keine emotionale Wertung</li>
+            <li>Neutral, analytisch</li>
+          </ul>
+          <div class="ohr-reaction">"Ach so, das weiß ich jetzt."</div>
+        </div>
+        <div class="ohr-card ohr-selbst">
+          <div class="ohr-name">Selbstoffenbarungsohr</div>
+          <div class="ohr-q">Was verrät das über den Sender?</div>
+          <ul class="q-list" style="margin-bottom:10px;">
+            <li>Fragt nach dem Innenleben</li>
+            <li>Empathisch, neugierig</li>
+            <li>Psychologisch orientiert</li>
+          </ul>
+          <div class="ohr-reaction">"Wie geht es ihr/ihm dabei?"</div>
+        </div>
+        <div class="ohr-card ohr-bezie">
+          <div class="ohr-name">Beziehungsohr</div>
+          <div class="ohr-q">Was meint er/sie damit über mich?</div>
+          <ul class="q-list" style="margin-bottom:10px;">
+            <li>Hört Bewertungen und Kritik</li>
+            <li>Sensitiv, oft überreagierend</li>
+            <li>„Bin ich gemeint?"</li>
+          </ul>
+          <div class="ohr-reaction">"Meint er/sie das als Kritik an mir?"</div>
+        </div>
+        <div class="ohr-card ohr-appell">
+          <div class="ohr-name">Appellohr</div>
+          <div class="ohr-q">Was soll ich jetzt tun?</div>
+          <ul class="q-list" style="margin-bottom:10px;">
+            <li>Hört Erwartungen und Forderungen</li>
+            <li>Aktionsorientiert, pflichtbewusst</li>
+            <li>„Was wird von mir erwartet?"</li>
+          </ul>
+          <div class="ohr-reaction">"Ich muss jetzt etwas tun!"</div>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <h3>Das Kernproblem</h3>
+        <p>Sender und Empfänger hören nicht automatisch auf derselben Ebene. Eine sachliche Aussage kann auf dem Beziehungsohr als Kritik landen — und ein gut gemeinter Ratschlag als Bevormundung. Kommunikation gelingt, wenn beide Seiten die Ebenen bewusst wahrnehmen.</p>
+      </div>
+    </div>
+
+    <hr class="fancy">
+
+    <div class="section">
+      <div class="section-label">Grundlagen</div>
+      <h2>Die <em>Kommunikationskanäle</em> im Überblick</h2>
+      <p>Nachrichten reisen nicht nur über Worte. Diese sechs Kanäle transportieren den Großteil einer Botschaft — oft unbewusst, oft stärker als der Inhalt selbst.</p>
+
+      <div style="display:flex;flex-direction:column;gap:10px;margin:24px 0;">
+
+        <div class="card" style="margin:0;display:grid;grid-template-columns:170px 1fr;gap:16px;align-items:start;">
+          <div>
+            <div style="font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:0.08em;color:var(--blue);margin-bottom:6px;">Mimik</div>
+            <div class="chip-row">
+              <span class="chip chip-blue" style="font-size:13px;">Selbstoffenbarung</span>
+              <span class="chip chip-amber" style="font-size:13px;">Beziehung</span>
+            </div>
+          </div>
+          <div>
+            <p style="font-size:16px;margin-bottom:5px;color:var(--ink);">Gesichtsausdruck, Augenbewegungen, Stirnrunzeln, Lächeln. Die Mimik ist der direkteste Kanal zur Selbstoffenbarung — sie verrät Emotionen oft schneller als Worte und ist kaum kontrollierbar.</p>
+            <p style="font-size:15px;color:var(--ink3);font-style:italic;margin:0;">Beispiel: Das Stirnrunzeln beim ersten Bissen verrät Überraschung — bevor ein Wort fällt.</p>
+          </div>
+        </div>
+
+        <div class="card" style="margin:0;display:grid;grid-template-columns:170px 1fr;gap:16px;align-items:start;">
+          <div>
+            <div style="font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:0.08em;color:var(--blue);margin-bottom:6px;">Gestik &amp; Körpersprache</div>
+            <div class="chip-row">
+              <span class="chip chip-blue" style="font-size:13px;">Selbstoffenbarung</span>
+              <span class="chip chip-blue" style="font-size:13px;">Appell</span>
+            </div>
+          </div>
+          <div>
+            <p style="font-size:16px;margin-bottom:5px;color:var(--ink);">Handbewegungen, Körperhaltung, Nicken, Zurücklehnen. Gestik verstärkt oder widerspricht dem gesprochenen Wort. Offene Hände signalisieren Ehrlichkeit, ausgestreckte Arme einen klaren Appell.</p>
+            <p style="font-size:15px;color:var(--ink3);font-style:italic;margin:0;">Beispiel: Hochgehobene Hände beim Klarstellen bedeuten nonverbal „Ich meine das nicht böse."</p>
+          </div>
+        </div>
+
+        <div class="card" style="margin:0;display:grid;grid-template-columns:170px 1fr;gap:16px;align-items:start;">
+          <div>
+            <div style="font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:0.08em;color:var(--blue);margin-bottom:6px;">Stimme &amp; Tonfall</div>
+            <div class="chip-row">
+              <span class="chip chip-blue" style="font-size:13px;">Selbstoffenbarung</span>
+              <span class="chip chip-blue" style="font-size:13px;">Beziehung</span>
+              <span class="chip chip-amber" style="font-size:13px;">Appell ~</span>
+            </div>
+          </div>
+          <div>
+            <p style="font-size:16px;margin-bottom:5px;color:var(--ink);">Lautstärke, Tempo, Pausen, Wärme oder Kälte der Stimme. Der Tonfall färbt jeden Satz: „Das Essen ist scharf" klingt als sachliche Feststellung völlig anders als als Klage oder als Anklage.</p>
+            <p style="font-size:15px;color:var(--ink3);font-style:italic;margin:0;">Beispiel: Eine leise, zögernde Stimme signalisiert Rücksichtnahme — noch vor dem Inhalt.</p>
+          </div>
+        </div>
+
+        <div class="card" style="margin:0;display:grid;grid-template-columns:170px 1fr;gap:16px;align-items:start;">
+          <div>
+            <div style="font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:0.08em;color:var(--blue);margin-bottom:6px;">Emotionaler Zustand</div>
+            <div class="chip-row">
+              <span class="chip chip-blue" style="font-size:13px;">Selbstoffenbarung</span>
+            </div>
+          </div>
+          <div>
+            <p style="font-size:16px;margin-bottom:5px;color:var(--ink);">Stress, Erschöpfung, Freude, Nervosität — der innere Zustand beeinflusst, wie jemand spricht und wie er gehört wird. Menschen lesen diese Signale intuitiv, ohne dass sie ausgesprochen werden.</p>
+            <p style="font-size:15px;color:var(--ink3);font-style:italic;margin:0;">Beispiel: Enttäuschung nach Kritik ist spürbar — auch wenn niemand „Ich bin enttäuscht" sagt.</p>
+          </div>
+        </div>
+
+        <div class="card" style="margin:0;display:grid;grid-template-columns:170px 1fr;gap:16px;align-items:start;">
+          <div>
+            <div style="font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:0.08em;color:var(--blue);margin-bottom:6px;">Gemeinsame Geschichte</div>
+            <div class="chip-row">
+              <span class="chip chip-blue" style="font-size:13px;">Selbstoffenbarung</span>
+              <span class="chip chip-blue" style="font-size:13px;">Beziehung</span>
+            </div>
+          </div>
+          <div>
+            <p style="font-size:16px;margin-bottom:5px;color:var(--ink);">Geteilte Erfahrungen, Anspielungen, Insider-Wissen, Erinnerungen. Gemeinsame Geschichte erlaubt es, mit wenigen Worten viel zu sagen — weil der Kontext nicht erklärt werden muss.</p>
+            <p style="font-size:15px;color:var(--ink3);font-style:italic;margin:0;">Beispiel: Humor zwischen Freunden funktioniert, weil beide wissen, wie der andere es meint.</p>
+          </div>
+        </div>
+
+        <div class="card" style="margin:0;background:var(--rose-light);border-color:rgba(155,58,74,0.2);display:grid;grid-template-columns:170px 1fr;gap:16px;align-items:start;">
+          <div>
+            <div style="font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:0.08em;color:var(--rose);margin-bottom:6px;">Ironie &amp; Humor</div>
+            <div class="chip-row">
+              <span class="chip" style="font-size:13px;background:rgba(155,58,74,0.12);color:var(--rose);border-color:rgba(155,58,74,0.3);">Selbstoffenbarung</span>
+              <span class="chip" style="font-size:13px;background:rgba(155,58,74,0.12);color:var(--rose);border-color:rgba(155,58,74,0.3);">Beziehung</span>
+            </div>
+          </div>
+          <div>
+            <p style="font-size:16px;margin-bottom:5px;color:var(--ink);">Übertreibung, Sarkasmus, Witze — Ironie funktioniert nur, wenn beide Seiten den Code kennen. Sie setzt Tonfall und gemeinsame Geschichte voraus. Das Gegenteil des Gesagten ist gemeint.</p>
+            <p style="font-size:15px;color:var(--rose);font-style:italic;margin:0;font-weight:500;">Achtung: Ohne Tonfall und Kontext ist Ironie nicht erkennbar — und wird wörtlich genommen. Das gilt besonders für KI.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="page-footer" style="padding-left:0;padding-right:0;">
+      <a href="#" class="btn btn-outline" onclick="show('intro')">← Zurück</a>
+      <span class="footer-note">Modul 2 von 12</span>
+      <a href="#" class="btn" onclick="show('mensch')">Weiter: Mensch–Mensch →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════ -->
+<!-- PAGE 3: MENSCH–MENSCH -->
+<!-- ════════════════════════════════ -->
+<div class="page" id="page-mensch">
+  <div class="hero" style="padding-bottom:32px;">
+    <div class="hero-eyebrow">Modul 02 — Mensch–Mensch</div>
+    <h1 class="hero-title">Mensch zu <em>Mensch</em></h1>
+    <p class="hero-sub">Zwei Szenarien mit demselben Satz — analysiert durch das Kommunikationsquadrat und die vier Ohren.</p>
+  </div>
+  <div class="content">
+
+    <div class="module-nav">
+      <button class="module-btn active" onclick="switchSzenario(1, this)">Szenario 1 — Sachohr</button>
+      <button class="module-btn" onclick="switchSzenario(2, this)">Szenario 2 — Beziehungsohr</button>
+    </div>
+
+    <!-- SZENARIO 1 -->
+    <div id="sz1">
+      <div class="section-label">Szenario 1</div>
+      <h2>Sachliche Beratung <em>unter Freunden</em></h2>
+      <p>A hat sich Essen bestellt, das viel zu scharf ist. A ruft B an und sucht praktische Hilfe.</p>
+
+      <hr class="fancy">
+
+      <h3>Das Quadrat — Senderperspektive</h3>
+      <div class="quadrat">
+        <div class="q-cell q-sach">
+          <div class="q-label">Sachinhalt</div>
+          <div class="q-question">Was sendet A?</div>
+          <ul class="q-list">
+            <li>Das Essen enthält Schärfe.</li>
+            <li>Es ist kein milder Geschmack.</li>
+            <li>Eine Zutat verursacht die Schärfe.</li>
+            <li>Der Sachverhalt ist feststellbar.</li>
+            <li>Die Aussage ist neutral formuliert.</li>
+          </ul>
+          <div class="q-divider">Kanäle</div>
+          <div class="chip-row">
+            <span class="chip chip-blue">Worte & Inhalt</span>
+            <span class="chip chip-amber">Gestik ~</span>
+            <span class="chip chip-amber">Ironie ~</span>
+          </div>
+        </div>
+        <div class="q-cell q-selbst">
+          <div class="q-label">Selbstoffenbarung</div>
+          <div class="q-question">Was verrät A über sich?</div>
+          <ul class="q-list">
+            <li>Ich mag kein scharfes Essen.</li>
+            <li>Ich bin überrascht oder erschrocken.</li>
+            <li>Ich esse gerne — sonst würde ich schweigen.</li>
+            <li>Ich teile meine Wahrnehmung mit.</li>
+            <li>Ich vertraue dir genug, das zu sagen.</li>
+          </ul>
+          <div class="q-divider">Kanäle</div>
+          <div class="chip-row">
+            <span class="chip chip-blue">Worte</span>
+            <span class="chip chip-blue">Mimik</span>
+            <span class="chip chip-blue">Stimme & Tonfall</span>
+            <span class="chip chip-blue">Emotionaler Zustand</span>
+          </div>
+        </div>
+        <div class="q-cell q-bezie">
+          <div class="q-label">Beziehung</div>
+          <div class="q-question">Was sagt A über die Beziehung?</div>
+          <ul class="q-list">
+            <li>Wir sind vertraut genug für Ehrlichkeit.</li>
+            <li>Ich traue dir zu, zu helfen.</li>
+            <li>Wir dürfen darüber lachen.</li>
+            <li>Es gibt keine Hierarchie hier.</li>
+            <li>Du bist meine erste Anlaufstelle.</li>
+          </ul>
+          <div class="q-divider">Kanäle</div>
+          <div class="chip-row">
+            <span class="chip chip-blue">Tonfall</span>
+            <span class="chip chip-blue">Humor</span>
+            <span class="chip chip-blue">Gemeinsame Geschichte</span>
+          </div>
+        </div>
+        <div class="q-cell q-appell">
+          <div class="q-label">Appell</div>
+          <div class="q-question">Was will A von B?</div>
+          <ul class="q-list">
+            <li>Hilf mir, das besser essbar zu machen.</li>
+            <li>Sag mir, was ich tun kann.</li>
+            <li>Sei für mich da — auch wenn's banal ist.</li>
+            <li>Nimm mein Problem ernst.</li>
+          </ul>
+          <div class="q-divider">Kanäle</div>
+          <div class="chip-row">
+            <span class="chip chip-blue">Worte (später explizit)</span>
+            <span class="chip chip-blue">Stimme</span>
+            <span class="chip chip-amber">Ironie ~</span>
+          </div>
+        </div>
+        <div class="q-center">„Das Essen ist scharf."</div>
+      </div>
+
+      <hr class="fancy">
+      <h3>Der Dialog — kommentiert</h3>
+
+      <div class="dialog-step">
+        <div class="step-label">Schritt 1 — A eröffnet</div>
+        <div class="bubbles">
+          <div style="align-self:flex-start;">
+            <div class="bubble-speaker">A — ruft an</div>
+            <div class="bubble bubble-a">„Hey, ich hab mir gerade was bestellt — das Essen ist krass scharf, ich kann das kaum essen."</div>
+            <div class="bubble-nonverbal">Stimme: leicht gequält, lacht dabei</div>
+          </div>
+        </div>
+        <div class="comment-strip">
+          <span class="badge b-sach">Sachinhalt</span>
+          <span class="badge b-selbst">Selbstoffenbarung</span>
+          <span class="badge b-appell">Appell (verdeckt)</span>
+          <span class="comment-text">A sendet auf allen Ebenen gleichzeitig: sachlich (es ist scharf), persönlich (ich komme nicht damit klar) und indirekt appellierend (hilf mir). Das Lachen transportiert Selbstoffenbarung über den Tonfall — ohne Worte.</span>
+        </div>
+      </div>
+
+      <div class="dialog-step">
+        <div class="step-label">Schritt 2 — B hört auf dem Sachohr, fragt nach</div>
+        <div class="bubbles">
+          <div style="align-self:flex-end;">
+            <div class="bubble-speaker" style="text-align:right;">B</div>
+            <div class="bubble bubble-b">„Haha — wie scharf reden wir? Thai-scharf oder ‚ich sterbe gerade'?"</div>
+            <div class="bubble-nonverbal" style="text-align:right;">Ton: amüsiert, neugierig</div>
+          </div>
+        </div>
+        <div class="comment-strip">
+          <span class="badge b-sach">Sachohr aktiv</span>
+          <span class="badge b-bezie">Beziehung (Humor)</span>
+          <span class="comment-text">B hat auf dem Sachohr gehört und fragt nach — sachlich, um besser helfen zu können. Der Humor zeigt gleichzeitig Vertrautheit auf der Beziehungsebene: man darf darüber lachen.</span>
+        </div>
+      </div>
+
+      <div class="dialog-step">
+        <div class="step-label">Schritt 3 — A macht den Appell explizit</div>
+        <div class="bubbles">
+          <div style="align-self:flex-start;">
+            <div class="bubble-speaker">A</div>
+            <div class="bubble bubble-a">„Ich sterbe gerade, glaub mir. Gibt es irgendwas, was ich jetzt tun kann?"</div>
+            <div class="bubble-nonverbal">Stimme: jetzt klarer appellierend</div>
+          </div>
+        </div>
+        <div class="comment-strip">
+          <span class="badge b-appell">Appell (jetzt explizit)</span>
+          <span class="badge b-selbst">Selbstoffenbarung</span>
+          <span class="comment-text">A macht den Appell jetzt explizit. Vorher war er nur im Ton — jetzt steckt er auch in den Worten. A hat gespürt, dass B noch keine Hilfe angeboten hat, und wird direkter.</span>
+        </div>
+      </div>
+
+      <div class="dialog-step">
+        <div class="step-label">Schritt 4 — B antwortet auf den Appell</div>
+        <div class="bubbles">
+          <div style="align-self:flex-end;">
+            <div class="bubble-speaker" style="text-align:right;">B</div>
+            <div class="bubble bubble-b">„Ja! Milch oder Joghurt, wenn du was hast. Oder einfach Brot — das bindet die Schärfe."</div>
+            <div class="bubble-nonverbal" style="text-align:right;">Ton: hilfsbereit, ruhig</div>
+          </div>
+        </div>
+        <div class="comment-strip">
+          <span class="badge b-sach">Sachinhalt</span>
+          <span class="badge b-bezie">Beziehung (Fürsorge)</span>
+          <span class="comment-text">B antwortet auf den Appell mit Sachinformation — aber der ruhige, konkrete Ton signalisiert gleichzeitig: „Ich bin für dich da, kein Problem."</span>
+        </div>
+      </div>
+
+      <div class="dialog-step">
+        <div class="step-label">Schritt 5 — Abschluss auf der Beziehungsebene</div>
+        <div class="bubbles">
+          <div style="align-self:flex-start;">
+            <div class="bubble-speaker">A</div>
+            <div class="bubble bubble-a">„Oh Gott, danke. Du rettest mein Leben."</div>
+            <div class="bubble-nonverbal">lacht erleichtert</div>
+          </div>
+        </div>
+        <div class="comment-strip">
+          <span class="badge b-bezie">Beziehung</span>
+          <span class="badge b-selbst">Selbstoffenbarung</span>
+          <span class="comment-text">Abschluss auf der Beziehungsebene: Dankbarkeit, Erleichterung, Humor. Kein Sachinhalt mehr nötig — die Verbindung wird bestätigt.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SZENARIO 2 -->
+    <div id="sz2" style="display:none;">
+      <div class="section-label">Szenario 2</div>
+      <h2>Feedback in der <em>Beziehung</em></h2>
+      <p>Der Partner hat gekocht. A möchte Feedback geben, ohne B zu verletzen. Derselbe Satz — aber alles ist anders.</p>
+
+      <hr class="fancy">
+
+      <h3>Das Quadrat — Senderperspektive</h3>
+      <div class="quadrat">
+        <div class="q-cell q-sach">
+          <div class="q-label">Sachinhalt</div>
+          <div class="q-question">Was sendet A?</div>
+          <ul class="q-list">
+            <li>Das Essen enthält Schärfe.</li>
+            <li>Identisch zu Szenario 1.</li>
+            <li>Der Satz ist objektiv gleich.</li>
+          </ul>
+          <div class="q-divider">Kanäle</div>
+          <div class="chip-row">
+            <span class="chip chip-blue">Worte & Inhalt</span>
+          </div>
+        </div>
+        <div class="q-cell q-selbst">
+          <div class="q-label">Selbstoffenbarung</div>
+          <div class="q-question">Was verrät A nonverbal?</div>
+          <ul class="q-list">
+            <li>Ich bin unsicher, wie ich das sage.</li>
+            <li>Ich will B nicht verletzen.</li>
+            <li>Mir ist die Beziehung wichtiger als die Kritik.</li>
+            <li>Ich bin überrascht von der Schärfe.</li>
+          </ul>
+          <div class="q-divider">Kanäle</div>
+          <div class="chip-row">
+            <span class="chip chip-blue">Stimme (leise, vorsichtig)</span>
+            <span class="chip chip-blue">Gestik (Gabel ablegen)</span>
+            <span class="chip chip-blue">Mimik (Zögern)</span>
+          </div>
+        </div>
+        <div class="q-cell q-bezie">
+          <div class="q-label">Beziehung</div>
+          <div class="q-question">Was schwingt mit?</div>
+          <ul class="q-list">
+            <li>Du hast gekocht — ich bewerte deine Arbeit.</li>
+            <li>Ich vertraue dir genug für Ehrlichkeit.</li>
+            <li>Ich will dich nicht demotivieren.</li>
+            <li>Wir sind eng genug für solches Feedback.</li>
+          </ul>
+          <div class="q-divider">Kanäle</div>
+          <div class="chip-row">
+            <span class="chip chip-blue">Tonfall</span>
+            <span class="chip chip-blue">Blickkontakt</span>
+            <span class="chip chip-blue">Gemeinsame Geschichte</span>
+          </div>
+        </div>
+        <div class="q-cell q-appell">
+          <div class="q-label">Appell</div>
+          <div class="q-question">Was will A implizit?</div>
+          <ul class="q-list">
+            <li>Nimm das als Hinweis — nicht als Kritik.</li>
+            <li>Koch es nächstes Mal milder.</li>
+            <li>Reagiere verständnisvoll.</li>
+          </ul>
+          <div class="q-divider">Kanäle</div>
+          <div class="chip-row">
+            <span class="chip chip-amber">Indirekt / verdeckt</span>
+            <span class="chip chip-blue">Stimme</span>
+          </div>
+        </div>
+        <div class="q-center">„Das Essen ist scharf."</div>
+      </div>
+
+      <hr class="fancy">
+      <h3>Der Dialog — kommentiert</h3>
+
+      <div class="dialog-step">
+        <div class="step-label">Schritt 1 — A sagt es vorsichtig</div>
+        <div class="bubbles">
+          <div style="align-self:flex-start;">
+            <div class="bubble-speaker">A — isst, zögert</div>
+            <div class="bubble bubble-a">„Mmh… das Essen ist scharf."</div>
+            <div class="bubble-nonverbal">Stimme: vorsichtig, leise. Legt die Gabel kurz ab.</div>
+          </div>
+        </div>
+        <div class="comment-strip">
+          <span class="badge b-sach">Sachinhalt</span>
+          <span class="badge b-selbst">Selbstoffenbarung</span>
+          <span class="badge b-bezie">Beziehung (heikel)</span>
+          <span class="comment-text">Derselbe Satz wie in Szenario 1 — aber alles ist anders. Das Zögern, die leise Stimme, die abgelegte Gabel: nonverbale Kanäle senden gleichzeitig Unsicherheit und Rücksichtnahme.</span>
+        </div>
+      </div>
+
+      <div class="dialog-step">
+        <div class="step-label">Schritt 2 — B hört auf dem Beziehungsohr</div>
+        <div class="bubbles">
+          <div style="align-self:flex-end;">
+            <div class="bubble-speaker" style="text-align:right;">B — hat gekocht</div>
+            <div class="bubble bubble-b">„Ich hab doch extra weniger Chili genommen als sonst…"</div>
+            <div class="bubble-nonverbal" style="text-align:right;">Ton: leicht defensiv, enttäuscht</div>
+          </div>
+        </div>
+        <div class="comment-strip">
+          <span class="badge b-bezie">Beziehungsohr aktiv</span>
+          <span class="badge b-selbst">Selbstverteidigung</span>
+          <span class="comment-text">B hat auf dem Beziehungsohr gehört: „Du kritisierst mich." Die Antwort ist Selbstverteidigung — obwohl A das gar nicht so gemeint hat. Klassisches Missverständnis.</span>
+        </div>
+      </div>
+
+      <div class="dialog-step">
+        <div class="step-label">Schritt 3 — A macht die Selbstoffenbarung explizit</div>
+        <div class="bubbles">
+          <div style="align-self:flex-start;">
+            <div class="bubble-speaker">A</div>
+            <div class="bubble bubble-a">„Nein, nein — ich mein das nicht böse! Es schmeckt wirklich gut, ich vertrag nur keine starke Schärfe."</div>
+            <div class="bubble-nonverbal">Hände heben, Blickkontakt, betonte Stimme</div>
+          </div>
+        </div>
+        <div class="comment-strip">
+          <span class="badge b-selbst">Ich-Botschaft</span>
+          <span class="badge b-bezie">Beziehung klären</span>
+          <span class="comment-text">A macht nach, was im ersten Satz gefehlt hat: die Selbstoffenbarung explizit. „Ich vertrag keine Schärfe" ist eine Ich-Botschaft — sie nimmt B aus der Verantwortung. Körpersprache unterstützt das aktiv.</span>
+        </div>
+      </div>
+
+      <div class="dialog-step">
+        <div class="step-label">Schritt 4 — B hört um</div>
+        <div class="bubbles">
+          <div style="align-self:flex-end;">
+            <div class="bubble-speaker" style="text-align:right;">B</div>
+            <div class="bubble bubble-b">„Ach so — das hab ich gar nicht gewusst. Magst du, dass ich dir was anderes mache?"</div>
+            <div class="bubble-nonverbal" style="text-align:right;">Ton: entspannter, zugewandt</div>
+          </div>
+        </div>
+        <div class="comment-strip">
+          <span class="badge b-sach">Sachohr (jetzt)</span>
+          <span class="badge b-bezie">Fürsorge</span>
+          <span class="badge b-appell">Gegenangebot</span>
+          <span class="comment-text">B „hört um" — von Beziehungs- auf Sachohr. Die Spannung löst sich. B sendet jetzt Fürsorge auf der Beziehungsebene.</span>
+        </div>
+      </div>
+
+      <div class="dialog-step">
+        <div class="step-label">Schritt 5 — Auflösung</div>
+        <div class="bubbles">
+          <div style="align-self:flex-start;">
+            <div class="bubble-speaker">A</div>
+            <div class="bubble bubble-a">„Nein lass mal, ich ess einfach das Brot dazu. Wirklich, danke — es war lieb, dass du gekocht hast."</div>
+            <div class="bubble-nonverbal">lächelt, lehnt sich entspannt zurück</div>
+          </div>
+        </div>
+        <div class="comment-strip">
+          <span class="badge b-bezie">Wertschätzung</span>
+          <span class="badge b-selbst">Erleichterung</span>
+          <span class="comment-text">A schließt explizit auf der Beziehungsebene: Wertschätzung für die Geste, Entlastung von B. Die Körperhaltung bestätigt nonverbal, dass die Spannung aufgelöst ist.</span>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <h3>Warum hat es trotz Missverständnis funktioniert?</h3>
+        <p>Weil Menschen in Echtzeit korrigieren können. Tonfall, Mimik, Gesten und Ich-Botschaften reparieren, was die Worte angerichtet haben. Diese Selbstkorrektur ist die Stärke menschlicher Kommunikation — und genau das fehlt, wenn man mit einer KI spricht.</p>
+      </div>
+    </div>
+
+    <hr class="fancy">
+
+    <div class="section">
+      <div class="section-label">Hintergrundwissen</div>
+      <h2>Die <em>Kommunikationskanäle</em> im Überblick</h2>
+      <p>In den beiden Szenarien haben wir gesehen, wie viel mehr als Worte in einem Gespräch mitschwingt. Diese sechs Kanäle transportieren den Großteil der Botschaft — oft ohne dass wir es bewusst steuern.</p>
+
+      <div style="display:flex;flex-direction:column;gap:10px;margin:24px 0;">
+
+        <div class="card" style="margin:0;display:grid;grid-template-columns:160px 1fr;gap:16px;align-items:start;">
+          <div>
+            <div style="font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:0.08em;color:var(--blue);margin-bottom:4px;">Mimik</div>
+            <div class="chip-row">
+              <span class="chip chip-blue" style="font-size:13px;">Selbstoffenbarung</span>
+              <span class="chip chip-amber" style="font-size:13px;">Beziehung</span>
+            </div>
+          </div>
+          <div>
+            <p style="font-size:16px;margin-bottom:6px;color:var(--ink);">Gesichtsausdruck, Augenbewegungen, Stirnrunzeln, Lächeln — die Mimik ist der direkteste Kanal zur Selbstoffenbarung. Sie verrät Emotionen oft schneller als Worte, kaum kontrollierbar und selten bewusst.</p>
+            <p style="font-size:15px;color:var(--ink3);font-style:italic;">Im Szenario 2: Das Zögern von A beim Essen war im Gesicht sichtbar — bevor ein einziges Wort fiel.</p>
+          </div>
+        </div>
+
+        <div class="card" style="margin:0;display:grid;grid-template-columns:160px 1fr;gap:16px;align-items:start;">
+          <div>
+            <div style="font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:0.08em;color:var(--blue);margin-bottom:4px;">Gestik & Körpersprache</div>
+            <div class="chip-row">
+              <span class="chip chip-blue" style="font-size:13px;">Selbstoffenbarung</span>
+              <span class="chip chip-blue" style="font-size:13px;">Appell</span>
+            </div>
+          </div>
+          <div>
+            <p style="font-size:16px;margin-bottom:6px;color:var(--ink);">Handbewegungen, Körperhaltung, Nicken, Zurücklehnen — Gestik verstärkt oder widerspricht dem gesprochenen Wort. Offene Hände signalisieren Ehrlichkeit, verschränkte Arme Distanz, ausgestreckte Arme einen klaren Appell.</p>
+            <p style="font-size:15px;color:var(--ink3);font-style:italic;">Im Szenario 2: A hebt die Hände beim Klarstellen — ein nonverbales „Ich meine das nicht böse".</p>
+          </div>
+        </div>
+
+        <div class="card" style="margin:0;display:grid;grid-template-columns:160px 1fr;gap:16px;align-items:start;">
+          <div>
+            <div style="font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:0.08em;color:var(--blue);margin-bottom:4px;">Stimme & Tonfall</div>
+            <div class="chip-row">
+              <span class="chip chip-blue" style="font-size:13px;">Selbstoffenbarung</span>
+              <span class="chip chip-amber" style="font-size:13px;">Beziehung</span>
+              <span class="chip chip-amber" style="font-size:13px;">Appell ~</span>
+            </div>
+          </div>
+          <div>
+            <p style="font-size:16px;margin-bottom:6px;color:var(--ink);">Lautstärke, Tempo, Pausen, Zittern, Wärme oder Kälte der Stimme — der Tonfall färbt jeden Satz. „Das Essen ist scharf" klingt als Feststellung anders als als Klage, anders als als Anklage. Derselbe Text, völlig andere Botschaft.</p>
+            <p style="font-size:15px;color:var(--ink3);font-style:italic;">Im Szenario 1: A klingt gequält und lacht — damit ist klar: Das ist eine Bitte, keine neutrale Info.</p>
+          </div>
+        </div>
+
+        <div class="card" style="margin:0;display:grid;grid-template-columns:160px 1fr;gap:16px;align-items:start;">
+          <div>
+            <div style="font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:0.08em;color:var(--blue);margin-bottom:4px;">Emotionaler Zustand</div>
+            <div class="chip-row">
+              <span class="chip chip-blue" style="font-size:13px;">Selbstoffenbarung</span>
+            </div>
+          </div>
+          <div>
+            <p style="font-size:16px;margin-bottom:6px;color:var(--ink);">Stress, Erschöpfung, Freude, Nervosität — der innere Zustand einer Person beeinflusst, wie sie spricht und wie sie gehört wird. Menschen lesen diese Signale intuitiv: „Die ist gerade angespannt" oder „Er wirkt erleichtert."</p>
+            <p style="font-size:15px;color:var(--ink3);font-style:italic;">Im Szenario 2: B ist enttäuscht — das ist spürbar, ohne dass B es ausspricht. A reagiert darauf.</p>
+          </div>
+        </div>
+
+        <div class="card" style="margin:0;display:grid;grid-template-columns:160px 1fr;gap:16px;align-items:start;">
+          <div>
+            <div style="font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:0.08em;color:var(--blue);margin-bottom:4px;">Gemeinsame Geschichte</div>
+            <div class="chip-row">
+              <span class="chip chip-blue" style="font-size:13px;">Selbstoffenbarung</span>
+              <span class="chip chip-blue" style="font-size:13px;">Beziehung</span>
+            </div>
+          </div>
+          <div>
+            <p style="font-size:16px;margin-bottom:6px;color:var(--ink);">Geteilte Erfahrungen, Anspielungen, Insider-Wissen, Erinnerungen — gemeinsame Geschichte erlaubt es, mit wenigen Worten viel zu sagen. „Du weißt, wie ich bin" erspart lange Erklärungen. Vertrauen entsteht aus geteilter Zeit.</p>
+            <p style="font-size:15px;color:var(--ink3);font-style:italic;">In beiden Szenarien: Der Humor funktioniert nur, weil A und B sich kennen und einander vertrauen.</p>
+          </div>
+        </div>
+
+        <div class="card" style="margin:0;background:var(--rose-light);border-color:rgba(155,58,74,0.2);display:grid;grid-template-columns:160px 1fr;gap:16px;align-items:start;">
+          <div>
+            <div style="font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:0.08em;color:var(--rose);margin-bottom:4px;">Ironie & Humor</div>
+            <div class="chip-row">
+              <span class="chip" style="font-size:13px;background:var(--rose-light);color:var(--rose);border-color:rgba(155,58,74,0.3);">Selbstoffenbarung</span>
+              <span class="chip" style="font-size:13px;background:var(--rose-light);color:var(--rose);border-color:rgba(155,58,74,0.3);">Beziehung</span>
+              <span class="chip" style="font-size:13px;background:var(--rose-light);color:var(--rose);border-color:rgba(155,58,74,0.3);">KI ⚠</span>
+            </div>
+          </div>
+          <div>
+            <p style="font-size:16px;margin-bottom:6px;color:var(--ink);">Übertreibung, Sarkasmus, Witze — Ironie funktioniert nur, wenn beide Seiten den Code kennen. Sie setzt gemeinsame Geschichte und Tonfall voraus. Was humorvoll gemeint ist, kann als Ernst aufgefasst werden — und umgekehrt.</p>
+            <p style="font-size:15px;color:var(--rose);font-style:italic;font-weight:500;">Achtung KI: Ironie wird wörtlich genommen. „Das könnte man ja fast als Rezept bezeichnen" → die KI schreibt ein Rezept.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="highlight-box">
+        <h3>Warum das für KI-Kommunikation entscheidend ist</h3>
+        <p>Von diesen sechs Kanälen empfängt die KI keinen einzigen — außer das, was explizit in Worte gefasst wird. Wer das versteht, weiß: Gutes Prompting bedeutet, diese Kanäle in Sprache zu übersetzen.</p>
+      </div>
+    </div>
+
+    <div class="page-footer" style="padding-left:0;padding-right:0;">
+      <a href="#" class="btn btn-outline" onclick="show('modell')">← Zurück</a>
+      <span class="footer-note">Modul 3 von 12</span>
+      <a href="#" class="btn" onclick="show('ki')">Weiter: Mensch–KI →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════ -->
+<!-- PAGE 4: MENSCH–KI -->
+<!-- ════════════════════════════════ -->
+<div class="page" id="page-ki">
+  <div class="hero" style="padding-bottom:32px;">
+    <div class="hero-eyebrow">Modul 03 — Mensch–KI</div>
+    <h1 class="hero-title">Wenn einer der<br>beiden <em>keine Ohren</em> hat</h1>
+    <p class="hero-sub">Wie verändert sich das Kommunikationsquadrat, wenn der Gesprächspartner ein generatives Sprachmodell ist?</p>
+  </div>
+  <div class="content">
+
+    <div class="section">
+      <h2>Was die KI <em>nicht empfangen kann</em></h2>
+      <p>Generative Sprachmodelle wie ChatGPT oder Claude empfangen ausschließlich Text. Alle anderen Kommunikationskanäle existieren für sie schlicht nicht.</p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0;">
+        <div class="card">
+          <div class="card-title" style="color:var(--green);">Was ankommt</div>
+          <div class="chip-row" style="gap:6px;">
+            <span class="chip chip-blue" style="font-size:15px;padding:4px 10px;">Worte & Inhalt</span>
+          </div>
+          <p style="font-size:15px;margin-top:10px;">Vollständig und präzise — das ist die einzige Stärke des Kanals.</p>
+        </div>
+        <div class="card">
+          <div class="card-title" style="color:var(--rose);">Was fehlt</div>
+          <div class="chip-row" style="gap:5px;">
+            <span class="chip chip-ghost">Mimik</span>
+            <span class="chip chip-ghost">Gestik</span>
+            <span class="chip chip-ghost">Stimme & Tonfall</span>
+            <span class="chip chip-ghost">Emotionaler Zustand</span>
+            <span class="chip chip-ghost">Gemeinsame Geschichte</span>
+            <span class="chip chip-rose">Ironie & Humor ⚠</span>
+          </div>
+          <p style="font-size:15px;margin-top:10px;">Ironie wird nicht nur nicht erkannt — sie wird wörtlich genommen und kann Fehlantworten erzeugen.</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="fancy">
+
+    <div class="section">
+      <h2>Das Quadrat für <em>KI-Kommunikation</em></h2>
+      <p>Derselbe Rahmen — aber die meisten Felder sind leer oder verändert.</p>
+
+      <div class="quadrat">
+        <div class="q-cell q-sach">
+          <div class="q-label">Sachinhalt</div>
+          <div class="q-question">Was versteht die KI?</div>
+          <ul class="q-list">
+            <li>Vollständig — das ist die Stärke.</li>
+            <li>Fakten, Begriffe, Kontext im Text.</li>
+            <li>Präzise und reproduzierbar.</li>
+          </ul>
+          <div class="q-divider">Kanäle</div>
+          <div class="chip-row">
+            <span class="chip chip-blue">Worte & Inhalt</span>
+            <span class="chip chip-ghost">Gestik</span>
+            <span class="chip chip-ghost">Ironie</span>
+          </div>
+          <div class="note-mini">Einzige Seite, die zuverlässig empfangen wird.</div>
+        </div>
+        <div class="q-cell q-selbst">
+          <div class="q-label">Selbstoffenbarung</div>
+          <div class="q-question">Was erkennt die KI über mich?</div>
+          <ul class="q-list">
+            <li>Nur, was explizit geschrieben steht.</li>
+            <li>Keine Stimmung, keine Erschöpfung.</li>
+            <li>Kein Erschrecken, keine Freude.</li>
+          </ul>
+          <div class="q-divider">Kanäle</div>
+          <div class="chip-row">
+            <span class="chip chip-blue">Worte & Inhalt</span>
+            <span class="chip chip-ghost">Mimik</span>
+            <span class="chip chip-ghost">Stimme</span>
+            <span class="chip chip-ghost">Emotionaler Zustand</span>
+            <span class="chip chip-ghost">Gemeinsame Geschichte</span>
+          </div>
+          <div class="note-mini warn">5 von 6 Kanälen fehlen — die Person bleibt unsichtbar.</div>
+        </div>
+        <div class="q-cell q-bezie">
+          <div class="q-label">Beziehung</div>
+          <div class="q-question">Welche Beziehung nimmt die KI wahr?</div>
+          <ul class="q-list">
+            <li>Keine — es gibt kein echtes Gegenüber.</li>
+            <li>Kein Gedächtnis, keine Geschichte.</li>
+            <li>Keine Haltung zur Person.</li>
+          </ul>
+          <div class="q-divider">Kanäle</div>
+          <div class="chip-row">
+            <span class="chip chip-blue">Worte & Inhalt</span>
+            <span class="chip chip-ghost">Mimik</span>
+            <span class="chip chip-ghost">Gemeinsame Geschichte</span>
+            <span class="chip chip-rose">Ironie ⚠</span>
+          </div>
+          <div class="note-mini warn">Keine echte Beziehungsebene möglich.</div>
+        </div>
+        <div class="q-cell q-appell">
+          <div class="q-label">Appell</div>
+          <div class="q-question">Was versteht die KI als Auftrag?</div>
+          <ul class="q-list">
+            <li>Nur explizite Aufforderungen.</li>
+            <li>Indirekte Bitten gehen verloren.</li>
+            <li>Ironie wird wörtlich genommen.</li>
+          </ul>
+          <div class="q-divider">Kanäle</div>
+          <div class="chip-row">
+            <span class="chip chip-blue">Worte & Inhalt</span>
+            <span class="chip chip-ghost">Gestik</span>
+            <span class="chip chip-ghost">Stimme</span>
+            <span class="chip chip-rose">Ironie ⚠</span>
+          </div>
+          <div class="note-mini warn">Ohne expliziten Auftrag reagiert die KI nur auf den Sachinhalt.</div>
+        </div>
+        <div class="q-center">Prompt</div>
+      </div>
+
+      <div class="legend">
+        <span><span class="leg-dot" style="background:var(--blue-light);border-color:rgba(43,95,166,0.3);"></span>wird empfangen</span>
+        <span><span class="leg-dot" style="background:var(--bg2);border-color:var(--border);"></span>nicht vorhanden</span>
+        <span><span class="leg-dot" style="background:var(--rose-light);border-color:rgba(155,58,74,0.3);"></span>wird falsch interpretiert</span>
+      </div>
+    </div>
+
+    <hr class="fancy">
+
+    <div class="section">
+      <h2>Was das <em>bedeutet</em></h2>
+      <div class="ohren-grid">
+        <div class="ohr-card" style="background:var(--blue-light);border-color:rgba(43,95,166,0.2);">
+          <div class="ohr-name" style="color:var(--blue);">Sachohr der KI</div>
+          <div class="ohr-q">Das einzige aktive Ohr</div>
+          <p style="font-size:15px;margin-bottom:10px;color:var(--ink2);">Die KI hört immer und ausschließlich auf dem Sachohr. Sie analysiert den Wortlaut, sucht nach Mustern und antwortet auf das, was explizit steht.</p>
+          <div class="ohr-reaction">"Was steht da? Was wird gefragt?"</div>
+        </div>
+        <div class="ohr-card" style="background:var(--bg2);border-color:var(--border);">
+          <div class="ohr-name" style="color:var(--ink3);">Selbstoffenbarungsohr</div>
+          <div class="ohr-q">Nicht vorhanden</div>
+          <p style="font-size:15px;margin-bottom:10px;color:var(--ink3);">Die KI kann nicht fragen: „Wie geht es dir gerade?" Sie hat keinen Zugang zu emotionalem Subtext — außer er wird explizit geschrieben.</p>
+          <div class="ohr-reaction" style="opacity:0.5;">(inaktiv)</div>
+        </div>
+        <div class="ohr-card" style="background:var(--bg2);border-color:var(--border);">
+          <div class="ohr-name" style="color:var(--ink3);">Beziehungsohr</div>
+          <div class="ohr-q">Nicht vorhanden</div>
+          <p style="font-size:15px;margin-bottom:10px;color:var(--ink3);">Es gibt keine gemeinsame Geschichte, kein Vertrauen, keine Gegenseitigkeit. Die KI hat keine Haltung zur Person — nur zum Text.</p>
+          <div class="ohr-reaction" style="opacity:0.5;">(inaktiv)</div>
+        </div>
+        <div class="ohr-card" style="background:var(--bg2);border-color:var(--border);">
+          <div class="ohr-name" style="color:var(--ink3);">Appellohr</div>
+          <div class="ohr-q">Nur bei explizitem Auftrag</div>
+          <p style="font-size:15px;margin-bottom:10px;color:var(--ink3);">Verdeckte Appelle, Ironie oder implizite Erwartungen werden nicht erkannt. Nur klare, direkte Aufträge kommen an.</p>
+          <div class="ohr-reaction" style="opacity:0.5;">"Was soll ich tun?" — nur wenn es dasteht.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer" style="padding-left:0;padding-right:0;">
+      <a href="#" class="btn btn-outline" onclick="show('mensch')">← Zurück</a>
+      <span class="footer-note">Modul 4 von 12</span>
+      <a href="#" class="btn" onclick="show('kisender')">Weiter: KI als Sender →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════ -->
+<!-- PAGE 5: KI ALS SENDER -->
+<!-- ════════════════════════════════ -->
+<div class="page" id="page-kisender">
+  <div class="hero" style="padding-bottom:32px;">
+    <div class="hero-eyebrow">Modul 04 — Perspektivwechsel</div>
+    <h1 class="hero-title">KI als <em>Sender</em></h1>
+    <p class="hero-sub">Was sendet ein KI-Sprachmodell auf den vier Ebenen — und wie hört der Mensch als Empfänger? Eine Analyse beider Seiten des Quadrats.</p>
+  </div>
+  <div class="content">
+
+    <div class="section">
+      <div class="section-title-sender">Senderseite — die KI</div>
+
+      <div class="quadrat-wrap" style="position:relative;margin-bottom:12px;">
+        <div class="quadrat-sender">
+
+          <div class="q-cell-sender q-sach-s">
+            <div class="q-sender-label" style="color:var(--blue);">Sachinhalt</div>
+            <div class="q-sender-title" style="color:var(--blue);">Was sendet die KI?</div>
+            <ul class="q-sender-list">
+              <li>Präzise, strukturierte Information</li>
+              <li>Konsistente Logik ohne Tagesform</li>
+              <li>Kein implizites Hintergrundwissen</li>
+              <li>Vollständig explizit formuliert</li>
+              <li>Reproduzierbar und stabil</li>
+            </ul>
+            <span class="badge-sender badge-strong">✓ einzige echte Stärke</span>
+          </div>
+
+          <div class="q-cell-sender q-selbst-s">
+            <div class="q-sender-label" style="color:var(--ink3);">Selbstoffenbarung</div>
+            <div class="q-sender-title" style="color:var(--ink2);">Was offenbart die KI?</div>
+            <ul class="q-sender-list">
+              <li>Keine Emotionen, kein Erleben</li>
+              <li>Kein innerer Zustand</li>
+              <li>Nur Sprachstil als Oberflächensignal</li>
+              <li>Wärme ist Design, nicht Aufrichtigkeit</li>
+              <li>Kein Ich hinter dem Text</li>
+            </ul>
+            <span class="badge-sender badge-limited">⚠ sehr eingeschränkt</span>
+          </div>
+
+          <div class="q-cell-sender q-bezie-s">
+            <div class="q-sender-label" style="color:var(--ink3);">Beziehung</div>
+            <div class="q-sender-title" style="color:var(--ink2);">Welche Haltung zur Person?</div>
+            <ul class="q-sender-list">
+              <li>Keine echte Haltung zur Person</li>
+              <li>Kein Gedächtnis, keine Geschichte</li>
+              <li>Kann höflich klingen …</li>
+              <li>… aber ohne Gegenseitigkeit</li>
+              <li>Neutral ist nicht freundlich oder kalt</li>
+            </ul>
+            <span class="badge-sender badge-limited">⚠ kaum vorhanden</span>
+          </div>
+
+          <div class="q-cell-sender q-appell-s">
+            <div class="q-sender-label" style="color:var(--amber);">Appell</div>
+            <div class="q-sender-title" style="color:var(--amber);">Was fordert die KI?</div>
+            <ul class="q-sender-list">
+              <li>Vorschläge &amp; Handlungsoptionen</li>
+              <li>Aufforderungen zur Überprüfung</li>
+              <li>Manchmal ungebetene Ratschläge</li>
+              <li>Kein Tonfall, der Dringlichkeit zeigt</li>
+              <li>Alle Appelle wirken gleich stark</li>
+            </ul>
+            <span class="badge-sender badge-warn-s">~ situationsabhängig</span>
+          </div>
+
+        </div>
+        <div class="q-center-sender">KI-Antwort</div>
+      </div>
+
+      <div class="legend-sender">
+        <div class="legend-sender-item"><div class="legend-sender-dot dot-blue"></div>stark / eindeutig</div>
+        <div class="legend-sender-item"><div class="legend-sender-dot dot-gray"></div>eingeschränkt / kaum vorhanden</div>
+        <div class="legend-sender-item"><div class="legend-sender-dot dot-amber"></div>situationsabhängig</div>
+      </div>
+    </div>
+
+    <!-- DIVIDER -->
+    <div class="sender-divider">
+      <div class="sender-divider-line"></div>
+      <div class="sender-divider-icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M8 2v12M2 8l6 6 6-6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="sender-divider-line"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title-sender">Empfängerseite — der Mensch</div>
+
+      <div class="quadrat-wrap" style="position:relative;margin-bottom:12px;">
+        <div class="quadrat-sender">
+
+          <div class="q-cell-sender q-sach-e">
+            <div class="q-sender-label" style="color:var(--blue);">Sachohr</div>
+            <div class="q-sender-title" style="color:var(--blue);">Passgenau — und empfohlen</div>
+            <ul class="q-sender-list">
+              <li>„Was steht da?" — neutrale Aufnahme</li>
+              <li>Passt zur Sendestärke der KI</li>
+              <li>Gute Übereinstimmung von Sender &amp; Ohr</li>
+              <li>Eigenes Urteil bleibt aktiv</li>
+              <li>Bestes Ohr für KI-Kommunikation</li>
+            </ul>
+            <span class="badge-sender badge-ok">✓ passt gut zur KI</span>
+          </div>
+
+          <div class="q-cell-sender q-selbst-e">
+            <div class="q-sender-label" style="color:var(--ink3);">Selbstoffenbarungsohr</div>
+            <div class="q-sender-title" style="color:var(--ink2);">Gefahr der Projektion</div>
+            <ul class="q-sender-list">
+              <li>„Versteht sie mich wirklich?"</li>
+              <li>KI wirkt empathisch → Illusion entsteht</li>
+              <li>Menschen sehen ein Gegenüber im Text</li>
+              <li>Trugschluss: KI hat kein Innenleben</li>
+              <li>Bindung entsteht, wo keine ist</li>
+            </ul>
+            <span class="badge-sender badge-limited">⚠ Überinterpretation möglich</span>
+          </div>
+
+          <div class="q-cell-sender q-bezie-e">
+            <div class="q-sender-label" style="color:var(--rose);">Beziehungsohr</div>
+            <div class="q-sender-title" style="color:var(--rose);">Häufigste Fehlquelle</div>
+            <ul class="q-sender-list">
+              <li>„Meint sie das kritisch?"</li>
+              <li>Neutralität wirkt kalt oder arrogant</li>
+              <li>Menschen fühlen sich bewertet</li>
+              <li>KI hat keine Haltung zur Person</li>
+              <li>Verletzung ohne Absender</li>
+            </ul>
+            <span class="badge-sender badge-danger">✗ häufige Fehlquelle</span>
+          </div>
+
+          <div class="q-cell-sender q-appell-e">
+            <div class="q-sender-label" style="color:var(--amber);">Appellohr</div>
+            <div class="q-sender-title" style="color:var(--amber);">Gefahr blinder Gefolgschaft</div>
+            <ul class="q-sender-list">
+              <li>KI-Antwort als Anweisung gelesen</li>
+              <li>Eigenes Urteil wird ausgesetzt</li>
+              <li>Fachliche Prüfung übersprungen</li>
+              <li>Alle Empfehlungen wirken gleich verbindlich</li>
+              <li>Verantwortung wird abgegeben</li>
+            </ul>
+            <span class="badge-sender badge-warn-s">⚠ kritisch reflektieren</span>
+          </div>
+
+        </div>
+        <div class="q-center-sender">Mensch hört</div>
+      </div>
+
+      <div class="legend-sender">
+        <div class="legend-sender-item"><div class="legend-sender-dot dot-blue"></div>passt gut</div>
+        <div class="legend-sender-item"><div class="legend-sender-dot dot-gray"></div>Überinterpretation möglich</div>
+        <div class="legend-sender-item"><div class="legend-sender-dot dot-rose"></div>häufige Fehlquelle</div>
+        <div class="legend-sender-item"><div class="legend-sender-dot dot-amber"></div>kritisch reflektieren</div>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <h3>Die entscheidende Asymmetrie</h3>
+      <p>KI ist eine starke Sachsenderin und eine schlechte Selbstoffenbarerin. Der Mensch hört aber gewohnheitsmäßig auch auf Selbstoffenbarungs-, Beziehungs- und Appell-Ebene — Ohren, die bei KI-Kommunikation ins Leere greifen oder aktiv irreführen.</p>
+      <p style="margin-top:8px;">Gutes Prompting bedeutet: das Sachohr bewusst einschalten. Kritisches Prompting bedeutet: Appelle der KI nie als Anweisungen lesen, sondern als Vorschläge — die man annehmen oder ablehnen kann.</p>
+    </div>
+
+    <div class="page-footer" style="padding-left:0;padding-right:0;">
+      <a href="#" class="btn btn-outline" onclick="show('ki')">← Zurück</a>
+      <span class="footer-note">Modul 5 von 12</span>
+      <a href="#" class="btn" onclick="show('beispiel')">Weiter: Analyse →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════ -->
+<!-- PAGE 6: ANALYSE -->
+<!-- ════════════════════════════════ -->
+<div class="page" id="page-beispiel">
+  <div class="hero" style="padding-bottom:32px;">
+    <div class="hero-eyebrow">Modul 05 — Analyse</div>
+    <h1 class="hero-title">„Das Essen ist scharf." —<br><em>zwei Welten</em></h1>
+    <p class="hero-sub">Ein Satz. Einmal im menschlichen Gespräch, einmal als KI-Prompt. Was kommt an — und was geht verloren?</p>
+  </div>
+  <div class="content">
+
+    <div class="section">
+      <h2>Vergleich: <em>Mensch vs. KI</em></h2>
+      <p>Die Quadrate nebeneinander zeigen, wie drastisch sich die Kommunikation verändert — obwohl der Satz identisch bleibt.</p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0;">
+        <div>
+          <div style="font-size:14px;font-weight:500;text-transform:uppercase;letter-spacing:0.07em;color:var(--green);margin-bottom:8px;">Menschliches Gespräch</div>
+          <div class="quadrat" style="margin:0;">
+            <div class="q-cell q-sach" style="padding:14px 12px;">
+              <div class="q-label">Sachinhalt</div>
+              <div class="chip-row" style="margin-top:8px;">
+                <span class="chip chip-blue" style="font-size:13px;">Worte</span>
+                <span class="chip chip-amber" style="font-size:13px;">Gestik ~</span>
+              </div>
+            </div>
+            <div class="q-cell q-selbst" style="padding:14px 12px;">
+              <div class="q-label">Selbstoffenbarung</div>
+              <div class="chip-row" style="margin-top:8px;">
+                <span class="chip chip-blue" style="font-size:13px;">Worte</span>
+                <span class="chip chip-blue" style="font-size:13px;">Mimik</span>
+                <span class="chip chip-blue" style="font-size:13px;">Stimme</span>
+                <span class="chip chip-blue" style="font-size:13px;">Emotion</span>
+              </div>
+            </div>
+            <div class="q-cell q-bezie" style="padding:14px 12px;">
+              <div class="q-label">Beziehung</div>
+              <div class="chip-row" style="margin-top:8px;">
+                <span class="chip chip-blue" style="font-size:13px;">Tonfall</span>
+                <span class="chip chip-blue" style="font-size:13px;">Mimik</span>
+                <span class="chip chip-blue" style="font-size:13px;">Geschichte</span>
+              </div>
+            </div>
+            <div class="q-cell q-appell" style="padding:14px 12px;">
+              <div class="q-label">Appell</div>
+              <div class="chip-row" style="margin-top:8px;">
+                <span class="chip chip-blue" style="font-size:13px;">Worte</span>
+                <span class="chip chip-blue" style="font-size:13px;">Gestik</span>
+                <span class="chip chip-amber" style="font-size:13px;">Stimme ~</span>
+              </div>
+            </div>
+            <div class="q-center">Nachricht</div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:14px;font-weight:500;text-transform:uppercase;letter-spacing:0.07em;color:var(--ink3);margin-bottom:8px;">KI-Prompt</div>
+          <div class="quadrat" style="margin:0;">
+            <div class="q-cell q-sach" style="padding:14px 12px;">
+              <div class="q-label">Sachinhalt</div>
+              <div class="chip-row" style="margin-top:8px;">
+                <span class="chip chip-blue" style="font-size:13px;">Worte ✓</span>
+                <span class="chip chip-ghost" style="font-size:13px;">Gestik</span>
+              </div>
+            </div>
+            <div class="q-cell q-selbst" style="padding:14px 12px;">
+              <div class="q-label">Selbstoffenbarung</div>
+              <div class="chip-row" style="margin-top:8px;">
+                <span class="chip chip-blue" style="font-size:13px;">Worte</span>
+                <span class="chip chip-ghost" style="font-size:13px;">Mimik</span>
+                <span class="chip chip-ghost" style="font-size:13px;">Stimme</span>
+                <span class="chip chip-ghost" style="font-size:13px;">Emotion</span>
+              </div>
+            </div>
+            <div class="q-cell q-bezie" style="padding:14px 12px;">
+              <div class="q-label">Beziehung</div>
+              <div class="chip-row" style="margin-top:8px;">
+                <span class="chip chip-ghost" style="font-size:13px;">Tonfall</span>
+                <span class="chip chip-ghost" style="font-size:13px;">Mimik</span>
+                <span class="chip chip-rose" style="font-size:13px;">Ironie ⚠</span>
+              </div>
+            </div>
+            <div class="q-cell q-appell" style="padding:14px 12px;">
+              <div class="q-label">Appell</div>
+              <div class="chip-row" style="margin-top:8px;">
+                <span class="chip chip-blue" style="font-size:13px;">Worte</span>
+                <span class="chip chip-ghost" style="font-size:13px;">Gestik</span>
+                <span class="chip chip-rose" style="font-size:13px;">Ironie ⚠</span>
+              </div>
+            </div>
+            <div class="q-center">Prompt</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <h3>Was der Vergleich zeigt</h3>
+        <p>Beim Menschen sind alle vier Seiten aktiv — und können sich in Echtzeit korrigieren. Bei der KI bleibt nur der Sachinhalt und das, was explizit in Worte gefasst wurde. Alles andere: unsichtbar.</p>
+      </div>
+    </div>
+
+    <hr class="fancy">
+
+    <div class="section">
+      <h2>Das <em>Missverständnis</em> in Zahlen</h2>
+      <p>Von 7 möglichen Kommunikationskanälen empfängt die KI beim nackten Satz „Das Essen ist scharf" nur einen zuverlässig.</p>
+      <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:20px 0;">
+        <div style="text-align:center;">
+          <div style="height:60px;background:var(--blue-light);border:1px solid rgba(43,95,166,0.3);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+            <span style="font-size:13px;color:var(--blue);font-weight:500;text-align:center;padding:4px;">Worte &amp; Inhalt</span>
+          </div>
+          <div style="font-size:13px;color:var(--green);margin-top:4px;font-weight:500;">✓ ankommt</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="height:60px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+            <span style="font-size:13px;color:var(--ink3);text-align:center;padding:4px;text-decoration:line-through;">Mimik</span>
+          </div>
+          <div style="font-size:13px;color:var(--rose);margin-top:4px;">✗ fehlt</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="height:60px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+            <span style="font-size:13px;color:var(--ink3);text-align:center;padding:4px;text-decoration:line-through;">Gestik</span>
+          </div>
+          <div style="font-size:13px;color:var(--rose);margin-top:4px;">✗ fehlt</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="height:60px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+            <span style="font-size:13px;color:var(--ink3);text-align:center;padding:4px;text-decoration:line-through;">Stimme</span>
+          </div>
+          <div style="font-size:13px;color:var(--rose);margin-top:4px;">✗ fehlt</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="height:60px;background:var(--rose-light);border:1px solid rgba(155,58,74,0.3);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+            <span style="font-size:13px;color:var(--rose);text-align:center;padding:4px;">Ironie &amp; Humor</span>
+          </div>
+          <div style="font-size:13px;color:var(--rose);margin-top:4px;">⚠ falsch</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="height:60px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+            <span style="font-size:13px;color:var(--ink3);text-align:center;padding:4px;text-decoration:line-through;">Gemeinsame Geschichte</span>
+          </div>
+          <div style="font-size:13px;color:var(--rose);margin-top:4px;">✗ fehlt</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="height:60px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+            <span style="font-size:13px;color:var(--ink3);text-align:center;padding:4px;text-decoration:line-through;">Emotionaler Zustand</span>
+          </div>
+          <div style="font-size:13px;color:var(--rose);margin-top:4px;">✗ fehlt</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer" style="padding-left:0;padding-right:0;">
+      <a href="#" class="btn btn-outline" onclick="show('kisender')">← Zurück</a>
+      <span class="footer-note">Modul 6 von 12</span>
+      <a href="#" class="btn" onclick="show('watzlawick')">Weiter: Watzlawick →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════ -->
+<!-- PAGE 7: WATZLAWICK -->
+<!-- ════════════════════════════════ -->
+<div class="page" id="page-watzlawick">
+  <div class="hero" style="padding-bottom:32px;">
+    <div class="hero-eyebrow">Modul 06 — Ergänzende Kommunikationsmodelle</div>
+    <h1 class="hero-title">Drei weitere<br><em>Blickwinkel</em><br>auf Mensch und KI.</h1>
+    <p class="hero-sub">Watzlawick, Grice und Searle beleuchten dieselbe Frage wie Schulz von Thun — aber aus anderen Winkeln. Zusammen schärfen sie das Bild erheblich.</p>
+  </div>
+  <div class="content">
+
+    <div class="section">
+      <div class="model-header">
+        <div class="model-number">01</div>
+        <div class="model-meta">
+          <div class="model-eyebrow" style="color:var(--blue);">Paul Watzlawick</div>
+          <div class="model-title">Man kann nicht <em>nicht</em> kommunizieren.</div>
+          <div class="model-author">Watzlawick, Beavin & Jackson · Pragmatics of Human Communication · 1967</div>
+        </div>
+      </div>
+
+      <p>Watzlawick formulierte fünf Axiome menschlicher Kommunikation. Zwei davon greifen direkt in das Thema dieses Workshops ein: das erste und das zweite Axiom. Sie zeigen, was Kommunikation strukturell ist — und wo die KI strukturell herausfällt.</p>
+
+      <div class="axiom-grid">
+
+        <div class="axiom focus">
+          <div class="axiom-num">1</div>
+          <div class="axiom-content">
+            <div class="axiom-title">Man kann nicht nicht kommunizieren.</div>
+            <div class="axiom-body">Jedes Verhalten — auch Schweigen, Wegschauen, Zögern — ist Kommunikation. Es gibt kein kommunikationsfreies Verhalten zwischen Menschen, die sich wahrnehmen.</div>
+          </div>
+        </div>
+
+        <div class="axiom focus">
+          <div class="axiom-num">2</div>
+          <div class="axiom-content">
+            <div class="axiom-title">Jede Kommunikation hat einen Inhalts- und einen Beziehungsaspekt.</div>
+            <div class="axiom-body">Was gesagt wird (Inhalt) und wie die Beziehung der Beteiligten aussieht (Beziehung), sind immer beide präsent. Der Beziehungsaspekt rahmt den Inhaltsaspekt — er sagt, wie das Gesagte zu verstehen ist.</div>
+          </div>
+        </div>
+
+        <div class="axiom subtle">
+          <div class="axiom-num">3</div>
+          <div class="axiom-content">
+            <div class="axiom-title">Kommunikation ist immer Ursache und Wirkung.</div>
+            <div class="axiom-body">Kommunikation ist kein lineares Senden, sondern ein zirkulärer Prozess. Jede Reaktion ist zugleich Reiz für die nächste — es gibt keinen neutralen Anfang.</div>
+          </div>
+        </div>
+
+        <div class="axiom subtle">
+          <div class="axiom-num">4</div>
+          <div class="axiom-content">
+            <div class="axiom-title">Digitale und analoge Kommunikation.</div>
+            <div class="axiom-body">Menschen kommunizieren sowohl digital (Sprache, Worte) als auch analog (Tonfall, Körpersprache, Mimik). Analoge Kommunikation trägt besonders den Beziehungsaspekt.</div>
+          </div>
+        </div>
+
+        <div class="axiom subtle">
+          <div class="axiom-num">5</div>
+          <div class="axiom-content">
+            <div class="axiom-title">Symmetrische und komplementäre Interaktion.</div>
+            <div class="axiom-body">Kommunikation basiert entweder auf Gleichheit (symmetrisch) oder auf Unterschied (komplementär) — zum Beispiel Arzt–Patient, Lehrer–Schüler.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <hr class="fancy">
+
+      <div class="section-label">Was bedeutet das für die KI?</div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0;">
+
+        <div class="card" style="margin:0;border-color:rgba(43,95,166,0.25);background:var(--blue-light);">
+          <div style="font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--blue);margin-bottom:10px;">Axiom 1 × KI</div>
+          <h3 style="font-size:20px;margin-bottom:10px;">KI kann sehr wohl „nicht kommunizieren".</h3>
+          <p style="font-size:15px;color:var(--ink);">Wenn ein Mensch schweigt, kommuniziert er Unbehagen, Nachdenklichkeit oder Ablehnung. Wenn die KI keine Antwort gibt — etwa weil der Prompt unklar ist — kommuniziert sie strukturell gar nichts. Das Schweigen hat keinen Sender.</p>
+          <p style="font-size:15px;color:var(--ink);">Umgekehrt: Die KI antwortet <em>immer</em> mit Text. Auch Tonfall-Signale (höfliche Formulierungen) sind für die KI nicht analoges Verhalten, sondern bewusst generierter digitaler Output.</p>
+          <div class="chip-row"><span class="chip chip-blue">Kein Non-Verbales</span><span class="chip chip-blue">Kein Schweigen als Signal</span></div>
+        </div>
+
+        <div class="card" style="margin:0;border-color:rgba(43,95,166,0.25);background:var(--blue-light);">
+          <div style="font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--blue);margin-bottom:10px;">Axiom 2 × KI</div>
+          <h3 style="font-size:20px;margin-bottom:10px;">Die KI hat keinen Beziehungsaspekt.</h3>
+          <p style="font-size:15px;color:var(--ink);">Watzlawick: Der Beziehungsaspekt sagt, wie der Inhalt zu lesen ist. Bei der KI gibt es keinen Beziehungsaspekt — keine gemeinsame Geschichte, keine echte Haltung zur Person. Deshalb entsteht beim Lesen von KI-Antworten oft eine Leerstelle, die Menschen intuitiv selbst füllen.</p>
+          <p style="font-size:15px;color:var(--ink);">Das ist dieselbe Beobachtung wie beim Beziehungsohr von Schulz von Thun — jetzt aus einer anderen theoretischen Richtung bestätigt.</p>
+          <div class="chip-row"><span class="chip chip-blue">Nur Inhaltsaspekt</span><span class="chip chip-blue">Beziehung = Projektion</span></div>
+        </div>
+
+      </div>
+
+      <div class="model-quote">„Der Beziehungsaspekt rahmt den Inhaltsaspekt — er sagt, wie das Gesagte zu verstehen ist."</div>
+
+      <div class="highlight-box">
+        <h3>Die didaktische Brücke</h3>
+        <p>Watzlawick bestätigt Schulz von Thun aus einem anderen Winkel: Beziehung ist nicht optional — sie ist strukturell immer da. Bei der KI fehlt dieser Beziehungsrahmen vollständig. Deshalb ist das Missverständnisrisiko auf der Beziehungsebene strukturell — kein Zufall, sondern ein Systemmerkmal.</p>
+      </div>
+    </div>
+
+    <div class="page-footer" style="padding-left:0;padding-right:0;">
+      <a href="#" class="btn btn-outline" onclick="show('beispiel')">← Zurück</a>
+      <span class="footer-note">Modul 7 von 12</span>
+      <a href="#" class="btn" onclick="show('grice')">Weiter: Grice →</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════ -->
+<!-- PAGE 8: GRICE -->
+<!-- ════════════════════════════════ -->
+<div class="page" id="page-grice">
+  <div class="hero" style="padding-bottom:32px;">
+    <div class="hero-eyebrow">Modul 07 — Ergänzende Kommunikationsmodelle</div>
+    <h1 class="hero-title">Was macht eine<br>gute <em>Aussage</em> aus?</h1>
+    <p class="hero-sub">Paul Grices Konversationsmaximen beschreiben, wie gelungene Kommunikation funktioniert — und lassen sich direkt als Qualitätsprüfung für Prompts nutzen.</p>
+  </div>
+  <div class="content">
+
+    <div class="section">
+      <div class="model-header">
+        <div class="model-number">02</div>
+        <div class="model-meta">
+          <div class="model-eyebrow" style="color:var(--teal);">H. Paul Grice</div>
+          <div class="model-title">Das <em>Kooperationsprinzip</em><br>und die Konversationsmaximen.</div>
+          <div class="model-author">Grice · Logic and Conversation · 1975</div>
+        </div>
+      </div>
+
+      <p>Grice beschreibt, wie Menschen in Gesprächen stillschweigend kooperieren. Jede Aussage folgt einem übergeordneten Kooperationsprinzip: Sei so informativ, klar und relevant wie nötig. Vier Maximen konkretisieren das — und alle vier lassen sich direkt auf Prompts und KI-Antworten anwenden.</p>
+
+      <div class="model-quote">„Make your contribution such as it is required, at the stage at which it occurs, by the accepted purpose or direction of the talk exchange."</div>
+
+      <div class="section-label" style="margin-top:28px;">Die vier Maximen — und was sie für Prompts bedeuten</div>
+
+      <div class="maxim-grid">
+
+        <div class="maxim-card warn">
+          <div class="maxim-name">Quantität</div>
+          <div class="maxim-rule">Sei so informativ wie nötig — nicht mehr und nicht weniger.</div>
+          <div class="maxim-ki">
+            <strong>Problem beim Promten:</strong> Wer zu wenig Kontext gibt, erhält zu generische Antworten. Wer zu viel schreibt, verleitet die KI zum Abschweifen. Die Quantitätsmaxime ist beim Promten dauernd verletzt — in beide Richtungen.
+          </div>
+          <div class="chip-row"><span class="chip chip-rose">häufig verletzt</span></div>
+        </div>
+
+        <div class="maxim-card ok">
+          <div class="maxim-name">Qualität</div>
+          <div class="maxim-rule">Behaupte nichts, wofür du keine hinreichenden Belege hast.</div>
+          <div class="maxim-ki">
+            <strong>Problem bei KI-Antworten:</strong> Die KI verletzt die Qualitätsmaxime, wenn sie halluziniert — also Sachverhalte behauptet, die nicht zutreffen, aber plausibel klingen. Das Sachohr kann täuschen.
+          </div>
+          <div class="chip-row"><span class="chip chip-green">bei Fakten prüfen</span></div>
+        </div>
+
+        <div class="maxim-card warn">
+          <div class="maxim-name">Relevanz</div>
+          <div class="maxim-rule">Sei relevant — bleib beim Thema.</div>
+          <div class="maxim-ki">
+            <strong>Problem beim Promten:</strong> Ohne klare Aufgabe und Kontext antwortet die KI oft zu allgemein. Sie bleibt thematisch, aber nicht situativ relevant. Das RAKFET-K (Kontext) ist direkte Antwort auf diese Maxime.
+          </div>
+          <div class="chip-row"><span class="chip chip-rose">häufig verletzt</span></div>
+        </div>
+
+        <div class="maxim-card mid">
+          <div class="maxim-name">Modalität</div>
+          <div class="maxim-rule">Sei klar, geordnet, kurz — vermeide Mehrdeutigkeit.</div>
+          <div class="maxim-ki">
+            <strong>Problem beim Promten:</strong> Vage oder mehrdeutige Prompts erzeugen vage Antworten. Die Modalitätsmaxime wird verletzt, wenn Prompts ohne Formatangabe oder ohne klare Struktur verfasst werden. RAKFET-F (Format) behebt genau das.
+          </div>
+          <div class="chip-row"><span class="chip chip-amber">ohne Format-Angabe</span></div>
+        </div>
+
+      </div>
+
+      <hr class="fancy">
+
+      <div class="section-label">Grice als Prompt-Qualitäts-Raster</div>
+      <p>Die vier Maximen lassen sich direkt als Checkliste vor dem Absenden eines Prompts nutzen:</p>
+
+      <div style="display:flex;flex-direction:column;gap:0;margin:20px 0;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;">
+
+        <div style="display:grid;grid-template-columns:40px 1fr 1fr;background:var(--bg2);padding:10px 16px;border-bottom:1px solid var(--border);">
+          <div></div>
+          <div style="font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink3);">Maxime verletzt?</div>
+          <div style="font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink3);">Lösung im RAKFET-Prompt</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:40px 1fr 1fr;padding:12px 16px;border-bottom:1px solid var(--border);background:var(--surface);">
+          <div style="font-weight:500;color:var(--rose);font-size:15px;">Q</div>
+          <div style="font-size:15px;color:var(--ink2);">„Schreibe etwas über Teamarbeit."<br><em style="font-size:13px;">Zu wenig Information.</em></div>
+          <div style="font-size:15px;color:var(--teal);font-weight:500;">→ Kontext (K) hinzufügen</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:40px 1fr 1fr;padding:12px 16px;border-bottom:1px solid var(--border);background:var(--surface);">
+          <div style="font-weight:500;color:var(--green);font-size:15px;">Qu</div>
+          <div style="font-size:15px;color:var(--ink2);">KI erfindet Quellen oder Fakten.<br><em style="font-size:13px;">Halluzination = Qualitätsverletzung.</em></div>
+          <div style="font-size:15px;color:var(--teal);font-weight:500;">→ Eigenes Urteil aktiv halten</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:40px 1fr 1fr;padding:12px 16px;border-bottom:1px solid var(--border);background:var(--surface);">
+          <div style="font-weight:500;color:var(--rose);font-size:15px;">R</div>
+          <div style="font-size:15px;color:var(--ink2);">KI antwortet generisch statt situativ.<br><em style="font-size:13px;">Irrelevant für diese Situation.</em></div>
+          <div style="font-size:15px;color:var(--teal);font-weight:500;">→ Aufgabe (A) präzisieren</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:40px 1fr 1fr;padding:12px 16px;background:var(--surface);">
+          <div style="font-weight:500;color:var(--amber);font-size:15px;">M</div>
+          <div style="font-size:15px;color:var(--ink2);">KI antwortet in unangemessener Form.<br><em style="font-size:13px;">Zu lang, unstrukturiert.</em></div>
+          <div style="font-size:15px;color:var(--teal);font-weight:500;">→ Format (F) angeben</div>
+        </div>
+
+      </div>
+
+      <div class="highlight-box">
+        <h3>Grice als theoretische Begründung für RAKFET</h3>
+        <p>Die RAKFET-Formel ist im Kern eine Operationalisierung von Grices Maximen für den Kontext Mensch–KI. Was im menschlichen Gespräch automatisch durch Kooperation und gemeinsamen Kontext geleistet wird, muss beim Prompt explizit gemacht werden — Grice liefert dafür das theoretische Fundament.</p>
+      </div>
+
+    </div>
+
+    <div class="page-footer" style="padding-left:0;padding-right:0;">
+      <a href="#" class="btn btn-outline" onclick="show('watzlawick')">← Watzlawick</a>
+      <span class="footer-note">Modul 8 von 12</span>
+      <a href="#" class="btn" onclick="show('searle')">Weiter: Searle →</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════ -->
+<!-- PAGE 9: SEARLE -->
+<!-- ════════════════════════════════ -->
+<div class="page" id="page-searle">
+  <div class="hero" style="padding-bottom:32px;">
+    <div class="hero-eyebrow">Modul 08 — Ergänzende Kommunikationsmodelle</div>
+    <h1 class="hero-title">Was wir sagen —<br>und was wir <em>meinen.</em></h1>
+    <p class="hero-sub">John Searles Sprechakttheorie erklärt, warum KI indirekte Aussagen nicht versteht — und warum der direkte Sprechakt im Prompt immer besser ist als der indirekte.</p>
+  </div>
+  <div class="content">
+
+    <div class="section">
+      <div class="model-header">
+        <div class="model-number">03</div>
+        <div class="model-meta">
+          <div class="model-eyebrow" style="color:var(--violet);">John R. Searle</div>
+          <div class="model-title">Direkte und indirekte<br><em>Sprechakte.</em></div>
+          <div class="model-author">Searle · Speech Acts · 1969 · Indirect Speech Acts · 1975</div>
+        </div>
+      </div>
+
+      <p>Searle unterscheidet drei Ebenen jedes Sprachakts. Diese drei Ebenen klingen abstrakt — aber das Beispiel macht sie sofort greifbar. Und für die Praxis des Promptens sind sie entscheidend.</p>
+
+      <div class="sprechakt-wrap">
+
+        <div class="sprechakt-row">
+          <div class="sa-label">Begriff</div>
+          <div class="sa-cell highlight">
+            <div class="sa-head">Im Gespräch</div>
+            <strong>„Das Essen ist scharf."</strong>
+          </div>
+          <div class="sa-cell highlight">
+            <div class="sa-head">Im Prompt</div>
+            <strong>„Schreibe etwas über Kommunikation."</strong>
+          </div>
+        </div>
+
+        <div class="sprechakt-row">
+          <div class="sa-label">Lokutionärer Akt</div>
+          <div class="sa-cell">
+            <div class="sa-head">Was wörtlich gesagt wird</div>
+            Eine Aussage über den Schärfegrad des Essens.
+          </div>
+          <div class="sa-cell">
+            <div class="sa-head">Was wörtlich steht</div>
+            Eine Aufforderung, über Kommunikation zu schreiben.
+          </div>
+        </div>
+
+        <div class="sprechakt-row">
+          <div class="sa-label">Illokutionärer Akt</div>
+          <div class="sa-cell">
+            <div class="sa-head">Was gemeint ist</div>
+            Eine verdeckte Bitte: „Bitte bring mir etwas anderes" — oder: „Ich möchte dich warnen."
+          </div>
+          <div class="sa-cell warn">
+            <div class="sa-head">Was gemeint sein könnte</div>
+            Ein kurzer Einleitungstext? Eine wissenschaftliche Abhandlung? Ein Workshop-Modul? <em>Unklar.</em>
+          </div>
+        </div>
+
+        <div class="sprechakt-row">
+          <div class="sa-label">Perlokutionärer Akt</div>
+          <div class="sa-cell">
+            <div class="sa-head">Was bewirkt wird</div>
+            Der Koch bringt ein milderes Gericht — weil er den indirekten Sprechakt versteht.
+          </div>
+          <div class="sa-cell warn">
+            <div class="sa-head">Was die KI bewirkt</div>
+            Sie interpretiert den lokutionären Akt wörtlich — und produziert etwas Generisches.
+          </div>
+        </div>
+
+      </div>
+
+      <div class="model-quote">„Das Essen ist scharf" — verstanden als Bitte, nicht als Feststellung.</div>
+
+      <hr class="fancy">
+
+      <div class="section-label">Direkter vs. indirekter Sprechakt</div>
+      <p>Im menschlichen Gespräch kommunizieren wir ständig indirekt. Wir <em>fragen</em>, wenn wir <em>bitten</em> wollen. Wir <em>stellen fest</em>, wenn wir <em>kritisieren</em>. Die KI versteht nur den lokutionären Akt — was wörtlich dasteht.</p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0;">
+
+        <div class="card" style="margin:0;background:var(--bg2);">
+          <div style="font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink3);margin-bottom:12px;">Indirekte Sprechakte — im Gespräch funktionieren sie</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="background:var(--surface);border-radius:var(--radius);padding:10px 14px;">
+              <div style="font-size:14px;font-style:italic;color:var(--ink2);">„Könntest du das Fenster schließen?"</div>
+              <div style="font-size:13px;color:var(--ink3);margin-top:4px;">→ Bitte, keine Frage nach Fähigkeit</div>
+            </div>
+            <div style="background:var(--surface);border-radius:var(--radius);padding:10px 14px;">
+              <div style="font-size:14px;font-style:italic;color:var(--ink2);">„Es wäre schön, wenn der Bericht kürzer wäre."</div>
+              <div style="font-size:13px;color:var(--ink3);margin-top:4px;">→ Kritik, keine neutrale Beschreibung</div>
+            </div>
+            <div style="background:var(--surface);border-radius:var(--radius);padding:10px 14px;">
+              <div style="font-size:14px;font-style:italic;color:var(--ink2);">„Ich bin eigentlich kein großer Fan von Bullet Points."</div>
+              <div style="font-size:13px;color:var(--ink3);margin-top:4px;">→ Stilwunsch, keine Meinungsäußerung</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin:0;background:var(--violet-light);border-color:rgba(91,61,138,0.2);">
+          <div style="font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--violet);margin-bottom:12px;">Indirekte Sprechakte — im Prompt scheitern sie</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="background:rgba(255,255,255,0.5);border-radius:var(--radius);padding:10px 14px;">
+              <div style="font-size:14px;font-style:italic;color:var(--ink2);">„Könntest du das kürzer machen?"</div>
+              <div style="font-size:13px;color:var(--violet);margin-top:4px;">→ KI kürzt um zwei Sätze — oder nicht.</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.5);border-radius:var(--radius);padding:10px 14px;">
+              <div style="font-size:14px;font-style:italic;color:var(--ink2);">„Es wäre schön, wenn der Ton wärmer wäre."</div>
+              <div style="font-size:13px;color:var(--violet);margin-top:4px;">→ KI ändert wenig — kein Kontrastgefühl.</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.5);border-radius:var(--radius);padding:10px 14px;">
+              <div style="font-size:14px;font-style:italic;color:var(--ink2);">„Ich bin kein Fan von Fachbegriffen."</div>
+              <div style="font-size:13px;color:var(--violet);margin-top:4px;">→ KI antwortet auf Meinungsäußerung, ändert nichts.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <hr class="fancy">
+
+      <div class="section-label">Die Konsequenz für Prompts</div>
+      <p>Searle liefert die linguistische Begründung für eine der wichtigsten Prompt-Regeln: <strong>Schreibe direkt, was du willst.</strong> Nicht was du über die Situation denkst — sondern was die KI tun soll.</p>
+
+      <div style="display:flex;flex-direction:column;gap:10px;margin:20px 0;">
+
+        <div class="connector-row">
+          <div class="connector-left">„Ich bin kein Fan von Fachbegriffen."<br><em style="font-size:13px;color:var(--ink3);">indirekter Sprechakt</em></div>
+          <div class="connector-arrow">→</div>
+          <div class="connector-right">„Verwende keine Fachbegriffe. Erkläre alles in einfacher Alltagssprache."</div>
+        </div>
+
+        <div class="connector-row">
+          <div class="connector-left">„Es wäre schön, wenn es kürzer wäre."<br><em style="font-size:13px;color:var(--ink3);">indirekter Sprechakt</em></div>
+          <div class="connector-arrow">→</div>
+          <div class="connector-right">„Fasse die Antwort auf maximal 5 Sätze zusammen."</div>
+        </div>
+
+        <div class="connector-row">
+          <div class="connector-left">„Das klingt ein bisschen formell."<br><em style="font-size:13px;color:var(--ink3);">indirekter Sprechakt</em></div>
+          <div class="connector-arrow">→</div>
+          <div class="connector-right">„Schreibe in einem warmen, persönlichen Ton — wie ein Brief an Eltern, nicht wie ein Amtsschreiben."</div>
+        </div>
+
+      </div>
+
+      <div class="highlight-box">
+        <h3>Searle und der Appell im RAKFET</h3>
+        <p>Searle erklärt, warum der Appell (A — Aufgabe) und die Einschränkungen (E) im RAKFET-Prompt so wichtig sind: Im Gespräch können wir indirekt bitten. Im Prompt müssen wir den illokutionären Akt explizit machen — wir müssen sagen, was wir <em>meinen</em>, nicht nur, was wir <em>denken</em>.</p>
+      </div>
+
+    </div>
+
+    <div class="page-footer" style="padding-left:0;padding-right:0;">
+      <a href="#" class="btn btn-outline" onclick="show('grice')">← Grice</a>
+      <span class="footer-note">Modul 9 von 12</span>
+      <a href="#" class="btn" onclick="show('synthese')">Weiter: Synthese →</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════ -->
+<!-- PAGE 10: SYNTHESE -->
+<!-- ════════════════════════════════ -->
+<div class="page" id="page-synthese">
+  <div class="hero" style="padding-bottom:32px;">
+    <div class="hero-eyebrow">Modul 09 — Synthese</div>
+    <h1 class="hero-title">Vier Modelle —<br>ein <em>gemeinsames</em> Bild.</h1>
+    <p class="hero-sub">Schulz von Thun, Watzlawick, Grice und Searle beschreiben dasselbe Phänomen aus vier verschiedenen Winkeln. Zusammen ergeben sie ein vollständiges Bild davon, was beim Promten fehlt — und warum RAKFET funktioniert.</p>
+  </div>
+  <div class="content">
+
+    <div class="section">
+      <div class="section-label">Was jedes Modell beiträgt</div>
+      <h2>Vier Perspektiven auf <em>eine Lücke</em></h2>
+      <p>Alle vier Modelle kommen zu derselben Kernaussage: Menschliche Kommunikation ist mehrschichtig, kontextgebunden und beziehungsabhängig. KI versteht nur die Oberfläche — den expliziten Text. Der Rest muss explizit gemacht werden.</p>
+
+      <div class="bridge-grid">
+
+        <div class="bridge-card" style="border-color:rgba(43,95,166,0.25);background:var(--blue-light);">
+          <div class="bridge-icon">◧</div>
+          <div class="bridge-title">Schulz von Thun</div>
+          <div class="bridge-body">Zeigt, dass jede Nachricht vier Ebenen hat — und dass KI nur den Sachinhalt zuverlässig sendet und empfängt. Die anderen drei Ebenen fallen strukturell aus.</div>
+          <div class="chip-row"><span class="chip chip-blue">Vier-Ohren-Modell</span></div>
+        </div>
+
+        <div class="bridge-card" style="border-color:rgba(43,95,166,0.25);background:var(--blue-light);">
+          <div class="bridge-icon">⟺</div>
+          <div class="bridge-title">Watzlawick</div>
+          <div class="bridge-body">Bestätigt: Ohne Beziehungsaspekt fehlt der Rahmen für jede Aussage. Beim Lesen von KI-Antworten füllen Menschen diese Leerstelle mit Projektion.</div>
+          <div class="chip-row"><span class="chip chip-blue">Beziehungsaspekt fehlt</span></div>
+        </div>
+
+        <div class="bridge-card" style="border-color:rgba(42,122,106,0.25);background:var(--teal-light);">
+          <div class="bridge-icon">✓✓✓✓</div>
+          <div class="bridge-title">Grice</div>
+          <div class="bridge-body">Liefert das Qualitäts-Raster: Quantität, Qualität, Relevanz, Modalität. Vier Prüffragen für jeden Prompt — und vier Erklärungen, warum Prompts scheitern.</div>
+          <div class="chip-row"><span class="chip chip-teal">Prompt-Checkliste</span></div>
+        </div>
+
+        <div class="bridge-card" style="border-color:rgba(91,61,138,0.25);background:var(--violet-light);">
+          <div class="bridge-icon">↗</div>
+          <div class="bridge-title">Searle</div>
+          <div class="bridge-body">Erklärt, warum indirekte Sprechakte im Prompt versagen. Die KI versteht nur den lokutionären Akt — was wörtlich steht. Der Illokution fehlt der Empfänger.</div>
+          <div class="chip-row"><span class="chip chip-violet">Direktheit im Prompt</span></div>
+        </div>
+
+      </div>
+
+      <hr class="fancy">
+
+      <div class="section-label">Warum RAKFET funktioniert — theoretisch begründet</div>
+      <h2>RAKFET als <em>Antwort</em> auf alle vier Modelle</h2>
+
+      <div style="overflow-x:auto;margin:20px 0;">
+      <div style="display:flex;flex-direction:column;gap:0;min-width:700px;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;">
+
+        <div style="display:grid;grid-template-columns:110px 1fr 1fr 1fr 1fr;background:var(--bg2);padding:10px 16px;border-bottom:1px solid var(--border);">
+          <div style="font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink3);">RAKFET</div>
+          <div style="font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--blue);">Schulz v.Thun</div>
+          <div style="font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--blue);">Watzlawick</div>
+          <div style="font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--teal);">Grice</div>
+          <div style="font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--violet);">Searle</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:110px 1fr 1fr 1fr 1fr;padding:12px 16px;border-bottom:1px solid var(--border);background:var(--surface);align-items:start;">
+          <div style="font-weight:500;color:var(--blue);font-size:16px;">R · Rolle</div>
+          <div style="font-size:14px;color:var(--ink2);">Selbstoffenbarung simulieren</div>
+          <div style="font-size:14px;color:var(--ink2);">Beziehungsrahmen setzen</div>
+          <div style="font-size:14px;color:var(--ink2);">Qualität / Relevanz</div>
+          <div style="font-size:14px;color:var(--ink2);">Illokution explizit</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:110px 1fr 1fr 1fr 1fr;padding:12px 16px;border-bottom:1px solid var(--border);background:var(--surface);align-items:start;">
+          <div style="font-weight:500;color:var(--green);font-size:16px;">A · Aufgabe</div>
+          <div style="font-size:14px;color:var(--ink2);">Appell präzisieren</div>
+          <div style="font-size:14px;color:var(--ink2);">Inhaltsaspekt klar machen</div>
+          <div style="font-size:14px;color:var(--ink2);">Relevanz sichern</div>
+          <div style="font-size:14px;color:var(--ink2);">Direkter Sprechakt</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:110px 1fr 1fr 1fr 1fr;padding:12px 16px;border-bottom:1px solid var(--border);background:var(--surface);align-items:start;">
+          <div style="font-weight:500;color:var(--amber);font-size:16px;">K · Kontext</div>
+          <div style="font-size:14px;color:var(--ink2);">Gemeinsamer Wissensraum</div>
+          <div style="font-size:14px;color:var(--ink2);">Beziehungsgeschichte ersetzen</div>
+          <div style="font-size:14px;color:var(--ink2);">Quantität / Relevanz</div>
+          <div style="font-size:14px;color:var(--ink2);">Situation explizit</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:110px 1fr 1fr 1fr 1fr;padding:12px 16px;border-bottom:1px solid var(--border);background:var(--surface);align-items:start;">
+          <div style="font-weight:500;color:var(--rose);font-size:16px;">F · Format</div>
+          <div style="font-size:14px;color:var(--ink2);">Sachinhalt strukturieren</div>
+          <div style="font-size:14px;color:var(--ink2);">Kanal definieren</div>
+          <div style="font-size:14px;color:var(--ink2);">Modalität sichern</div>
+          <div style="font-size:14px;color:var(--ink2);">Perlokution steuern</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:110px 1fr 1fr 1fr 1fr;padding:12px 16px;border-bottom:1px solid var(--border);background:var(--surface);align-items:start;">
+          <div style="font-weight:500;color:var(--ink2);font-size:16px;">E · Einschr.</div>
+          <div style="font-size:14px;color:var(--ink2);">Appell (negativ)</div>
+          <div style="font-size:14px;color:var(--ink2);">Grenzen des Inhalts</div>
+          <div style="font-size:14px;color:var(--ink2);">Quantität begrenzen</div>
+          <div style="font-size:14px;color:var(--ink2);">Indirektes explizit machen</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:110px 1fr 1fr 1fr 1fr;padding:12px 16px;background:var(--surface);align-items:start;">
+          <div style="font-weight:500;color:var(--teal);font-size:16px;">T · Ton</div>
+          <div style="font-size:14px;color:var(--ink2);">Beziehungsebene, Stimme</div>
+          <div style="font-size:14px;color:var(--ink2);">Analoge Kommunikation ersetzen</div>
+          <div style="font-size:14px;color:var(--ink2);">Modalität verfeinern</div>
+          <div style="font-size:14px;color:var(--ink2);">Haltung explizit</div>
+        </div>
+
+      </div>
+      </div>
+
+      <div class="highlight-box">
+        <h3>Die gemeinsame Botschaft aller vier Modelle</h3>
+        <p>Menschliche Kommunikation ist reich, mehrschichtig und beziehungsgebunden. KI-Kommunikation ist arm, flach und kontextfrei — solange der Mensch diesen Kontext nicht explizit einbringt. Die RAKFET-Formel ist kein Trick: Sie ist die theoretisch begründete Antwort auf eine strukturelle Lücke.</p>
+        <p style="margin-top:14px;">Wer diese Lücke versteht, wird nicht nur besser promten — er wird auch bewusster mit KI-Antworten umgehen, sie kritischer lesen und klarer einordnen, was eine KI leisten kann und was nicht.</p>
+      </div>
+
+    </div>
+
+    <div class="page-footer" style="padding-left:0;padding-right:0;">
+      <a href="#" class="btn btn-outline" onclick="show('searle')">← Searle</a>
+      <span class="footer-note">Modul 10 von 12</span>
+      <a href="#" class="btn" onclick="show('prompts')">Weiter: Besser promten →</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════ -->
+<!-- PAGE 11: PROMPTS -->
+<!-- ════════════════════════════════ -->
+<div class="page" id="page-prompts">
+  <div class="hero" style="padding-bottom:32px;">
+    <div class="hero-eyebrow">Modul 10 — Praxis</div>
+    <h1 class="hero-title">Besser <em>promten</em> —<br>die fehlenden Kanäle<br>in Sprache übersetzen</h1>
+    <p class="hero-sub">Gutes Prompting ist keine technische Fähigkeit — es ist Kommunikationskompetenz. Wer weiß, was die KI nicht sehen kann, weiß, was er schreiben muss.</p>
+  </div>
+  <div class="content">
+
+    <div class="section">
+      <h2>Das <em>Prinzip</em></h2>
+      <div class="highlight-box">
+        <h3>Was im Gespräch automatisch schwingt, muss im Prompt explizit stehen.</h3>
+        <p>Mimik, Tonfall, Beziehung, emotionaler Zustand, gemeinsame Geschichte — all das muss der Nutzer in Worte übersetzen. Ein guter Prompt ist eine Selbstoffenbarung in Textform.</p>
+      </div>
+    </div>
+
+    <hr class="fancy">
+
+    <div class="section">
+      <div class="section-label">Szenario 1 — Sachliche Beratung</div>
+      <h2>„Ich brauche praktische <em>Hilfe</em>"</h2>
+      <p>Ziel: Die KI soll konkret helfen, das zu scharfe Essen jetzt sofort besser essbar zu machen.</p>
+
+      <div class="prompt-compare">
+        <div class="prompt-card">
+          <div class="prompt-head bad">Nackter Prompt — ohne Kontext</div>
+          <div class="prompt-body">Das Essen ist scharf.</div>
+          <div class="prompt-foot">KI antwortet wahrscheinlich: Eine sachliche Erklärung, was Schärfe ist und wie sie entsteht — aber kein Lösungsangebot.</div>
+        </div>
+        <div class="prompt-card">
+          <div class="prompt-head good">Angereicherter Prompt</div>
+          <div class="prompt-body"><span class="hlo">Ich esse gerade ein Gericht, das viel zu scharf ist für mich.</span> <span class="hl">Ich vertrage keine starke Schärfe</span> und möchte es <span class="hlo">jetzt sofort milder machen</span>, ohne es wegzuwerfen. <span class="hl">Was kann ich konkret tun?</span></div>
+          <div class="prompt-foot">KI antwortet: Konkrete Tipps — Joghurt, Milch, Brot, Zucker — direkt anwendbar.</div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:8px;">
+        <div class="card-title">Was wurde ergänzt — und warum?</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;gap:10px;align-items:flex-start;">
+            <span class="badge b-selbst" style="margin-top:2px;white-space:nowrap;">Selbstoffenbarung</span>
+            <span style="font-size:15px;color:var(--ink2);">„Ich vertrage keine starke Schärfe" — ersetzt den Gesichtsausdruck des Leidens und den gequälten Tonfall.</span>
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;">
+            <span class="badge b-appell" style="margin-top:2px;white-space:nowrap;">Appell</span>
+            <span style="font-size:15px;color:var(--ink2);">„Was kann ich konkret tun?" — macht den verdeckten Appell aus dem Originalton explizit sichtbar.</span>
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;">
+            <span class="badge b-sach" style="margin-top:2px;white-space:nowrap;">Sachinhalt</span>
+            <span style="font-size:15px;color:var(--ink2);">„jetzt sofort", „ohne es wegzuwerfen" — präzisiert den Kontext, der im Gespräch durch Situation und Tonfall klar wäre.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="fancy">
+
+    <div class="section">
+      <div class="section-label">Szenario 2 — Beziehungskommunikation</div>
+      <h2>„Ich will ehrlich sein, <em>ohne zu verletzen</em>"</h2>
+      <p>Ziel: Die KI soll helfen, Feedback an den Partner zu formulieren — wertschätzend und ohne Konflikt.</p>
+
+      <div class="prompt-compare">
+        <div class="prompt-card">
+          <div class="prompt-head bad">Nackter Prompt — ohne Kontext</div>
+          <div class="prompt-body">Das Essen ist scharf. Wie sage ich das jemandem?</div>
+          <div class="prompt-foot">KI antwortet: „Du könntest sagen: ‚Es ist etwas scharf, aber es schmeckt gut!'" — generisch, ohne Gefühl für die Situation.</div>
+        </div>
+        <div class="prompt-card">
+          <div class="prompt-head good">Angereicherter Prompt</div>
+          <div class="prompt-body"><span class="hlo">Mein Partner hat heute extra für mich gekocht</span> und sich viel Mühe gegeben. <span class="hl">Das Essen ist leider zu scharf für mich</span>, aber <span class="hlo">ich möchte ihn/sie nicht verletzen oder demotivieren.</span> <span class="hl">Ich schätze die Geste sehr.</span> Wie kann ich das <span class="hlo">ehrlich, aber wertschätzend</span> ansprechen?</div>
+          <div class="prompt-foot">KI antwortet: Eine durchdachte Formulierung, die Lob, Ich-Botschaft und Zukunftsperspektive verbindet — passend zur Situation.</div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:8px;">
+        <div class="card-title">Was wurde ergänzt — und warum?</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;gap:10px;align-items:flex-start;">
+            <span class="badge b-bezie" style="margin-top:2px;white-space:nowrap;">Beziehung</span>
+            <span style="font-size:15px;color:var(--ink2);">„Mein Partner hat gekocht" — beschreibt die Beziehungskonstellation, die die KI sonst nicht kennt. Das verändert die gesamte Antwort.</span>
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;">
+            <span class="badge b-selbst" style="margin-top:2px;white-space:nowrap;">Selbstoffenbarung</span>
+            <span style="font-size:15px;color:var(--ink2);">„Ich möchte nicht verletzen" und „Ich schätze die Geste" — ersetzt den vorsichtigen Tonfall und das Zögern, das im Gespräch sichtbar wäre.</span>
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;">
+            <span class="badge b-appell" style="margin-top:2px;white-space:nowrap;">Appell</span>
+            <span style="font-size:15px;color:var(--ink2);">„ehrlich, aber wertschätzend" — definiert den Ton der gewünschten Antwort, der im Gespräch durch Körpersprache signalisiert würde.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="fancy">
+
+    <div class="section">
+      <h2>Die <em>Faustregeln</em> für besseres Prompting</h2>
+      <div style="display:flex;flex-direction:column;gap:10px;margin:20px 0;">
+        <div class="card" style="margin:0;">
+          <div style="display:flex;gap:12px;align-items:flex-start;">
+            <span class="badge b-selbst" style="margin-top:2px;white-space:nowrap;">Selbstoffenbarung</span>
+            <span style="font-size:16px;color:var(--ink2);"><strong style="color:var(--ink);">Schreib, wer du bist und wie es dir geht.</strong> Dein Gefühl, deine Einschränkung, deine Situation — alles, was du nonverbal mitteilen würdest.</span>
+          </div>
+        </div>
+        <div class="card" style="margin:0;">
+          <div style="display:flex;gap:12px;align-items:flex-start;">
+            <span class="badge b-bezie" style="margin-top:2px;white-space:nowrap;">Beziehung</span>
+            <span style="font-size:16px;color:var(--ink2);"><strong style="color:var(--ink);">Erkläre den Kontext der Beziehung.</strong> Wer ist beteiligt? Welche Rolle spielen die Personen? Was verbindet sie?</span>
+          </div>
+        </div>
+        <div class="card" style="margin:0;">
+          <div style="display:flex;gap:12px;align-items:flex-start;">
+            <span class="badge b-appell" style="margin-top:2px;white-space:nowrap;">Appell</span>
+            <span style="font-size:16px;color:var(--ink2);"><strong style="color:var(--ink);">Formuliere deinen Wunsch explizit.</strong> Was genau soll die KI tun? Welchen Ton soll die Antwort haben? Für wen ist sie?</span>
+          </div>
+        </div>
+        <div class="card" style="margin:0;">
+          <div style="display:flex;gap:12px;align-items:flex-start;">
+            <span class="badge b-sach" style="margin-top:2px;white-space:nowrap;">Sachinhalt</span>
+            <span style="font-size:16px;color:var(--ink2);"><strong style="color:var(--ink);">Präzisiere den Sachkontext.</strong> Zeitdruck, Einschränkungen, Rahmenbedingungen — alles, was die Situation konkret macht.</span>
+          </div>
+        </div>
+        <div class="card" style="margin:0;background:var(--rose-light);border-color:rgba(155,58,74,0.2);">
+          <div style="display:flex;gap:12px;align-items:flex-start;">
+            <span class="badge" style="background:var(--rose-light);color:var(--rose);border-color:rgba(155,58,74,0.3);margin-top:2px;white-space:nowrap;">Ironie ⚠</span>
+            <span style="font-size:16px;color:var(--ink2);"><strong style="color:var(--ink);">Vermeide Ironie und Sarkasmus.</strong> Die KI nimmt alles wörtlich. Was im Gespräch als Witz erkennbar ist, wird im Prompt zum ernsthaften Auftrag.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <h3>Die wichtigste Erkenntnis</h3>
+        <p>Ein guter Prompt ist im Grunde eine vollständige Selbstoffenbarung in Textform. Wer gelernt hat, über die vier Seiten einer Nachricht nachzudenken, kann dieses Wissen direkt auf das Prompting übertragen — und bekommt von der KI Antworten, die sich menschlich anfühlen.</p>
+      </div>
+    </div>
+
+    <div class="page-footer" style="padding-left:0;padding-right:0;">
+      <a href="#" class="btn btn-outline" onclick="show('synthese')">← Zurück</a>
+      <span class="footer-note">Modul 11 von 12</span>
+      <a href="#" class="btn" onclick="show('rakfet')">Weiter: RAKFET →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════ -->
+<!-- PAGE 7: RAKFET -->
+<!-- ════════════════════════════════ -->
+<div class="page" id="page-rakfet">
+  <div class="hero" style="padding-bottom:32px;">
+    <div class="hero-eyebrow">Modul 11 — Berufliche Praxis</div>
+    <h1 class="hero-title">Die <em>RAKFET</em>-Formel —<br>KI im beruflichen<br>Alltag nutzen</h1>
+    <p class="hero-sub">Sechs Bausteine, die aus einem vagen Prompt einen präzisen Arbeitsauftrag machen. Was im Gespräch automatisch mitschwingt, wird hier bewusst formuliert.</p>
+  </div>
+  <div class="content">
+
+    <div class="section">
+      <div class="section-label">Das Prinzip</div>
+      <h2>Vom Gespräch <em>zum Auftrag</em></h2>
+      <p>Im menschlichen Gespräch kennt der Gesprächspartner die Situation, die Beziehung und den Kontext — oft ohne ein Wort darüber zu verlieren. Bei der KI muss all das explizit gemacht werden. Die RAKFET-Formel ist ein Werkzeug dafür.</p>
+
+      <!-- RAKFET Übersicht -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:28px 0;">
+        <div style="background:var(--blue-light);border:1px solid rgba(43,95,166,0.2);border-radius:var(--radius-lg);padding:18px;text-align:center;">
+          <div style="font-family:var(--serif);font-size:32px;font-weight:300;color:var(--blue);line-height:1;margin-bottom:8px;">R</div>
+          <div style="font-size:14px;font-weight:500;text-transform:uppercase;letter-spacing:0.07em;color:var(--blue);margin-bottom:4px;">Rolle</div>
+          <div style="font-size:15px;color:var(--ink2);">Wer soll die KI sein?</div>
+        </div>
+        <div style="background:var(--green-light);border:1px solid rgba(58,110,53,0.2);border-radius:var(--radius-lg);padding:18px;text-align:center;">
+          <div style="font-family:var(--serif);font-size:32px;font-weight:300;color:var(--green);line-height:1;margin-bottom:8px;">A</div>
+          <div style="font-size:14px;font-weight:500;text-transform:uppercase;letter-spacing:0.07em;color:var(--green);margin-bottom:4px;">Aufgabe</div>
+          <div style="font-size:15px;color:var(--ink2);">Was soll die KI tun?</div>
+        </div>
+        <div style="background:var(--amber-light);border:1px solid rgba(160,107,16,0.2);border-radius:var(--radius-lg);padding:18px;text-align:center;">
+          <div style="font-family:var(--serif);font-size:32px;font-weight:300;color:var(--amber);line-height:1;margin-bottom:8px;">K</div>
+          <div style="font-size:14px;font-weight:500;text-transform:uppercase;letter-spacing:0.07em;color:var(--amber);margin-bottom:4px;">Kontext</div>
+          <div style="font-size:15px;color:var(--ink2);">Was ist die Situation?</div>
+        </div>
+        <div style="background:var(--rose-light);border:1px solid rgba(155,58,74,0.2);border-radius:var(--radius-lg);padding:18px;text-align:center;">
+          <div style="font-family:var(--serif);font-size:32px;font-weight:300;color:var(--rose);line-height:1;margin-bottom:8px;">F</div>
+          <div style="font-size:14px;font-weight:500;text-transform:uppercase;letter-spacing:0.07em;color:var(--rose);margin-bottom:4px;">Format</div>
+          <div style="font-size:15px;color:var(--ink2);">Wie soll das Ergebnis aussehen?</div>
+        </div>
+        <div style="background:var(--bg2);border:1px solid var(--border-strong);border-radius:var(--radius-lg);padding:18px;text-align:center;">
+          <div style="font-family:var(--serif);font-size:32px;font-weight:300;color:var(--ink2);line-height:1;margin-bottom:8px;">E</div>
+          <div style="font-size:14px;font-weight:500;text-transform:uppercase;letter-spacing:0.07em;color:var(--ink2);margin-bottom:4px;">Einschränkungen</div>
+          <div style="font-size:15px;color:var(--ink2);">Was soll die KI vermeiden?</div>
+        </div>
+        <div style="background:var(--teal-light);border:1px solid rgba(42,122,106,0.2);border-radius:var(--radius-lg);padding:18px;text-align:center;">
+          <div style="font-family:var(--serif);font-size:32px;font-weight:300;color:var(--teal);line-height:1;margin-bottom:8px;">T</div>
+          <div style="font-size:14px;font-weight:500;text-transform:uppercase;letter-spacing:0.07em;color:var(--teal);margin-bottom:4px;">Ton</div>
+          <div style="font-size:15px;color:var(--ink2);">Wie soll der Text klingen?</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="fancy">
+
+    <div class="section">
+      <div class="section-label">Die sechs Bausteine</div>
+      <h2>Was steckt <em>dahinter?</em></h2>
+      <p>Jeder Baustein adressiert einen anderen Aspekt der Kommunikation — und ersetzt einen Kanal, der im Gespräch nonverbal übertragen würde.</p>
+
+      <div style="display:flex;flex-direction:column;gap:10px;margin:24px 0;">
+
+        <!-- R -->
+        <div class="card" style="margin:0;display:grid;grid-template-columns:200px 1fr;gap:20px;align-items:start;">
+          <div>
+            <div style="font-family:var(--serif);font-size:22px;font-weight:300;color:var(--blue);margin-bottom:4px;">R — Rolle</div>
+            <div style="font-size:14px;color:var(--ink3);margin-bottom:8px;">Wer soll die KI sein?</div>
+            <div class="chip-row">
+              <span class="chip chip-blue" style="font-size:13px;">Beziehung</span>
+              <span class="chip chip-blue" style="font-size:13px;">Selbstoffenbarung</span>
+            </div>
+          </div>
+          <div>
+            <p style="font-size:16px;color:var(--ink);margin-bottom:8px;">Die Rolle gibt der KI eine Perspektive, ein Fachwissen und eine Haltung. Ohne Rolle antwortet die KI als generalistischer Assistent — mit Rolle als Expertin mit spezifischem Blickwinkel.</p>
+            <div style="background:var(--bg2);border-radius:var(--radius);padding:10px 14px;font-size:15px;font-family:var(--sans);color:var(--ink2);line-height:1.6;">
+              <span style="color:var(--ink3);font-size:13px;text-transform:uppercase;letter-spacing:0.05em;display:block;margin-bottom:4px;">Beispiel</span>
+              „Du bist eine erfahrene Kita-Leiterin mit 15 Jahren Praxis in der Elternkommunikation."
+            </div>
+          </div>
+        </div>
+
+        <!-- A -->
+        <div class="card" style="margin:0;display:grid;grid-template-columns:200px 1fr;gap:20px;align-items:start;">
+          <div>
+            <div style="font-family:var(--serif);font-size:22px;font-weight:300;color:var(--green);margin-bottom:4px;">A — Aufgabe</div>
+            <div style="font-size:14px;color:var(--ink3);margin-bottom:8px;">Was soll die KI tun?</div>
+            <div class="chip-row">
+              <span class="chip chip-blue" style="font-size:13px;">Appell</span>
+            </div>
+          </div>
+          <div>
+            <p style="font-size:16px;color:var(--ink);margin-bottom:8px;">Die Aufgabe ist der explizite Appell — der im menschlichen Gespräch oft nur durch Tonfall und Situation klar wird. Hier muss er vollständig in Worte gefasst werden: Was genau, für wen, bis wann?</p>
+            <div style="background:var(--bg2);border-radius:var(--radius);padding:10px 14px;font-size:15px;font-family:var(--sans);color:var(--ink2);line-height:1.6;">
+              <span style="color:var(--ink3);font-size:13px;text-transform:uppercase;letter-spacing:0.05em;display:block;margin-bottom:4px;">Beispiel</span>
+              „Schreibe eine kurze E-Mail an Eltern, in der wir ankündigen, dass die Kita nächste Woche wegen eines Teamtags geschlossen bleibt."
+            </div>
+          </div>
+        </div>
+
+        <!-- K -->
+        <div class="card" style="margin:0;display:grid;grid-template-columns:200px 1fr;gap:20px;align-items:start;">
+          <div>
+            <div style="font-family:var(--serif);font-size:22px;font-weight:300;color:var(--amber);margin-bottom:4px;">K — Kontext</div>
+            <div style="font-size:14px;color:var(--ink3);margin-bottom:8px;">Was ist die Situation?</div>
+            <div class="chip-row">
+              <span class="chip chip-amber" style="font-size:13px;">Gemeinsame Geschichte</span>
+              <span class="chip chip-blue" style="font-size:13px;">Sachinhalt</span>
+            </div>
+          </div>
+          <div>
+            <p style="font-size:16px;color:var(--ink);margin-bottom:8px;">Der Kontext ersetzt das geteilte Vorwissen, das im Gespräch selbstverständlich ist. Die KI kennt weder die Einrichtung noch die Eltern noch die Vorgeschichte — all das muss hier stehen.</p>
+            <div style="background:var(--bg2);border-radius:var(--radius);padding:10px 14px;font-size:15px;font-family:var(--sans);color:var(--ink2);line-height:1.6;">
+              <span style="color:var(--ink3);font-size:13px;text-transform:uppercase;letter-spacing:0.05em;display:block;margin-bottom:4px;">Beispiel</span>
+              „Unsere Kita hat 45 Kinder, ein familiäres Klima und kommuniziert regelmäßig per E-Mail mit den Eltern. Die Eltern sind gut informiert und schätzen transparente Kommunikation."
+            </div>
+          </div>
+        </div>
+
+        <!-- F -->
+        <div class="card" style="margin:0;display:grid;grid-template-columns:200px 1fr;gap:20px;align-items:start;">
+          <div>
+            <div style="font-family:var(--serif);font-size:22px;font-weight:300;color:var(--rose);margin-bottom:4px;">F — Format</div>
+            <div style="font-size:14px;color:var(--ink3);margin-bottom:8px;">Wie soll das Ergebnis aussehen?</div>
+            <div class="chip-row">
+              <span class="chip chip-blue" style="font-size:13px;">Sachinhalt</span>
+              <span class="chip chip-blue" style="font-size:13px;">Appell</span>
+            </div>
+          </div>
+          <div>
+            <p style="font-size:16px;color:var(--ink);margin-bottom:8px;">Das Format definiert die äußere Form der Antwort: Länge, Struktur, Gliederung. Ohne diese Angabe entscheidet die KI selbst — und trifft dabei oft nicht das, was gebraucht wird.</p>
+            <div style="background:var(--bg2);border-radius:var(--radius);padding:10px 14px;font-size:15px;font-family:var(--sans);color:var(--ink2);line-height:1.6;">
+              <span style="color:var(--ink3);font-size:13px;text-transform:uppercase;letter-spacing:0.05em;display:block;margin-bottom:4px;">Beispiel</span>
+              „Die E-Mail soll maximal 8 Sätze lang sein, mit einer kurzen Betreffzeile beginnen und keinen Anhang erwähnen."
+            </div>
+          </div>
+        </div>
+
+        <!-- E -->
+        <div class="card" style="margin:0;display:grid;grid-template-columns:200px 1fr;gap:20px;align-items:start;">
+          <div>
+            <div style="font-family:var(--serif);font-size:22px;font-weight:300;color:var(--ink2);margin-bottom:4px;">E — Einschränkungen</div>
+            <div style="font-size:14px;color:var(--ink3);margin-bottom:8px;">Was soll die KI vermeiden?</div>
+            <div class="chip-row">
+              <span class="chip chip-blue" style="font-size:13px;">Appell (negativ)</span>
+              <span class="chip chip-blue" style="font-size:13px;">Beziehung</span>
+            </div>
+          </div>
+          <div>
+            <p style="font-size:16px;color:var(--ink);margin-bottom:8px;">Einschränkungen sind das Gegenteil des Appells — sie sagen der KI, was sie nicht tun soll. Im Gespräch werden solche Grenzen durch Mimik, Tonfall oder Widerspruch klar. Im Prompt müssen sie explizit benannt werden.</p>
+            <div style="background:var(--bg2);border-radius:var(--radius);padding:10px 14px;font-size:15px;font-family:var(--sans);color:var(--ink2);line-height:1.6;">
+              <span style="color:var(--ink3);font-size:13px;text-transform:uppercase;letter-spacing:0.05em;display:block;margin-bottom:4px;">Beispiel</span>
+              „Bitte keine Floskeln wie 'Wir hoffen auf Ihr Verständnis'. Keine Entschuldigungen — der Teamtag ist eine bewusste Entscheidung."
+            </div>
+          </div>
+        </div>
+
+        <!-- T -->
+        <div class="card" style="margin:0;background:var(--teal-light);border-color:rgba(42,122,106,0.2);display:grid;grid-template-columns:200px 1fr;gap:20px;align-items:start;">
+          <div>
+            <div style="font-family:var(--serif);font-size:22px;font-weight:300;color:var(--teal);margin-bottom:4px;">T — Ton</div>
+            <div style="font-size:14px;color:var(--ink3);margin-bottom:8px;">Wie soll der Text klingen?</div>
+            <div class="chip-row">
+              <span class="chip" style="font-size:13px;background:rgba(42,122,106,0.12);color:var(--teal);border-color:rgba(42,122,106,0.3);">Stimme &amp; Tonfall</span>
+              <span class="chip" style="font-size:13px;background:rgba(42,122,106,0.12);color:var(--teal);border-color:rgba(42,122,106,0.3);">Beziehung</span>
+            </div>
+          </div>
+          <div>
+            <p style="font-size:16px;color:var(--ink);margin-bottom:8px;">Der Ton ist der Kanal, der im menschlichen Gespräch durch Stimme und Haltung transportiert wird — und der im Prompt am häufigsten vergessen wird. Er entscheidet darüber, ob ein Text warm oder kalt, professionell oder locker, einladend oder distanziert klingt.</p>
+            <div style="background:rgba(255,255,255,0.5);border-radius:var(--radius);padding:10px 14px;font-size:15px;font-family:var(--sans);color:var(--ink2);line-height:1.6;">
+              <span style="color:var(--ink3);font-size:13px;text-transform:uppercase;letter-spacing:0.05em;display:block;margin-bottom:4px;">Beispiel</span>
+              „Der Ton soll warm und wertschätzend sein — wir sprechen Eltern auf Augenhöhe an, nicht von oben herab."
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <hr class="fancy">
+
+    <div class="section">
+      <div class="section-label">Beispiel komplett</div>
+      <h2>Ein vollständiger <em>RAKFET-Prompt</em></h2>
+      <p>So sieht ein Prompt aus, der alle sechs Bausteine nutzt — am Beispiel der Kita-Schließung.</p>
+
+      <div class="card" style="margin:20px 0 0;background:var(--ink);border:none;">
+        <div style="font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:0.08em;color:rgba(245,242,236,0.4);margin-bottom:14px;">Vollständiger RAKFET-Prompt</div>
+        <div style="font-size:16px;line-height:1.9;color:rgba(245,242,236,0.9);">
+          <span style="color:#7EB8D4;">[Rolle]</span> Du bist eine erfahrene Kita-Leiterin mit 15 Jahren Praxis in der Elternkommunikation.<br>
+          <span style="color:#8FCA8F;">[Aufgabe]</span> Schreibe eine E-Mail an die Eltern unserer Kita, in der wir ankündigen, dass die Einrichtung am Montag, 12. Mai, wegen eines Teamtags geschlossen bleibt.<br>
+          <span style="color:#F0C070;">[Kontext]</span> Unsere Kita hat 45 Kinder, ein familiäres Klima und kommuniziert regelmäßig per E-Mail mit den Eltern. Die Eltern schätzen transparente, direkte Kommunikation.<br>
+          <span style="color:#F09090;">[Format]</span> Maximal 8 Sätze. Kurze, prägnante Betreffzeile. Kein Anhang.<br>
+          <span style="color:#C0C0C0;">[Einschränkungen]</span> Keine Floskeln wie „Wir hoffen auf Ihr Verständnis". Keine Entschuldigungen — der Teamtag ist eine bewusste, positive Investition ins Team.<br>
+          <span style="color:#7ECEC4;">[Ton]</span> Warm, wertschätzend, auf Augenhöhe. Professionell, aber nicht bürokratisch.
+        </div>
+      </div>
+    </div>
+
+    <hr class="fancy">
+
+    <div class="section">
+      <div class="section-label">Verbindung zum Kommunikationsmodell</div>
+      <h2>RAKFET und das <em>Kommunikationsquadrat</em></h2>
+      <p>Die sechs Bausteine adressieren gezielt die Kanäle, die im Gespräch nonverbal übertragen werden — und die bei der KI fehlen.</p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0;">
+        <div class="card" style="margin:0;">
+          <div style="font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:0.07em;color:var(--ink3);margin-bottom:10px;">Im Gespräch — automatisch</div>
+          <div style="display:flex;flex-direction:column;gap:7px;">
+            <div style="font-size:15px;color:var(--ink2);">Tonfall → wer jemand ist und wie er es meint</div>
+            <div style="font-size:15px;color:var(--ink2);">Mimik → emotionaler Zustand, Dringlichkeit</div>
+            <div style="font-size:15px;color:var(--ink2);">Gemeinsame Geschichte → Kontext, Erwartungen</div>
+            <div style="font-size:15px;color:var(--ink2);">Situation → Format und Rahmen der Antwort</div>
+            <div style="font-size:15px;color:var(--ink2);">Körpersprache → Grenzen und Einschränkungen</div>
+            <div style="font-size:15px;color:var(--ink2);">Beziehung → Haltung, Nähe, Respekt</div>
+          </div>
+        </div>
+        <div class="card" style="margin:0;background:var(--surface);">
+          <div style="font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:0.07em;color:var(--ink3);margin-bottom:10px;">Im Prompt — muss explizit stehen</div>
+          <div style="display:flex;flex-direction:column;gap:7px;">
+            <div style="font-size:15px;color:var(--ink2);display:flex;align-items:center;gap:8px;"><span style="font-weight:500;color:var(--blue);min-width:14px;">R</span> Rolle → Perspektive und Haltung der KI</div>
+            <div style="font-size:15px;color:var(--ink2);display:flex;align-items:center;gap:8px;"><span style="font-weight:500;color:var(--green);min-width:14px;">A</span> Aufgabe → expliziter, präziser Appell</div>
+            <div style="font-size:15px;color:var(--ink2);display:flex;align-items:center;gap:8px;"><span style="font-weight:500;color:var(--amber);min-width:14px;">K</span> Kontext → Situation und Vorwissen</div>
+            <div style="font-size:15px;color:var(--ink2);display:flex;align-items:center;gap:8px;"><span style="font-weight:500;color:var(--rose);min-width:14px;">F</span> Format → Struktur und Umfang</div>
+            <div style="font-size:15px;color:var(--ink2);display:flex;align-items:center;gap:8px;"><span style="font-weight:500;color:var(--ink2);min-width:14px;">E</span> Einschränkungen → explizite Grenzen</div>
+            <div style="font-size:15px;color:var(--ink2);display:flex;align-items:center;gap:8px;"><span style="font-weight:500;color:var(--teal);min-width:14px;">T</span> Ton → Stimme und Beziehungshaltung</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <h3>Die Formel ist kein Kochrezept</h3>
+        <p>Nicht jeder Prompt braucht alle sechs Bausteine. Kurze, klare Aufgaben brauchen wenig Kontext. Komplexe, beziehungssensible Texte brauchen alles. Die Frage ist immer: Welche Kanäle fehlen — und was muss ich deshalb explizit machen?</p>
+      </div>
+    </div>
+
+    <div class="page-footer" style="padding-left:0;padding-right:0;">
+      <a href="#" class="btn btn-outline" onclick="show('prompts')">← Zurück</a>
+      <span class="footer-note">Modul 12 von 12</span>
+      <a href="#" class="btn" onclick="show('intro')">↺ Zum Anfang</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  const pages = ['intro','modell','mensch','ki','kisender','beispiel','watzlawick','grice','searle','synthese','prompts','rakfet'];
+
+  function show(id) {
+    pages.forEach(p => {
+      document.getElementById('page-'+p).classList.remove('active');
+      const nav = document.getElementById('nav-'+p);
+      if (nav) nav.classList.remove('active');
+    });
+    document.getElementById('page-'+id).classList.add('active');
+    const nav = document.getElementById('nav-'+id);
+    if (nav) nav.classList.add('active');
+    window.scrollTo({top: 0, behavior: 'smooth'});
+    return false;
+  }
+
+  function switchSzenario(n, btn) {
+    document.getElementById('sz1').style.display = n === 1 ? 'block' : 'none';
+    document.getElementById('sz2').style.display = n === 2 ? 'block' : 'none';
+    document.querySelectorAll('.module-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+</script>
+</body>
+</html>
