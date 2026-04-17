@@ -1,4 +1,4 @@
-## **SOFT SKILLS** 
+## **SOFT SKILLS \- Was wir können** 
 
 **Zeitmanagement** 
 
@@ -94,6 +94,10 @@ Plakativer und vielleicht manchmal provozierender Ausblick auf den Unterricht mi
 
 Skills, die die Lernenden brauchen, um sich in einer VUCA und BANI Welt beruflich und privat zurechtzufinden
 
+**Dein Thema** 
+
+Du brauchst ein anderes Thema? Lass uns reden\!
+
 ## **AKTUELLE WORKSHOPS (90 MINUTEN)** 
 
 **KI aus Sicht der Lernenden** 
@@ -110,7 +114,7 @@ Lohnt sich GPT Plus? Was können die Konkurrenten (Perplexity, Gemini, Copilot)?
 
 **KI-Systeme Audio/Video/Bild/Musik** 
 
-KI-Systeme generieren nicht nur Text. Hier werden Werkzeuge vorgestellt und ausprobiert, welche Bilder, Audios, Videos und Musik kreieren. Ebenso GPT Plus Funktionen wie Datenanalyse, Coding und Bildanalyse. 
+KI-Systeme generieren nicht nur Text. Hier werden Werkzeuge vorgestellt und ausprobiert, welche Bilder, Audios, Videos und Musik kreieren. Ebenso Funktionen wie Datenanalyse, Coding und Bildanalyse. 
 
 **Open Educational Resources** 
 
@@ -122,7 +126,7 @@ Was gibt es VOR dem Erstellen eines Online-Lernangebotes zu beachten? Von Zielgr
 
 **KI in der Frühpädagogik**
 
-Wie KI Beschäftigte in Kitas entlasten kann. Wie kann KI in der Trauerarbeit oder in der Leitungsebene unterstützen
+Wie KI Beschäftigte in Kitas entlasten kann. Wie kann KI in der Trägerarbeit oder in der Leitungsebene unterstützen
 
 **REFERENZEN** 
 
@@ -142,11 +146,11 @@ Erstellen eines Moodle-Selbstlernkurses “Basis Qualifizierung Moodle” für d
 
 **Workshopleiter und Referent für mobile.schule (seit 09/2022)** 
 
-Einsätze an einer Vielzahl von Schulen und bei mehreren Veranstaltungen (z.B. Lehrkräfte-Kongress in Gauting und mobile.schule Tagungen Hannover) im Auftrag von mobile.schule und dem Landesmedienzentrum Baden-Württemberg 
+Einsätze an einer Vielzahl von Schulen und bei mehreren Veranstaltungen (z.B. Lehrkräfte-Kongress in Gauting und mobile.schule Tagungen Hannover, Didacta, Leipziger Buchmesse)) im Auftrag von mobile.schule und dem Landesmedienzentrum Baden-Württemberg 
 
 **Autorentätigkeit Projekt durch-blickt.de (seit 06/2022)** 
 
-für Klett Mint im Auftrag der Barmer Krankenkasse erstellen von über 25 Lehrerhandreichungen zum Thema “Digitale Gesundheitskompetenzen” 
+für Klett MEX im Auftrag der Barmer Krankenkasse erstellen von über 25 Lehrerhandreichungen zum Thema “Digitale Gesundheitskompetenzen” 
 
 **Dozent Universität Regensburg (seit 04/2022)** 
 
