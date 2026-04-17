@@ -662,6 +662,57 @@ nav a.active {
   line-height: 1.65;
 }
 
+.leistung-item--highlight {
+  grid-column: 1 / -1;
+  background: var(--color-light);
+  border-color: transparent;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.leistung-item--highlight::before {
+  background: var(--color-primary);
+}
+
+.leistung-item--highlight .leistung-icon {
+  flex-shrink: 0;
+  background: var(--color-accent);
+}
+
+.leistung-item--highlight h3 {
+  font-size: 1.3rem;
+}
+
+.leistung-item--highlight .leistung-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.6rem;
+  color: var(--color-accent);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: underline;
+  transition: color var(--transition);
+}
+
+.leistung-item--highlight .leistung-link:hover {
+  color: var(--color-primary);
+}
+
+.leistung-item--highlight .leistung-link::after {
+  content: '→';
+  text-decoration: none;
+}
+
+@media (max-width: 600px) {
+  .leistung-item--highlight {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
+
 .werkzeug-link {
   display: inline-block;
   margin-top: 1.25rem;
