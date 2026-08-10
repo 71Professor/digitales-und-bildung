@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Insight Journal: ein neues Open-Source-Moodle-Plugin für echte Reflexionsarbeit – mit lernendengesteuertem Datenschutz, für Schule, Frühpädagogik und Hochschule.">
+  <link rel="icon" href="../images/favicon.ico">
+  <title>Reflexion, die bleibt: Insight Journal für Moodle | Digitales &amp; Bildung</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container nav-inner">
+      <a href="../index.html" class="logo">
+        <img src="../images/logo.jpeg" alt="Digitales & Bildung Logo" onerror="this.style.display='none'">
+        <div class="logo-text">
+          <span class="logo-title">Digitales &amp; Bildung</span>
+          <span class="logo-subtitle">Die Bildungsingenieure</span>
+        </div>
+      </a>
+      <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav>
+        <ul>
+          <li><a href="../index.html">Startseite</a></li>
+          <li><a href="../blog.html">Blog</a></li>
+          <li><a href="../leistungen.html">Leistungen</a></li>
+          <li><a href="../werkzeuge.html">Werkzeuge</a></li>
+          <li><a href="../der-bildungsingenieur.html">Die Bildungsingenieure</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb">
+    <div class="container">
+      <a href="../index.html">Startseite</a>
+      <span>›</span>
+      <a href="../blog.html">Blog</a>
+      <span>›</span>
+      Insight Journal für Moodle
+    </div>
+  </div>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="container">
+      <h1>Reflexion, die bleibt: Insight Journal für Moodle</h1>
+      <p>Warum ich ein eigenes Moodle-Plugin für Reflexionsarbeit gebaut habe – und was daraus geworden ist.</p>
+    </div>
+  </div>
+
+  <!-- BEITRAGSINHALT -->
+  <section class="section">
+    <div class="container">
+
+      <div class="post-header-meta">
+        <span class="blog-meta">Bildung &amp; Digitalisierung</span>
+        <span>10. August 2026</span>
+      </div>
+
+      <div class="post-content">
+
+        <p>
+          Reflexionsaufgaben sind in fast jedem Kompetenzmodell verankert – und landen im Alltag trotzdem meistens irgendwo dazwischen: in einem Word-Dokument, das per Mail hin- und hergeschickt wird, in einem Forumsbeitrag, den alle lesen können, oder in einem Papierheft, das am Ende des Kurses verloren geht. Dabei sitzen Lernende und Lehrende doch längst gemeinsam in einer Lernplattform. Genau diese Lücke wollte ich schließen – und habe ein eigenes Moodle-Plugin dafür gebaut: <strong>Insight Journal</strong>, seit August 2026 als Version 1.0.0 stabil verfügbar.
+        </p>
+
+        <h2>Die Idee dahinter</h2>
+
+        <p>
+          Reflexion funktioniert nur, wenn sie ehrlich ist – und ehrlich schreibt nur, wer sich sicher fühlt. Genau daran scheitern viele digitale Lösungen: Ein Forum ist öffentlich, ein geteiltes Dokument fühlt sich beobachtet an, ein externes Tool bedeutet einen weiteren Login und offene Fragen zum Datenschutz. Das Ergebnis sind Reflexionen, die brav formuliert sind, aber nichts mehr mit echtem Nachdenken zu tun haben.
+        </p>
+
+        <p>
+          Die Grundidee von Insight Journal ist deshalb denkbar einfach, aber im Moodle-Kosmos ungewöhnlich: Jeder einzelne Eintrag gehört der Person, die ihn geschrieben hat – nicht der Aktivität, nicht dem Kurs, nicht der Lehrkraft. Wie bei einem echten Tagebuch entscheidet die/der Lernende pro Eintrag, ob eine Trainerin oder ein Trainer mitlesen darf. Nicht die Lehrkraft legt fest, was sichtbar ist, sondern die Person, die geschrieben hat – und diese Entscheidung lässt sich jederzeit wieder ändern, ganz ohne dass jemand anderes das überschreiben könnte.
+        </p>
+
+        <blockquote>
+          Ein Reflexionswerkzeug, das die Kontrolle über Sichtbarkeit nicht der Lehrkraft, sondern der schreibenden Person gibt, ist kein Zusatzfeature. Es ist die Voraussetzung dafür, dass überhaupt ehrlich reflektiert wird.
+        </blockquote>
+
+        <p>
+          Der Name ist Programm: Jede Aktivität trägt genau eine gezielte Aufgabe oder Frage – kein allgemeines „Wie war dein Tag?", sondern ein bewusst gesetzter Reflexionspunkt, den Trainer/innen an genau der Stelle im Kurs platzieren, an der er inhaltlich sitzt.
+        </p>
+
+        <h2>Die Umsetzung</h2>
+
+        <p>
+          Technisch ist Insight Journal ein reguläres Moodle-Aktivitätsmodul (<code>mod_insightjournal</code>), Moodle 4.5+ und PHP 8.1+, ganz ohne externe Abhängigkeiten – kein Composer, kein Node.js zur Laufzeit. Für Trainer/innen fühlt es sich an wie jede andere Aktivität: über „Aktivität oder Material anlegen" hinzufügen, Aufgabe oder Frage formulieren, fertig.
+        </p>
+
+        <p>
+          Darüber hinaus lassen sich pro Aktivität ein paar Dinge feinjustieren:
+        </p>
+
+        <ul>
+          <li><strong>Optische Abhebung</strong> der Aufgabe/Frage über eine frei wählbare Hintergrundfarbe (mit Farbwähler).</li>
+          <li><strong>Autosave</strong> – die Antwort wird nach einer Tippause automatisch gespeichert, ganz ohne Klick.</li>
+          <li><strong>Mindest- und Maximalzeichenzahl</strong>, live mitgezählt. Die Mindestzahl kann als Abschlussbedingung dienen, blockiert aber nie das Speichern selbst – eine kürzere Antwort lässt sich immer sichern, sie zählt nur noch nicht als abgeschlossen.</li>
+        </ul>
+
+        <p>
+          Lernende schreiben im gewohnten Moodle-Editor, können ihre Antwort jederzeit wieder öffnen und überarbeiten, und sehen direkt neben dem Text die Checkbox <em>„Diesen Eintrag privat halten"</em> – standardmäßig nicht angehakt, also für Trainer/innen sichtbar, aber jederzeit änderbar. Speichert währenddessen jemand in einem anderen Tab eine neuere Version, erkennt das Plugin den Konflikt und lässt den eigenen Entwurf lieber stehen, statt ihn stillschweigend zu überschreiben.
+        </p>
+
+        <div class="post-mechanism">
+          <h3>Für Trainer/innen</h3>
+          <p>Der <strong>Aktivitätsbericht</strong> zeigt alle freigegebenen Antworten zu einer Frage, durchsuchbar und exportierbar. Der <strong>Kursbericht</strong> gibt den Fortschritt über alle Insight-Journal-Aktivitäten eines Kurses hinweg auf einen Blick. Private Einträge bleiben dabei überall ein Hinweistext statt Inhalt – ausnahmslos, auch für Manager/innen.</p>
+        </div>
+
+        <div class="post-mechanism">
+          <h3>Für Lernende</h3>
+          <p>Die <strong>persönliche Zusammenfassung</strong> bündelt alle eigenen Einträge eines Kurses auf einer druckbaren Seite – als einfaches, selbst kuratiertes Portfolio, das sich direkt aus dem Browser als PDF sichern lässt.</p>
+        </div>
+
+        <p>
+          Datenschutz war dabei kein nachträglicher Haken, sondern Ausgangspunkt: Die Moodle-Privacy-API ist vollständig implementiert (Export, Löschung, Metadaten-Beschreibung), CSV-Exporte sind gegen Formel-Injection abgesichert, Gruppentrennung wird auf allen Berichtsseiten respektiert. Getestet ist das Ganze mit PHPUnit, Behat-Szenarien und PHPStan auf Level 5 – die Produktivcode-Basis ist dabei vollständig sauber, ohne Baseline-Datei zum Wegdrücken alter Fehler. Der komplette Code ist quelloffen auf <a href="https://github.com/71Professor/moodle-mod_insightjournal" target="_blank" rel="noopener">GitHub</a> einsehbar.
+        </p>
+
+        <h2>Der Nutzen</h2>
+
+        <ul>
+          <li><strong>Für Lernende:</strong> ein fester, wiederkehrender Ort zum Nachdenken – mit echter Hoheit darüber, was davon andere lesen, und einem portablen Portfolio am Ende.</li>
+          <li><strong>Für Trainer/innen:</strong> ein Überblick über Bearbeitungsstand und Reflexionstiefe, ohne Hefte einzusammeln oder Dateien nachzuverfolgen – und ohne dabei Einträge zu sehen, die nicht für sie bestimmt sind.</li>
+          <li><strong>Für Institutionen:</strong> ein DSGVO-konformes, kostenloses und quelloffenes Werkzeug, das in der ohnehin vorhandenen Moodle-Instanz läuft – kein weiterer Vertrag, kein weiterer Login, keine weiteren Nutzerdaten bei einem dritten Anbieter.</li>
+          <li><strong>Didaktisch:</strong> ein Baustein für selbstreguliertes Lernen, formative Selbsteinschätzung und Portfolioarbeit, der sich nahtlos in Moodles Abschlussverfolgung einfügt, statt eine Parallelwelt zu eröffnen.</li>
+        </ul>
+
+        <h2>Beispiel aus der Schule</h2>
+
+        <p>
+          Eine Lehrkraft an einer berufsbildenden Schule legt pro Unterrichtseinheit eine kurze Insight-Journal-Aktivität an – als digitales Pendant zum „Exit Ticket": <em>„Was war heute neu für dich, und was ist noch unklar geblieben?"</em> Über ein Halbjahr entsteht so, Einheit für Einheit, ein durchgehendes Reflexionsprotokoll, ohne dass jemand extra ein Heft einsammeln müsste. Die Mindestzeichenzahl als Abschlussbedingung sorgt dafür, dass wirklich reflektiert und nicht nur ein Wort hingeworfen wird – ohne dass die Lehrkraft dafür den Inhalt bewerten muss. Wer eine Antwort lieber für sich behält, markiert sie privat; die Lehrkraft sieht am Kursbericht trotzdem, wer regelmäßig schreibt und wer nicht. Am Schuljahresende druckt sich jede/r Lernende die eigene Zusammenfassung als kleines Portfolio des eigenen Lernwegs aus.
+        </p>
+
+        <h2>Beispiel aus der Frühpädagogik</h2>
+
+        <p>
+          An einer Fachschule für Sozialpädagogik begleitet ein Insight Journal pro Praxiswoche die Erzieher/innen in Ausbildung während ihres Kita-Praktikums. Die Praxisanleitung stellt vorab die Leitfrage – etwa <em>„Beschreibe eine pädagogische Situation aus dieser Woche, die dich herausgefordert hat, und wie du reagiert hast."</em> Gerade hier zahlt sich die pro Eintrag wählbare Sichtbarkeit aus: Manche Beobachtungen – zum Kind, zum Team, zur eigenen Unsicherheit – sind zunächst nur für die eigene Verarbeitung gedacht, andere sollen bewusst mit der Praxisanleitung besprochen werden. Am Ende des Praktikums liefert die persönliche Zusammenfassung eine chronologische Grundlage für den Praktikumsbericht, ohne dass vorher mühsam Notizzettel oder lose Dateien zusammengesucht werden müssen.
+        </p>
+
+        <h2>Beispiel aus der Uni</h2>
+
+        <p>
+          In einem Praxissemester im Lehramtsstudium legt die Seminarleitung für jede Praxisphase eine eigene Insight-Journal-Aktivität an, mit wechselnden Schwerpunkten – von „Erwartungen an die erste Praxiswoche" bis „Rollenverständnis nach der Hälfte des Semesters". Über den Kursbericht behält die Seminarleitung den Fortschritt der gesamten Kohorte im Blick, während der Gruppenmodus dafür sorgt, dass verschiedene Praktikumsgruppen im selben Kurs sauber getrennt bleiben. Da viele Reflexionen im Praxissemester bewusst nicht benotet werden sollen, aber trotzdem stattfinden müssen, passt hier besonders gut, dass die Abschlussbedingung nur das Speichern voraussetzt – die inhaltliche Tiefe bleibt Sache der Studierenden, nicht Gegenstand einer Note.
+        </p>
+
+        <div class="post-tip">
+          <strong>Drei Sätze zum Mitnehmen</strong>
+          <ul>
+            <li>Reflexion ist nur so ehrlich wie die Kontrolle, die die schreibende Person über ihre eigene Sichtbarkeit hat.</li>
+            <li>Ein Reflexionswerkzeug, das direkt in der Lernplattform lebt, spart Logins, Dateien und verlorene Hefte.</li>
+            <li>Datenschutz und Abschlussverfolgung schließen sich nicht aus – sie gehören von Anfang an zusammen gedacht.</li>
+          </ul>
+        </div>
+
+        <p>
+          Insight Journal ist Version 1.0.0, quelloffen und kostenlos – der Code liegt auf <a href="https://github.com/71Professor/moodle-mod_insightjournal" target="_blank" rel="noopener">GitHub</a>, die Aufnahme in den offiziellen Moodle Plugin Directory läuft gerade. Wer es ausprobiert, ob als Entwickler/in oder als Lehrende/r: Rückmeldungen zu Praxistauglichkeit, fehlenden Funktionen oder Verhalten in konkreten Moodle-Umgebungen sind ausdrücklich willkommen.
+        </p>
+
+        <p style="margin-top: 3rem;">
+          <a href="../blog.html" style="color: var(--color-accent); font-weight: 600;">← Zurück zum Blog</a>
+        </p>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-logo">Digitales &amp; Bildung</div>
+          <div class="footer-sub">Die Bildungsingenieure</div>
+        </div>
+        <div class="footer-links">
+          <a href="../index.html">Startseite</a>
+          <a href="../blog.html">Blog</a>
+          <a href="../leistungen.html">Leistungen</a>
+          <a href="../referenzen.html">Referenzen</a>
+          <a href="../werkzeuge.html">Werkzeuge</a>
+          <a href="../der-bildungsingenieur.html">Die Bildungsingenieure</a>
+          <a href="../impressum.html">Impressum</a>
+          <a href="../datenschutz.html">Datenschutz</a>
+        </div>
+      </div>
+      <p class="footer-copy">© 2024 Digitales &amp; Bildung – Die Bildungsingenieure</p>
+    </div>
+  </footer>
+
+  <script src="../js/nav.js"></script>
+</body>
+</html>
