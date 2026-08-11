@@ -577,6 +577,19 @@ nav a.active {
   font-style: italic;
 }
 
+.post-license {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+}
+
+.post-license a {
+  color: var(--color-text-light);
+  text-decoration: underline;
+}
+
 .post-header-meta {
   display: flex;
   gap: 1.5rem;
